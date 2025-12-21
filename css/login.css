@@ -1,0 +1,98 @@
+html,
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    user-select: none;
+}
+
+body {
+    display: table;
+    background-image: url('..\\img\\background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.wrapper {
+    text-align: center;
+    display: table-cell;
+    vertical-align: middle;
+    top: 20%;
+}
+
+.leu_title {
+    color: #e7e7e7 !important;
+    text-shadow: rgb(0, 0, 0) 5px 10px 10px;
+}
+
+.armory_title {
+    color: rgb(212, 33, 33) !important;
+    text-shadow: rgb(0, 0, 0) 5px 10px 10px;
+}
+
+.title {
+    font-size: 80px;
+    font-weight: bold;
+    font-family: 'DejaVu Sans Mono', monospace;
+    cursor: default;
+}
+
+.register {
+    cursor: pointer;
+    color: white;
+    font-size: 14px;
+    text-decoration: underline;
+    font-family: 'DejaVu Sans Mono', monospace;
+}
+
+#login {
+    position: relative;
+    max-width: 30em;
+    margin: 0 auto;
+    font-size: 1.25em;
+}
+
+#formContainer form input {
+    margin: .25em 0.5em;
+    font-size: 16px;
+    width: 10em;
+    background: #e7e7e7;
+    font-family: 'DejaVu Sans Mono', monospace;
+    border-radius: 4px 4px;
+}
+
+#formContainer form input[type='submit'] {
+    position: relative;
+    top: -15px;
+    font-size: 16px;
+    padding: .2em 1.8em;
+    margin-top: 2em;
+    background: rgb(70, 70, 70);
+    color: #fff;
+    border: 1px solid #ffffff;
+    border-radius: 0px;
+    cursor: pointer;
+    opacity: 1;
+}
+
+#formContainer form input[type='submit']:hover {
+    background: rgb(30, 30, 30);
+}
+
+#formContainer form input:focus {
+    outline: none;
+}
+
+#formMsg {
+    position: relative;
+    text-align: center;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.spanMsg {
+    padding: 5px;
+    border: solid 1px black;
+    background-color: orange;
+}

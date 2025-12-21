@@ -1,0 +1,16 @@
+{
+    "lista": [
+        {
+            "spellID": 27,
+            "spellName": "dolore"
+        },
+        {
+            "spellID": 55,
+            "spellName": "causa ferite leggere"
+        },
+        {
+            "spellID": 56,
+            "spellName": "causa ferite gravi"
+        }
+    ]
+}

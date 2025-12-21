@@ -1,0 +1,54 @@
+{
+    "lista": [
+        {
+            "powerID": 1,
+            "powerName": "Inestinguibile",
+            "powerDescription": "Qualsiasi effetto applicato di tipo [FIDMG]Fuoco[mTit] dura [mVal]3[mTit] round in piu`. Se l'effetto e` invece a cariche, vengono aumentate proporzionalmente."
+        },
+        {
+            "powerID": 3,
+            "powerName": "Impeto della Vittoria",
+            "powerDescription": "Quando uccidi un avversario di livello pari o superiore al tuo, recuperi il [mVal]5%[mTit] dei Punti Ferita, +[mVal]5%[mTit] per ogni livello di differenza, con un massimo di [mVal]20%[mTit]."
+        },
+        {
+            "powerID": 4,
+            "powerName": "Perfezionista",
+            "powerDescription": "Finche` i tuoi Punti Ferita sono al massimo, il tuo danno e le tue cure sono aumentate del [mVal]10%[mTit]."
+        },
+        {
+            "powerID": 5,
+            "powerName": "Recupero Rapido",
+            "powerDescription": "La durata degli [mVal]Effetti di Stato[mTit] subiti e` ridotta di [mVal]1[mTit] round, con un minimo di [mVal]1[mTit] round."
+        },
+        {
+            "powerID": 6,
+            "powerName": "Strade Misteriose",
+            "powerDescription": "Il Tempo di Attesa richiesto per cambiare posizione nella stanza e` ridotto del [mVal]50%[sys]."
+        },
+        {
+            "powerID": 7,
+            "powerName": "Resilienza Magica",
+            "powerDescription": "Tutti gli effetti che applichi guadagnano [mVal]2[mTit] punti di [mVal]Resistenza alla Dissoluzione[mTit], con massimo [mVal]5[mTit]."
+        },
+        {
+            "powerID": 8,
+            "powerName": "Inesauribile",
+            "powerDescription": "La tua Energia massima e` aumentata di [mVal]30[mTit] punti."
+        },
+        {
+            "powerID": 9,
+            "powerName": "Impatto Duraturo",
+            "powerDescription": "La durata degli [mVal]Effetti di Stato[mTit] causati e` aumentata di [mVal]1[mTit] round."
+        },
+        {
+            "powerID": 10,
+            "powerName": "Cuore Impavido",
+            "powerDescription": "Le applicazioni massime di [mVal]Panico![mTit] sono ridotte a [mVal]2[mTit]."
+        },
+        {
+            "powerID": 11,
+            "powerName": "Tecnica Impeccabile",
+            "powerDescription": "Il bonus di Letalita` si applica a tutti gli attacchi. Non puoi causare colpi critici."
+        }
+    ]
+}

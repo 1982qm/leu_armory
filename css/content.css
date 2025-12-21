@@ -1,0 +1,705 @@
+/* 
+
+Dashboard Template 
+http://www.templatemo.com/preview/templatemo_415_dashboard
+
+    1. CSS Imports
+    2. General Styles
+    3. Sidebar
+    4. Charts
+    5. Preferences form
+    6. Sign in form
+    7. tables.html
+    8. Bootstrap overrides
+    9. Maps
+    10. Media Queries
+	
+--------------------------------------- */
+
+/* 1. CSS Imports
+--------------------------------------- */
+/* @import url('http://fonts.googleapis.com/css?family=Open Sans:300,400,700'); */
+@import url(bootstrap.min.css);
+
+/* 2. General Styles
+--------------------------------------- */
+* {
+    /*font-family: 'Open Sans', sans-serif;*/
+    /*font-family: 'Lucida Sans', Arial, sans-serif;*/
+    font-family: 'DejaVu Sans Mono', monospace;
+}
+
+body {
+    background-color: #222;
+    user-select: none;
+}
+
+h1 {
+    color: #ffffff;
+    /* font-family: 'Lato', sans-serif; */
+    /*font-family: 'Lucida Sans', Arial, sans-serif;*/
+    font-family: 'DejaVu Sans Mono', monospace;
+    font-size: 54px;
+    font-weight: 300;
+    line-height: 58px;
+}
+
+h2 {
+    color: #ffffff;
+    /* font-family: 'Lato', sans-serif; */
+    /*font-family: 'Lucida Sans', Arial, sans-serif;*/
+    font-family: 'DejaVu Sans Mono', monospace;
+    font-size: 24px;
+    font-weight: 300;
+    line-height: 24px;
+}
+
+.leu_title {
+    /*
+    background-image: linear-gradient(to right, rgb(255, 255, 255), rgb(53, 53, 53)) !important;
+    color: transparent !important;
+    background-clip: text !important;
+    */
+    color: #e7e7e7 !important;
+    text-shadow: rgb(0, 0, 0) 5px 10px 10px;
+}
+
+.armory_title {
+    /*
+    background-image: linear-gradient(rgb(212, 33, 33), rgb(88, 32, 32)) !important;
+    color: transparent !important;
+    background-clip: text !important;
+    */
+    color: rgb(212, 33, 33) !important;
+    text-shadow: rgb(0, 0, 0) 5px 10px 10px;
+}
+
+p {
+    color: #adb7bd;
+    font-family: 'Lucida Sans', Arial, sans-serif;
+    font-size: 24px;
+    line-height: 30px;
+    margin: 0px 30px;
+}
+
+.link {
+    background-color: transparent;
+    color: #DFDBD9;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    padding-right: 10px;
+    margin-right: 4px;
+    margin-top: 4px;
+    /*float: right;*/
+}
+
+.link:hover {
+    background-color: white;
+    color: black;
+    text-decoration: none;
+}
+
+.btn a {
+    color: white;
+    text-decoration: none;
+}
+
+.logo {
+    display: inline-block;
+    cursor: default;
+    width: 200px;
+}
+
+.logo h1 {
+    font-size: 24px;
+    margin: -10px 15px;
+    color: #DFDBD9;
+}
+
+.templatemo-content-wrapper {
+    float: left;
+    width: 100%;
+}
+
+.templatemo-content {
+    margin-left: 200px;
+    margin-top: 0px;
+    min-height: 600px;
+    padding: 0px;
+    background-color: rgb(70, 70, 70);
+    overflow-x: hidden;
+}
+
+.templatemo-footer {
+    clear: both;
+    font-size: 13px;
+    padding: 8px 0 5px 0;
+    text-align: center;
+    color: #ccc;
+    background-color: #333;
+}
+
+.margin-bottom-15 {
+    margin-bottom: 15px;
+}
+
+.margin-bottom-30 {
+    margin-bottom: 30px;
+}
+
+/* 3. Sidebar
+------------------------------------------------------*/
+#templatemo_search_box {
+    width: 150px;
+    display: inline-block;
+}
+
+.navbar {
+    margin-bottom: 0;
+    border-radius: 0;
+}
+
+.navbar-header {
+    color: rgb(127, 127, 127);
+}
+
+.templatemo-sidebar {
+    padding: 0;
+    margin-top: 20px;
+}
+
+.templatemo-sidebar .templatemo-sidebar-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.templatemo-sidebar .templatemo-sidebar-menu>li {
+    display: block;
+    margin: 0;
+    padding: 0;
+    border: 0px;
+}
+
+.templatemo-sidebar .templatemo-sidebar-menu>li>a {
+    display: block;
+    position: relative;
+    margin: 0;
+    border: 0px;
+    padding: 20px 15px;
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 300;
+}
+
+.templatemo-sidebar-menu a {
+    color: black;
+}
+
+.templatemo-sidebar-menu a:hover {
+    text-decoration: none;
+}
+
+.templatemo-sidebar-menu li.sub .templatemo-submenu {
+    display: none;
+}
+
+.templatemo-sidebar-menu li.sub.open .templatemo-submenu {
+    display: block;
+}
+
+.templatemo-submenu {
+    padding-left: 0;
+}
+
+.templatemo-submenu li {
+    list-style: none;
+    background-color: #DFDFDF;
+}
+
+.templatemo-submenu li a {
+    display: block;
+    padding: 20px 15px;
+    margin: 0;
+}
+
+.templatemo-sidebar-menu>li.sub.open>a {
+    background-color: rgba(145, 145, 145, 0.3);
+}
+
+.templatemo-sidebar .templatemo-sidebar-menu>li.active,
+.templatemo-sidebar .templatemo-sidebar-menu>li>a:hover {
+    background-color: rgb(191, 232, 167);
+}
+
+.templatemo-submenu li>a:hover {
+    background-color: rgb(228, 228, 228);
+}
+
+.templatemo-sidebar .templatemo-sidebar-menu>li>a>i {
+    font-size: 16px;
+    top: 2px;
+    margin-top: 1px;
+    margin-left: 1px;
+    margin-right: 4px;
+    display: inline-block;
+    width: 1.25em;
+    text-align: center;
+}
+
+/* 4. Charts 
+--------------------------------------------*/
+.templatemo-chart-box {
+    display: inline-block;
+    text-align: center;
+    padding: 20px 30px 30px 0;
+}
+
+/* 5. Preferences Form
+------------------------------------------*/
+#templatemo-preferences-form {
+    max-width: 960px;
+    margin-bottom: 30px;
+}
+
+/* 6. Sign in Form 
+--------------------------------------------*/
+.templatemo-signin-form {
+    padding-top: 50px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.form-horizontal .form-group {
+    margin-right: 0;
+    margin-left: 0;
+}
+
+/* 7. tables.html
+------------------------------------------*/
+#templatemo_sort_btn {
+    margin-bottom: 20px;
+}
+
+/* 8. Bootstrap overrides
+----------------------------------------------*/
+.nav-pills>li>a,
+.nav-tabs>li>a,
+.alert,
+.progress,
+.panel,
+.btn,
+.panel-group .panel,
+.form-control,
+.modal-content,
+.breadcrumb {
+    border-radius: 0;
+}
+
+.list-group-item:first-child,
+.panel-heading {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+
+.list-group-item:last-child {
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+
+.form-control-feedback {
+    right: 15px;
+}
+
+/* 9. Maps
+------------------------------------------------------*/
+.jqvmap-zoomin,
+.jqvmap-zoomout {
+    width: 15px;
+    height: 15px;
+}
+
+.vmap {
+    height: 400px;
+}
+
+/* 10. Media Queries
+------------------------------------------------------*/
+@media screen and (min-width: 992px) {
+    .templatemo-sidebar {
+        width: 200px;
+        float: left;
+        position: relative;
+        margin-right: -100%;
+    }
+}
+
+@media screen and (max-width: 991px) {
+    .navbar-form {
+        padding: 0;
+        margin-left: 0;
+    }
+
+    .navbar-header {
+        float: none;
+    }
+
+    .navbar-toggle {
+        display: block;
+    }
+
+    .templatemo-sidebar {
+        border-top: 0 !important;
+        margin: 20px;
+    }
+
+    .templatemo-sidebar.navbar-collapse.collapse {
+        display: none !important;
+    }
+
+    .templatemo-sidebar.navbar-collapse.in {
+        border-top: 0 !important;
+        margin: 20px;
+        position: relative;
+        overflow: hidden !important;
+        overflow-y: auto !important;
+        display: block !important;
+    }
+
+    .templatemo-content-wrapper {
+        float: none;
+    }
+
+    .templatemo-content {
+        margin: 0;
+    }
+}
+
+@media screen and (max-width: 767px) {
+    .templatemo-chart-box {
+        padding-right: 0;
+    }
+}
+
+
+/* Modal */
+.modal {
+    display: block;
+    position: fixed;
+    z-index: 99;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: auto;
+    background-color: var(--background-color);
+}
+
+.modal-content {
+    /* position: relative; */
+    /* background-color: #fefefe; */
+    margin-top: 45vh;
+    /* 15% from the top and centered */
+    margin-left: 30vw;
+    /* 15% from the top and centered */
+    padding: 20px;
+
+    /* border: 1px solid #888; */
+    width: 35vw;
+    /* Could be more or less, depending on screen size */
+    height: auto;
+}
+
+/* The Close Button */
+.modal .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    padding-right: 10px;
+}
+
+/* The Close Button */
+.modal .add {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    padding-left: 10px;
+}
+
+/* The Close Button */
+.modal .minus {
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+    padding-left: 10px;
+}
+
+@media only screen and (max-width: 768px) {
+    .modal-content {
+        width: 80%;
+    }
+}
+
+#playersImg:hover {
+    background-image: url('..\\img\\players_black.svg');
+}
+
+#itemsImg:hover {
+    background-image: url('..\\img\\items_black.svg');
+}
+
+#datatablePlayers tbody tr {
+    cursor: pointer;
+}
+
+.close {
+    position: absolute;
+    right: 30px;
+    top: 12px;
+    width: 35px;
+    height: 20px;
+    opacity: 0.8;
+    z-index: 10;
+}
+
+.close:hover {
+    opacity: 1;
+}
+
+.close:before,
+.close:after {
+    position: absolute;
+    left: 15px;
+    content: ' ';
+    height: 20px;
+    width: 3px;
+    background-color: #6090D5;
+}
+
+.close:before {
+    transform: rotate(45deg);
+}
+
+.close:after {
+    transform: rotate(-45deg);
+}
+
+.list {
+    padding: 0px !important;
+    line-height: 20px;
+    height: 21px;
+}
+
+.info {
+    padding: 0px !important;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.compare_info {
+    padding: 0px !important;
+    font-size: 13px;
+    font-weight: bold;
+    height: 21px;
+}
+
+
+.compare_label {
+    padding: 0px !important;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.eqrow {
+    padding: 0px !important;
+    font-size: 13px;
+    font-weight: bold;
+    display: flex;
+}
+
+.eqrow_compare {
+    padding: 0px !important;
+    font-size: 13px;
+    font-weight: bold;
+    min-height: 21px;
+    display: inline;
+}
+
+.pg {
+    width: 120px;
+}
+
+.slot {
+    width: 180px;
+}
+
+.resi {
+    width: 120px;
+}
+
+.stat {
+    width: 120px;
+}
+
+.number_value {
+    float: right;
+    font-weight: normal;
+    color: rgb(168, 168, 168);
+}
+
+.number_value_1 {
+    float: right;
+    font-weight: normal;
+    color: rgb(168, 168, 168);
+    padding-right: 10px;
+}
+
+.number_value_2 {
+    float: left;
+    font-weight: normal;
+    color: rgb(168, 168, 168);
+    padding-left: 10px;
+}
+
+.eq {
+    float: right;
+    font-weight: normal;
+    color: rgb(168, 168, 168);
+    min-height: 21px;
+}
+
+.eq_2 {
+    float: left;
+    font-weight: normal;
+    color: rgb(168, 168, 168);
+    min-height: 21px;
+}
+
+.eq_power_compare {
+    padding: 0px;
+    display: block;
+    background-color: #3535356c;
+}
+
+tfoot {
+    display: table-header-group;
+}
+
+.searchInput {
+    font-size: 13px;
+}
+
+.eqPower,
+.eqPower_1 {
+    display: none;
+    position: absolute;
+    z-index: 20;
+    width: max-content !important;
+    border-color: #727272;
+    /* box-shadow: 0px 0px 1px 1px #e7e7e7; */
+    max-width: 25rem;
+    text-align: left !important;
+    padding-bottom: 10px;
+}
+
+.eqPower_2 {
+    display: none;
+    position: absolute;
+    z-index: 20;
+    width: max-content !important;
+    border-color: #727272;
+    /* box-shadow: 0px 0px 1px 1px #e7e7e7; */
+    max-width: 25rem;
+    text-align: left !important;
+    padding-bottom: 10px;
+}
+
+.eqPowerItem {
+    padding-top: 0px;
+    padding-bottom: 0px;
+    background-color: #3535356c;
+}
+
+.set_name {
+    color: cyan;
+}
+
+.set_pieces {
+    color: #00FE1E;
+    padding-right: 20px;
+}
+
+.separatore {
+    /* margin-top: 21px; */
+    border: 0px;
+}
+
+.specialPowerName {
+    color: #F7BA49;
+}
+
+.specialPowerDesc {
+    color: gray;
+    font-style: italic;
+}
+
+.divFlex {
+    display: flex;
+    padding: 0px;
+}
+
+.divHidden {
+    display: none;
+}
+
+.highValue {
+    color: #00FE1E;
+}
+
+.select2-container--default .select2-results__option--disabled {
+    color: grey;
+}
+
+.chart_player {
+    position: relative;
+    z-index: 10;
+    height: 300px;
+    width: 300px;
+    display: flex;
+    left: -5px;
+    top: -80px;
+}
+
+.chart_dmg {
+    position: relative;
+    z-index: 10;
+    height: 300px;
+    width: 250px;
+    display: flex;
+    left: 10px;
+    top: -60px;
+}
+
+.upload-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    opacity: 0.1;
+}
+
+.upload-btn img {
+    width: 24px;
+    /* dimensione immagine */
+    height: auto;
+}
+
+.upload-btn:hover {
+    transform: scale(1.05);
+    opacity: 1;
+}
