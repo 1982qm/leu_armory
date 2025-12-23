@@ -255,18 +255,18 @@
         }
 
         preload (
-          "/leu/img/barbaro.png",
-          "/leu/img/chierico.png",
-          "/leu/img/druido.png",
-          "/leu/img/guerriero.png",
-          "/leu/img/ladro.png",
-          "/leu/img/mago.png",
-          "/leu/img/monaco.png",
-          "/leu/img/paladino.png",
-          "/leu/img/psionico.png",
-          "/leu/img/ranger.png",
-          "/leu/img/players.svg",
-          "/leu/img/background.jpg"
+          "/armory/img/barbaro.png",
+          "/armory/img/chierico.png",
+          "/armory/img/druido.png",
+          "/armory/img/guerriero.png",
+          "/armory/img/ladro.png",
+          "/armory/img/mago.png",
+          "/armory/img/monaco.png",
+          "/armory/img/paladino.png",
+          "/armory/img/psionico.png",
+          "/armory/img/ranger.png",
+          "/armory/img/players.svg",
+          "/armory/img/background.jpg"
         )
 
         var json_poteri_speciali;

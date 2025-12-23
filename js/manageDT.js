@@ -58,7 +58,7 @@ function CreateDataTable(myDt, addFun, editFun, delFun) {
         },
         // Setto la lingua 
         language: {
-            url: "/leu/lib/datatable_it-IT.json"
+            url: "/armory/lib/datatable_it-IT.json"
         },
         initComplete: function () {
             this.api()
