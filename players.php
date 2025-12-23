@@ -151,7 +151,7 @@
                 <!-- EQUIPAGGIAMENTO -->
                 <div class="card" style="min-width: 18rem; width: max-content; border: 0px; margin-left: 10px;">
                   <div class="card-body">
-                    <h5 class="card-title" style="text-shadow: 1px 1px 2px black;">Equipaggiamento</h5>
+                    <h5 class="card-title" style="text-shadow: 1px 1px 2px black;">Equipaggiamento<span id="oggettiLimitati">Oggetti limitati <span id="oggettiLimitatiMin"></span>/<span id="oggettiLimitatiMax"></span></span></h5>
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item list"><div class="eqrow"><span class="slot">come luce</span><span id="come_luce" class="eq"></span></div></li>
                       <li class="list-group-item list"><div class="eqrow"><span class="slot">mano destra</span><span id="mano_destra" class="eq"></span></div></li>
@@ -428,7 +428,7 @@
           json_p1 = json;
 
           <?php if ($isLoggedIn && $user['user_type'] == "1") {?>
-            console.log(data);
+            console.log(json);
           <?php } ?>
 
           setText("playerName", json.player.nome);
@@ -462,6 +462,14 @@
           setText("destrezza", json.player.destrezza);
           setText("costituzione", json.player.costituzione);
           setText("carisma", json.player.carisma);
+          setText("oggettiLimitatiMin", json.player.oggLimitati);
+          setText("oggettiLimitatiMax", json.player.oggLimitatiMax);
+
+          if (json.player.oggLimitati != undefined) {
+            $("#oggettiLimitati").show();
+          } else {
+            $("#oggettiLimitati").hide();
+          }
 
           // ATTACCHI
           setText("crit_chance", json.player.critico_chance,"%");

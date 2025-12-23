@@ -703,3 +703,18 @@ tfoot {
     transform: scale(1.05);
     opacity: 1;
 }
+
+#oggettiLimitati,
+#oggettiLimitati_1,
+#oggettiLimitati_2 {
+    text-align: right;
+    float: right;
+    font-size: 14px;
+    font-weight: bold;
+    padding-top: 7px;
+}
+
+#oggettiLimitati_1 {
+    text-align: left;
+    float: left;
+}

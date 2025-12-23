@@ -74,7 +74,7 @@
                 <div class="card" style="border: 0px; margin-left: 10px;">
                   <div class="card-body" style="padding-right: 0px;">
                     <!-- EQUIPAGGIAMENTO -->
-                    <h5 class="card-title" style="white-space: pre"> </h5>
+                    <h5 class="card-title" style="white-space: pre; display: block"><span id="oggettiLimitati_1">Oggetti limitati <span id="oggettiLimitatiMin_1"></span>/<span id="oggettiLimitatiMax_1"></span></span> </h5>
                     <ul class="list-group list-group-flush" style="text-align: right">
                       <li class="list-group-item list"><div id="cmp_come_luce_1" class="eqrow_compare"><span id="come_luce_1" class="eq"></span></div></li>
                       <li class="list-group-item list"><div id="cmp_mano_destra_1" class="eqrow_compare"><span id="mano_destra_1" class="eq"></span></div></li>
@@ -250,7 +250,7 @@
                 <div class="card" style="border: 0px; margin-right: 10px;">
                   <div class="card-body" style="padding-left: 0px;">
                     <!-- EQUIPAGGIAMENTO -->
-                    <h5 class="card-title" style="white-space: pre"> </h5>
+                    <h5 class="card-title" style="white-space: pre; display: block"> <span id="oggettiLimitati_2">Oggetti limitati <span id="oggettiLimitatiMin_2"></span>/<span id="oggettiLimitatiMax_2"></span></span></h5>
                     <ul class="list-group list-group-flush" style="text-align: left">
                       <li class="list-group-item list"><div id="cmp_come_luce_2" class="eqrow_compare"><span id="come_luce_2" class="eq_2"></span></div></li>
                       <li class="list-group-item list"><div id="cmp_mano_destra_2" class="eqrow_compare"><span id="mano_destra_2" class="eq_2"></span></div></li>
@@ -560,7 +560,7 @@
           }
 
           <?php if ($isLoggedIn && $user['user_type'] == "1") {?>
-            console.log(data);
+            console.log(json);
           <?php } ?>
 
           setText("playerName"+suffix, json.player.nome);
@@ -577,11 +577,20 @@
 
           setPlayerImg(json, data.custom_image_path, "classImg"+suffix);
 
+          setText("oggettiLimitatiMin"+suffix, json.player.oggLimitati);
+          setText("oggettiLimitatiMax"+suffix, json.player.oggLimitatiMax);
+
+          if (json.player.oggLimitati != undefined) {
+            $("#oggettiLimitati"+suffix).show();
+          } else {
+            $("#oggettiLimitati"+suffix).hide();
+          }
+
           if (json_p1 != undefined && json_p2 != undefined) {
             $(".number_value_1").removeClass("highValue");
             $(".number_value_2").removeClass("highValue");            
             // EQUIPAGGIAMENTO
-            $('.eq-dynamic-generated').remove();
+            $('.eq-dynamic-generated').remove();            
             updateEquip("come luce");
             updateEquip("mano destra");
             updateEquip("mano sinistra");
