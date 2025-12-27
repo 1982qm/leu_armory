@@ -36,6 +36,7 @@
 <script src="lib/chart.js"></script>
 <script src="js/make_chart.js"></script>
 <script src="js/manageDT.js?1.0"></script>
+<script src="js/common.js"></script>
 
 <body>
   <main>
@@ -687,137 +688,6 @@
           $("#player").show();          
         }
 
-        function setText (id, txt, suffisso) {
-          $("#"+id).text("");
-          if (txt != undefined) $("#"+id).text(txt + (suffisso != undefined ? suffisso : ""));
-        }
-
-        function getValore(array, nome) {
-          var el = array.filter(obj => {return obj.nome == nome});
-          return (el[0] == undefined) ? "" : el[0].valore;
-        }
-
-        function getResistenza(array, nome) {
-          var el = array.filter(obj => {return obj.nome == nome});
-          return (el[0] == undefined) ? "0 (0%)" : (el[0].valore + "\t(" + el[0].perc + ")");
-        }
-
-        function getEq(json) {
-          if (json.used) {
-            var nome = json.name;
-            nome = nome.replaceAll("<r>", "</span>");
-
-            //<r,g,b:r,g,b>
-            const regex = /<\d+,\d+,\d+:\d+,\d+,\d+>/g;
-
-            nome.matchAll(regex).forEach(
-                element => {
-                    var match = element[0];
-                    match = match.replaceAll("<", "");
-                    match = match.replaceAll(">", "");
-                    var colors = match.split(":");
-                    nome = nome.replaceAll(element[0], "<span style='color:rgb(" + colors[0] + ")'>");
-                }
-            );
-            
-            var out = "<span>[</span><span style='color:" + json.rarity.color + "'>" + json.rarity.short + "</span><span>|</span><span style='color: #00FE1E; white-space: pre;'>" + (json.level < 10 ? " " : "") + (json.level < 100 ? " " + json.level : json.level) + "</span><span>]\t</span><span onmouseover='showEqInfo(this)' onmouseout='hideEqInfo(this)'>" + nome + "</span>";
-
-            out = out + getEqPowers(json);
-
-            return out;
-          } else {
-            return "";
-          }
-        }
-
-        function getEqPowers(json) {
-          var out = "";
-
-          if (json.powers != undefined && json.powers.length > 0) {
-            out = "<div class='card eqPower' style='width: 18rem;'>" +
-                  "  <div class='card-header'>Proprietà</div>" +
-                  "    <ul class='list-group list-group-flush'>"; 
-
-            if (json.ac != undefined) out = out + "<li class='list-group-item eqPowerItem'><span>Ac:\t</span><span style='color: #00FE1E;'>"+json.ac+"</span></li>";
-            if (json.dice != undefined) out = out + "<li class='list-group-item eqPowerItem'><span>Dadi:\t</span><span style='color: cyan;'>"+json.dice+"</span></li>";
-
-            json.powers.forEach(
-                  element => {
-                      if (element.power == "Potere Speciale") {
-                        out = out + "<li class='list-group-item eqPowerItem'><span>"+element.power+":\t</span><span class='specialPowerName'>"+findSpecialPower(element.value)+"</span></li>";
-                        out = out + "<li class='list-group-item eqPowerItem'><span class='specialPowerDesc'>"+findSpecialPowerDesc(element.value)+"</span></li>";
-                      } else if (element.power == "Incantesimo su Arma") {
-                        out = out + "<li class='list-group-item eqPowerItem'><span>"+element.power+":\t</span><span style='color: #00FE1E;'>"+findWeaponSpell(element.value)+"</span></li>";
-                      } else {
-                        out = out + "<li class='list-group-item eqPowerItem'><span>"+element.power+":\t</span><span style='color: #00FE1E;'>+"+element.value+(element.power.startsWith("Eff.") ? "%" : "")+"</span></li>";
-                      }
-                  }
-            );
-
-            out = out + "</ul></div>";
-          }
-
-          return out;
-
-        }
-
-        function findWeaponSpell (idx) {
-          var out = idx.toString();
-          json_spell_armi.lista.forEach(
-            element => {
-              if (element.spellID == idx) {
-                out = element.spellName;
-              }
-            }
-          )
-
-          return out;
-        }        
-
-        function findSpecialPower (idx) {
-          var out = "";
-          json_poteri_speciali.lista.forEach(
-            element => {
-              if (element.powerID == idx) {
-                out = element.powerName;
-              }
-            }
-          )
-
-          return out;
-        }
-
-        function findSpecialPowerDesc (idx) {
-          var out = "";
-          json_poteri_speciali.lista.forEach(
-            element => {
-              if (element.powerID == idx) {
-                out = element.powerDescription;
-              }
-            }
-          )
-          
-          out = out.replaceAll("[mTit]", "</span>");
-          out = out.replaceAll("[mVal]", "<span style='color: cyan;'>");
-          out = out.replaceAll("[FIDMG]", "<span style='color: red;'>");
-
-          return out;
-        }
-
-        function showEqInfo(el) {
-          var eqPower = $(el).parent().find('.eqPower');
-          if (eqPower != undefined) {
-            $(eqPower).show();
-          }
-        }
-
-        function hideEqInfo(el) {
-          var eqPower = $(el).parent().find('.eqPower');
-          if (eqPower != undefined) {
-            $(eqPower).hide();
-          }
-        }
-
         $(function() {
 
             // Click  = apri file picker
@@ -883,20 +753,6 @@
             .then(data => setPlayerImg(json_p1,null,"classImg"))
             .catch(error => console.log("Errore in cancellazione: " + error));
         }        
-
-        function setPlayerImg(json, custom_path, imgid) {
-          if (custom_path != null) {
-            $("#"+imgid).attr("src", custom_path+"?t=" + new Date().getTime());
-          } else {
-            if(json.player.classe != undefined) {
-                if(json.player.main_class != undefined) {
-                  $("#"+imgid).attr("src", "img\\"+json.player.main_class.toLowerCase()+".png?t=" + new Date().getTime());
-                } else {
-                  $("#"+imgid).attr("src", "img\\"+json.player.classe.toLowerCase()+".png?t=" + new Date().getTime());
-                }
-            }
-          }
-        }
 
 </script>
 
