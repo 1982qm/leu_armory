@@ -6204,7 +6204,7 @@ fieldset:disabled .btn {
   left: 0;
   z-index: var(--bs-backdrop-zindex);
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   background-color: var(--bs-backdrop-bg);
 }
 
@@ -7644,7 +7644,7 @@ fieldset:disabled .btn {
   left: 0;
   z-index: 1040;
   width: 100vw;
-  height: 100vh;
+  height: 100dvh;
   background-color: #000;
 }
 
@@ -8427,11 +8427,11 @@ fieldset:disabled .btn {
 }
 
 .vh-100 {
-  height: 100vh !important;
+  height: 100dvh !important;
 }
 
 .min-vh-100 {
-  min-height: 100vh !important;
+  min-height: 100dvh !important;
 }
 
 .flex-fill {
@@ -12740,7 +12740,7 @@ body {
 #layoutAuthentication {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 #layoutAuthentication #layoutAuthentication_content {
@@ -12771,7 +12771,7 @@ body {
   justify-content: space-between;
   min-width: 0;
   flex-grow: 1;
-  min-height: calc(100vh - 56px);
+  min-height: calc(100dvh - 56px);
   margin-left: -225px;
 }
 
@@ -12822,7 +12822,7 @@ body {
 
 .sb-nav-fixed #layoutSidenav #layoutSidenav_nav {
   width: 225px;
-  height: 100vh;
+  height: 100dvh;
   z-index: 1038;
 }
 
@@ -12842,7 +12842,7 @@ body {
 #layoutError {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
+  min-height: 100dvh;
 }
 
 #layoutError #layoutError_content {

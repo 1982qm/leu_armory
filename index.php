@@ -54,6 +54,14 @@
            style="padding:0px; margin:0px 10px;">
            Confronta
           </a>
+        <?php if ($isLoggedIn && $user['user_type'] == "1") {?>
+          <a class="link" 
+            href="javascript:LoadPage('builder.php')"
+            draggable="false"
+            style="padding:0px; margin:0px 10px;">
+            Builder
+            </a>
+        <?php } ?>
         <a class="link" 
            href="login.php?logout=y"
            draggable="false"
@@ -62,7 +70,7 @@
           </a>
       </div>
     </div>
-    <iframe name="frame" id="frame" style="border:0px; top: 0; left: 0; bottom: 0px; right: 0; width: 100%; height: calc(100vh - 55px);" src="players.php" >
+    <iframe name="frame" id="frame" style="border:0px; top: 0; left: 0; bottom: 0px; right: 0; width: 100%; height: calc(100dvh - 55px);" src="players.php" >
 </body>
 
 </html>

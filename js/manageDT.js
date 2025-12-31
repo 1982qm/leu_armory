@@ -6,7 +6,7 @@ function CreateDataTable(myDt, addFun, editFun, delFun) {
     if (addFun != undefined) {
         buttons.push(
             {
-                text: 'Add',
+                text: 'Nuova Build',
                 className: 'customButton btn btn-primary btn-sm',
                 action: function (e, dt, node, config) {
                     addFun(dt);
@@ -17,7 +17,7 @@ function CreateDataTable(myDt, addFun, editFun, delFun) {
     if (editFun != undefined) {
         buttons.push(
             {
-                text: 'Edit',
+                text: 'Modifica',
                 className: 'customButton btn btn-primary btn-sm',
                 action: function (e, dt, node, config) {
                     editFun(dt);
@@ -28,7 +28,7 @@ function CreateDataTable(myDt, addFun, editFun, delFun) {
     if (delFun != undefined) {
         buttons.push(
             {
-                text: 'Delete',
+                text: 'Elimina',
                 className: 'customButton btn btn-danger btn-sm',
                 action: function (e, dt, node, config) {
                     delFun(dt);
@@ -47,7 +47,7 @@ function CreateDataTable(myDt, addFun, editFun, delFun) {
         iDisplayLength: 20,
         // Allineo tutti i campi a sinistra
         columnDefs: [
-            { width: '50%', targets: 0 },
+            //{ width: '50%', targets: 0 },
             { className: 'dt-left', targets: '_all' },
         ],
         // Aggiungo i bottoni di editing
@@ -80,10 +80,10 @@ function CreateDataTable(myDt, addFun, editFun, delFun) {
                         }
                     });
                 });
+            // Rimuovo la classe di default del dataTable
+            $(".customButton").parent().removeClass("dt-buttons");
         }
     });
-    // Rimuovo la classe di default del dataTable
-    $(".customButton").removeClass("dt-button");
 
     return table;
 }
@@ -118,7 +118,7 @@ function LoadDataTable(myDt, array, makeRow, clickFun) {
         });
     };
     // Rendering del dataTable
-    dtTable.draw();
+    dtTable.columns.adjust().draw(false);
 
     return dtTable;
 }

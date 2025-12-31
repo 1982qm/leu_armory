@@ -82,6 +82,10 @@ p {
     margin: 0px 30px;
 }
 
+input {
+    outline: none;
+}
+
 .link {
     background-color: transparent;
     color: #DFDBD9;
@@ -391,7 +395,7 @@ p {
     left: 0;
     top: 0;
     width: 100vw;
-    height: 100vh;
+    height: 100dvh;
     overflow: auto;
     background-color: var(--background-color);
 }

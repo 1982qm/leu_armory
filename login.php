@@ -2,8 +2,12 @@
 <html lang="it">
 
 <head>
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="css/login.css?1.0">
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+  	<link rel="stylesheet" href="css/login.css?1.0">
 </head>
 
 <script src="lib/jquery-3.5.1.min.js"></script>
@@ -212,7 +216,7 @@
 	<?php
 	if(!(isset($_GET['logout']) AND $_GET['logout']=='y')) {
 	?>
-		$(document).ready(function () {
+		document.addEventListener("DOMContentLoaded", function () {
 			$("#username").val("Guest");
 			$("#password").val("guest");
 			$("#submitButton").click();

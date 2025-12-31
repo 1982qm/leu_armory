@@ -9,6 +9,10 @@
             "spellName": "causa ferite leggere"
         },
         {
+            "spellID": 84,
+            "spellName": "causa ferite serie"
+        },
+        {
             "spellID": 56,
             "spellName": "causa ferite gravi"
         }

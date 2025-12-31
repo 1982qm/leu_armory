@@ -41,10 +41,10 @@
 <body>
   <main>
     <div class="container-fluid px-4" style="top: 30px; position: relative; width: max-content;">
-      <div class="row align-items-start bg-dark text-white mb-4" style="min-height: 800px; max-height: calc(100vh - 50px); opacity: 97%; padding: 16px;border: 1px solid #495057; border-radius: 0.375rem; margin: 0px;">
+      <div class="row align-items-start bg-dark text-white mb-4" style="min-height: 800px; max-height: calc(100dvh - 50px); opacity: 97%; padding: 16px;border: 1px solid #495057; border-radius: 0.375rem; margin: 0px;">
           <div class="col-md-auto" style="width: 20rem;">
                 <div class="card" style="width: 20rem; border: 0px; background: linear-gradient(black, transparent 70%);">
-                    <div class="card-body" style="z-index: 1; max-height: calc(100vh - 70px);">
+                    <div class="card-body" style="z-index: 1; max-height: calc(100dvh - 70px);">
                       <!-- PG -->              
                       <select id="selPlayer1" onchange="ShowPlayer('selPlayer1','_1')"></select>                     
                       <h3 id="playerName_1" class="card-title" style="text-shadow: 2px 2px 4px black; margin-top: 15px; cursor: pointer;"></h3>
@@ -59,7 +59,7 @@
                     </div>
                   </div>          
           </div>
-          <div class="col-md-auto" style="overflow-y: auto; min-height: 780px; max-height: calc(100vh - 80px)">
+          <div class="col-md-auto" style="overflow-y: auto; min-height: 780px; max-height: calc(100dvh - 80px)">
             <!--
             <center style="margin: 30px 0px">
               <div class="chart_player">
@@ -76,7 +76,7 @@
                   <div class="card-body" style="padding-right: 0px;">
                     <!-- EQUIPAGGIAMENTO -->
                     <h5 class="card-title" style="white-space: pre; display: block"><span id="oggettiLimitati_1">Oggetti limitati <span id="oggettiLimitatiMin_1"></span>/<span id="oggettiLimitatiMax_1"></span></span> </h5>
-                    <ul class="list-group list-group-flush" style="text-align: right">
+                    <ul class="list-group list-group-flush" style="width: max-content; text-align: right">
                       <li class="list-group-item list"><div id="cmp_come_luce_1" class="eqrow_compare"><span id="come_luce_1" class="eq"></span></div></li>
                       <li class="list-group-item list"><div id="cmp_mano_destra_1" class="eqrow_compare"><span id="mano_destra_1" class="eq"></span></div></li>
                       <li class="list-group-item list"><div id="cmp_mano_sinistra_1" class="eqrow_compare"><span id="mano_sinistra_1" class="eq"></span></div></li>
@@ -252,7 +252,7 @@
                   <div class="card-body" style="padding-left: 0px;">
                     <!-- EQUIPAGGIAMENTO -->
                     <h5 class="card-title" style="white-space: pre; display: block"> <span id="oggettiLimitati_2">Oggetti limitati <span id="oggettiLimitatiMin_2"></span>/<span id="oggettiLimitatiMax_2"></span></span></h5>
-                    <ul class="list-group list-group-flush" style="text-align: left">
+                    <ul class="list-group list-group-flush" style="width: max-content; text-align: left">
                       <li class="list-group-item list"><div id="cmp_come_luce_2" class="eqrow_compare"><span id="come_luce_2" class="eq_2"></span></div></li>
                       <li class="list-group-item list"><div id="cmp_mano_destra_2" class="eqrow_compare"><span id="mano_destra_2" class="eq_2"></span></div></li>
                       <li class="list-group-item list"><div id="cmp_mano_sinistra_2" class="eqrow_compare"><span id="mano_sinistra_2" class="eq_2"></span></div></li>
@@ -338,7 +338,7 @@
           </div>
           <div class="col-md-auto" style="width: 20rem; margin-right: 25px;">
                 <div class="card" style="width: 20rem; border: 0px; background: linear-gradient(black, transparent 70%);">
-                  <div class="card-body" style="z-index: 1; max-height: calc(100vh - 70px);">
+                  <div class="card-body" style="z-index: 1; max-height: calc(100dvh - 70px);">
                     <!-- PG -->
                     <select id="selPlayer2" onchange="ShowPlayer('selPlayer2','_2')"></select>                     
                     <h3 id="playerName_2" class="card-title" style="text-shadow: 2px 2px 4px black; margin-top: 15px; cursor: pointer;"></h3>
@@ -404,7 +404,7 @@
         var json_spell_armi;
         $.getJSON("database/spell_armi.json", function (json) { json_spell_armi = json; });
 
-        $(document).ready(function () {
+        document.addEventListener("DOMContentLoaded", function () {
             Chart.defaults.font.family = "'DejaVu Sans Mono', monospace";
             Chart.defaults.color = "#fff";
             if(input_p1) input_p1 = input_p1.toString().replace(/"/g,"");

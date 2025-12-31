@@ -19,7 +19,7 @@
     <meta name="author" content="" />
     <title>LeU Armory</title>
     <link href="css/select2.min.css" rel="stylesheet" />
-    <link href="css/styles.css?1.0" rel="stylesheet" />    
+    <link href="css/styles.css?1.0" rel="stylesheet" />
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/datatables.min.css" rel="stylesheet">
     <link href="css/dataTables.bootstrap5.css" rel="stylesheet">
@@ -52,20 +52,20 @@
       <div class="card bg-dark text-white mb-4" style="opacity: 95%;">
           <div class="card-header d-flex align-items-center">
               <img src="img\players.svg" width="36px" height="36px" />
-              <span id="datatableTitle" style="padding-left: 15px;">Players</span>
-              <div id="compareToDiv" style="right: 20px; position: absolute; width: 17rem; display:none">
-                <select id="compareToSelect" style="width: 100%;" onchange="ComparePlayer()"></select>
-              </div>
+              <span id="datatableTitle" style="padding-left: 15px;">Builds</span>
           </div>
           <div id="gridContainer" class="collapse show" style="font-size: 14px;">
               <div class="card-body">
-                  <table id="datatablePlayers" class="table table-striped hover compact">
+                  <table id="datatableBuilds" class="table table-striped hover compact">
                       <thead>
                           <tr>
                               <th>Nome</th>
                               <th>Classe</th>
                               <th>Livello Medio Eq</th>
+                              <th>Note</th>
+                              <th>Creata Da</th>
                               <th>Data Caricamento</th>
+                              <th>Visibilità</th>
                           </tr>
                       </thead>
                       <tfoot>
@@ -73,7 +73,10 @@
                               <th>Nome</th>
                               <th>Classe</th>
                               <th>Livello Medio Eq</th>
+                              <th>Note</th>
+                              <th>Creata Da</th>
                               <th>Data Caricamento</th>
+                              <th>Visibilità</th>
                           </tr>                          
                       </tfoot>
                       <tbody></tbody>
@@ -84,7 +87,7 @@
     </div>
 
     <div id="player" class="container-fluid px-4" style="top: 30px;position: relative; display: none;">
-      <a href="#" class="close" onclick="javascript:$('#compareToDiv').hide();$('#player').hide();$('#gridContainer').show();"></a>
+      <a href="#" class="close" onclick="javascript:$('#player').hide();$('#gridContainer').show();"></a>
       <div class="card bg-dark text-white mb-4" style="opacity: 97%; min-height: 750px;">
           <div id="playerContainer" class="collapse show">
               <div class="card-body" style="display: flex;">
@@ -92,34 +95,12 @@
                 <!-- PG -->
                 <div class="card" style="width: 20rem; border: 0px; background: linear-gradient(black, transparent 70%); margin-left: 10px;">
                   <div class="card-body" style="z-index: 1; max-height: calc(100dvh - 150px);">
-                    <h3 id="playerName" class="card-title" style="text-shadow: 2px 2px 4px black;"></h3>
+                    <h5 class="card-title" style="text-shadow: 2px 2px 4px black;"><input id="buildName" placeholder="Nome build"></input></h5>
                     <h5 id="className" class="card-title"></h5>
                     <h3 id="avg_eq_level" class="card-title" style="position: absolute; color: #00FE1E; top: 15px; right: 20px; text-shadow: 1px 1px 2px black;"></h3>
                     <div style="height: 430px; width: auto; margin-top: -60px; margin-bottom: 90px; align-content: center;" >
                       <img id="classImg" class="card-img-top" style="scale: 80%;">
                     </div>
-
-                    <?php if ($isLoggedIn && $user['user_type'] == "1") { ?>
-                      <!-- Personalizza immagine -->
-                      <form id="uploadForm" enctype="multipart/form-data" style="width: auto;position: absolute;top: 60px; right: 15px;">
-                          <!-- input file nascosto -->
-                          <input type="file"
-                              id="image"
-                              name="image"
-                              accept="image/png"
-                              style="display:none;">
-
-                          <!-- bottone di reset -->
-                          <button type="button" id="resetBtn" class="upload-btn" onclick="resetImg()">
-                              <img src="img/reset.svg" title="Torna all'immagine di default"/>
-                          </button>
-
-                          <!-- bottone di upload -->
-                          <button type="button" id="uploadBtn" class="upload-btn">
-                              <img src="img/edit.svg" title="Personalizza immagine"/>
-                          </button>
-                      </form>
-                    <?php } ?>
                     
                     <div class="chart_player" style="top:-90px">
                       <canvas id="chart_stat" style="width: 300px; height:300px"></canvas>
@@ -240,6 +221,8 @@
         var optgroupState;
         var chart_stat;
         var json_p1;
+        let lastWidth = window.innerWidth;
+        window.a
 
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
@@ -280,36 +263,47 @@
             Chart.defaults.font.family = "'DejaVu Sans Mono', monospace";
             Chart.defaults.color = "#fff";
             if(input_name) input_name = input_name.toString().replace(/"/g,"");
-            InitImgBtn();
-            CreateDataTable($("#datatablePlayers"), undefined, undefined, undefined);
+            CreateDataTable($("#datatableBuilds"), NewBuild, undefined, undefined);
             window.addEventListener('orientationchange', function (){
-                var dtTable = $("#datatablePlayers").DataTable();
+                var dtTable = $("#datatableBuilds").DataTable();
                 dtTable.columns.adjust();
             });
-            FetchPlayers();            
+            FetchBuilds();
         })
 
-        function FetchPlayers () {
-          fetch('php/load_players.php', {
+        function NewBuild() {
+          console.log("NewBuild");
+        }
+
+        function FetchBuilds () {
+          fetch('php/load_builds.php', {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json'
-              }
+              },
+              body: '{"account" : "<?php if ($isLoggedIn) { echo $user['user_name']; } ?>"}'
           })
           .then(response => response.json())
-          .then(data => LoadPlayers(data))
+          .then(data => LoadBuilds(data))
           .catch(error => console.log("Errore in caricamento: " + error));
         }
 
-        function LoadPlayers (data) {
-          var table = LoadDataTable($("#datatablePlayers"),
+        function LoadBuilds (data) {
+          var table = LoadDataTable($("#datatableBuilds"),
                                     data,
                                     function (element) {
-                                        return [element.titolo, element.classe, element.avg_eq_level, element.data_caricamento];
+                                        return [element.nome,
+                                                element.classe,
+                                                element.avg_eq_level,
+                                                element.note,
+                                                element.account,
+                                                element.data_caricamento,
+                                                element.visibilita
+                                               ];
                                     },
                                     ShowPlayer
           );
-          table .column('2')
+          table .column('5')
                 .order('desc')
                 .draw();
           
@@ -320,112 +314,29 @@
           $(".dt-search input").css("border-color","#464D54");
 
           setTimeout(() => {
-            LoadPlayersToCompare(data);
             document.getElementById("loadingDiv").style.display = "none";
             document.getElementById("content").style.display = "block";
-            if (input_name) FetchPlayerDetailsByName(input_name);
+            //if (input_name) FetchPlayerDetailsByName(input_name);
           }, 300);
-        }
-
-        function LoadPlayersToCompare (data) {
-          var actual_class = "";
-          var class_group;
-
-          var def1 = document.createElement("option");
-          document.getElementById("compareToSelect").appendChild(def1);
-
-          data.forEach( 
-              element => {
-                  if (actual_class != element.classe) {
-                    actual_class = element.classe;
-                    class_group = document.createElement("optgroup");
-                    $(class_group).attr("label", element.classe);
-                    document.getElementById("compareToSelect").appendChild(class_group);
-                  }
-
-                  var option = document.createElement("option");
-                  option.classList.add("pg_name");
-                  option.innerText = element.nome;
-                  $(option).css("cursor", "pointer");
-
-                  class_group.appendChild(option);
-              }
-            )
-
-            optgroupState = {};
-
-            InitializeStep2();
-
-            $("body").on('click', '.select2-container--open .select2-results__group', function() {
-              $(this).siblings().toggle();
-              let id = $(this).closest('.select2-results__options').attr('id');
-              let index = $('.select2-results__group').index(this);
-              optgroupState[id][index] = !optgroupState[id][index];
-            })
-        }
-
-        function InitializeStep2 () {
-            $("#compareToSelect").select2({
-              placeholder: "Confronta con...",
-              language: "it"
-            });
-
-            $('#compareToSelect').on('select2:open', function() {
-              $('.select2-dropdown--below').css('opacity', 0);
-              setTimeout(() => {
-                let groups = $('.select2-container--open .select2-results__group');
-                let id = $('.select2-results__options').attr('id');
-                if (!optgroupState[id]) {
-                  optgroupState[id] = {};
-                }
-                $.each(groups, (index, v) => {
-                  optgroupState[id][index] = optgroupState[id][index] || false;
-                  optgroupState[id][index] ? $(v).siblings().show() : $(v).siblings().hide();
-                })
-                $('.select2-dropdown--below').css('opacity', 1);
-              }, 0);
-            })
-        }
-
-        function ComparePlayer () {
-          var nome_p2 = $('#compareToSelect').find(":selected").text();
-          var nome_p1 = $("#playerName").text();
-          var url = location.origin+location.pathname;
-          url=url.replaceAll("players.php","");
-          url=url+'compare.php?p1="'+nome_p1+'"&p2="'+nome_p2+'"';
-          window.location.href = url;
         }
 
         function ShowPlayer (tr) {
           nome=$(tr).find("td").eq(0).text();
-          FetchPlayerDetails(nome);
+          FetchBuildDetails(nome);
         }
 
-        function FetchPlayerDetails (nome) {
-          fetch('php/load_player_details_by_title.php', {
+        function FetchBuildDetails (nome) {
+          fetch('php/load_build_details.php', {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json'
               },
-              body: '{"nome" : "' + nome + '"}'
+              body: '{"nome" : "' + nome + '", "account" : "<?php if ($isLoggedIn) { echo $user['user_name']; } ?>"}'
           })
           .then(response => response.json())
           .then(data => LoadPlayerDetails(data))
           .catch(error => console.log("Errore in caricamento: " + error));
         }
-
-        function FetchPlayerDetailsByName (nome) {
-          fetch('php/load_player_details_by_name.php', {
-              method: 'POST',
-              headers: {
-                  'Content-Type': 'application/json'
-              },
-              body: '{"nome" : "' + nome + '"}'
-          })
-          .then(response => response.json())
-          .then(data => LoadPlayerDetails(data))
-          .catch(error => console.log("Errore in caricamento: " + error));
-        }        
 
         function LoadPlayerDetails (data) {
           $('.dynamic-generated').remove();
@@ -437,16 +348,8 @@
             console.log(json);
           <?php } ?>
 
-          setText("playerName", json.player.nome);
+          $("#buildName").val(json.player.nome);
           setText("avg_eq_level", json.player.avg_eq_level);
-
-          // Disabilito il nome dalla lista dei compare
-          $('#compareToSelect option').removeAttr('disabled');
-          $('#compareToSelect option').css("cursor", "pointer");
-          opt = $('#compareToSelect option').filter(function () { return $(this).text() == json.player.nome; });
-          $(opt[0]).attr("disabled", true);
-          $(opt[0]).css("cursor", "default");
-          $("#compareToDiv").show();
 
           if(json.player.classe != undefined) {
               if(json.player.main_class != undefined) {
@@ -692,71 +595,6 @@
           $('#gridContainer').hide();
           $("#player").show();          
         }
-
-        function InitImgBtn () {
-            // Click  = apri file picker
-            $('#uploadBtn').on('click', function() {
-                $('#image').click();
-            });
-
-            // Dopo selezione file
-            $('#image').on('change', function() {
-
-                if (!this.files.length) return;
-
-                const file = this.files[0];
-                const maxSize = 5000 * 1024;
-
-                if (file.size > maxSize) {
-                    alert('Il file non deve superare i 5 MB');
-                    return;
-                }
-
-                if (file.type !== 'image/png') {
-                    alert('Il file deve essere PNG');
-                    return;
-                }
-
-                const img = new Image();
-                img.onload = function() {
-                    const ratio = img.width / img.height;
-                    const expectedRatio = 9 / 16;
-
-                    if (Math.abs(ratio - expectedRatio) > 0.01) {
-                        alert('L’immagine deve essere in formato 9:16');
-                        return;
-                    }
-
-                    const formData = new FormData();
-                    formData.append('image', file);
-                    formData.append('user', "<?php if ($isLoggedIn) { echo $user['user_name']; } ?>");
-                    formData.append('pg', $("#playerName").text());
-
-                    fetch('php/upload.php', {
-                        method: 'POST',
-                        body: formData
-                    })
-                    .then(response => response.json())
-                    .then(data => setPlayerImg(json_p1, data, "classImg"))
-                    .catch(error => console.log("Errore in caricamento: " + error));
-                };
-
-                img.src = URL.createObjectURL(file);
-            });
-        }
-
-        function resetImg() {
-            const formData = new FormData();
-            formData.append('user', "<?php if ($isLoggedIn) { echo $user['user_name']; } ?>");
-            formData.append('pg', $("#playerName").text());
-
-            fetch('php/delete_image.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(data => setPlayerImg(json_p1,null,"classImg"))
-            .catch(error => console.log("Errore in cancellazione: " + error));
-        }        
 
 </script>
 

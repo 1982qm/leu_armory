@@ -134,14 +134,17 @@ function findSpecialPowerDesc(idx) {
 }
 
 function setPlayerImg(json, custom_path, imgid) {
+    var forza_reload = "";
+    //var forza_reload = "?t=" + new Date().getTime();
+
     if (custom_path != null) {
-        $("#" + imgid).attr("src", custom_path + "?t=" + new Date().getTime());
+        $("#" + imgid).attr("src", custom_path + forza_reload);
     } else {
         if (json.player.classe != undefined) {
             if (json.player.main_class != undefined) {
-                $("#" + imgid).attr("src", "img\\" + json.player.main_class.toLowerCase() + ".png?t=" + new Date().getTime());
+                $("#" + imgid).attr("src", "img\\" + json.player.main_class.toLowerCase() + ".png" + forza_reload);
             } else {
-                $("#" + imgid).attr("src", "img\\" + json.player.classe.toLowerCase() + ".png?t=" + new Date().getTime());
+                $("#" + imgid).attr("src", "img\\" + json.player.classe.toLowerCase() + ".png" + forza_reload);
             }
         }
     }
