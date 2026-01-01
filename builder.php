@@ -51,7 +51,7 @@
     <div id="content" class="container-fluid px-4" style="display: none;top: 30px;position: relative;">
       <div class="card bg-dark text-white mb-4" style="opacity: 95%;">
           <div class="card-header d-flex align-items-center">
-              <img src="img\players.svg" width="36px" height="36px" />
+              <img src="img\builder.svg" width="36px" height="36px" />
               <span id="datatableTitle" style="padding-left: 15px;">Builds</span>
           </div>
           <div id="gridContainer" class="collapse show" style="font-size: 14px;">
@@ -221,8 +221,6 @@
         var optgroupState;
         var chart_stat;
         var json_p1;
-        let lastWidth = window.innerWidth;
-        window.a
 
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);

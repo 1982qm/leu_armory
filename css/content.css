@@ -449,14 +449,6 @@ input {
     }
 }
 
-#playersImg:hover {
-    background-image: url('..\\img\\players_black.svg');
-}
-
-#itemsImg:hover {
-    background-image: url('..\\img\\items_black.svg');
-}
-
 #datatablePlayers tbody tr {
     cursor: pointer;
 }

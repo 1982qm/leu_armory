@@ -27,10 +27,6 @@
   function LoadPage(url) {
     $('#frame').attr('src', url)
   }
-
-  function changeImg(elem, img) {
-    $("#"+elem).attr("src",img);
-  }
 </script>
 
 <body>
@@ -42,30 +38,56 @@
       </div>
       <?php $isLoggedIn=isLoggedIn(); if ($isLoggedIn) { $user = $isLoggedIn; }?>
       <div>
-        <a class="link" 
+        <a class="link"
            href="javascript:LoadPage('players.php')"
            draggable="false"
-           style="padding:0px; margin:0px 10px;">
+           style="padding:5px; margin: 0px;"
+           onmouseover="$('#playerImg').attr('src','img\\players_dark.svg')"
+           onmouseout ="$('#playerImg').attr('src','img\\players.svg')"
+           >
+           <img id="playerImg" src="img\\players.svg" width="24px" height="24px" style="margin: 0px"/>
            Players
           </a>
         <a class="link" 
            href="javascript:LoadPage('compare.php')"
            draggable="false"
-           style="padding:0px; margin:0px 10px;">
+           style="padding:5px; margin: 0px;"
+           onmouseover="$('#compareImg').attr('src','img\\compare_dark.svg')"
+           onmouseout ="$('#compareImg').attr('src','img\\compare.svg')"
+           >
+           <img id="compareImg" src="img\\compare.svg" width="24px" height="24px" style="margin: 0px"/>
            Confronta
+          </a>
+        <a class="link" 
+           href="javascript:LoadPage('items.php')"
+           draggable="false"
+           style="padding:5px; margin: 0px;"
+           onmouseover="$('#itemsImg').attr('src','img\\items_dark.svg')"
+           onmouseout ="$('#itemsImg').attr('src','img\\items.svg')"
+           >
+           <img id="itemsImg" src="img\\items.svg" width="24px" height="24px" style="margin: 0px"/>
+           Items
           </a>
         <?php if ($isLoggedIn && $user['user_type'] == "1") {?>
           <a class="link" 
             href="javascript:LoadPage('builder.php')"
             draggable="false"
-            style="padding:0px; margin:0px 10px;">
+            style="padding:5px; margin: 0px;"
+            onmouseover="$('#builderImg').attr('src','img\\builder_dark.svg')"
+            onmouseout ="$('#builderImg').attr('src','img\\builder.svg')"
+            >
+            <img id="builderImg" src="img\\builder.svg" width="24px" height="24px" style="margin: 0px" />
             Builder
             </a>
         <?php } ?>
         <a class="link" 
            href="login.php?logout=y"
            draggable="false"
-           style="padding:0px; margin:0px 10px;">
+           style="padding:5px; margin: 0px; margin-right: 10px;"
+           onmouseover="$('#logoutImg').attr('src','img\\logout_dark.svg')"
+           onmouseout ="$('#logoutImg').attr('src','img\\logout.svg')"
+           >
+           <img id="logoutImg" src="img\\logout.svg" width="24px" height="24px" style="margin: 0px"/>
            Logout <?php if ($isLoggedIn) { echo $user['user_name']; } ?>
           </a>
       </div>

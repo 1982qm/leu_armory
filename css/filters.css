@@ -1,0 +1,34 @@
+.filterInputContainer {
+    margin: 5px 5px 5px 20px;
+    height: 50px;
+}
+
+.filterLabel {
+    width: 150px;
+    margin: 0px;
+    font-weight: bold;
+}
+
+.filterSelect {
+    width: 300px;
+    margin-left: 10px;
+}
+
+.filterValue {
+    width: 300px;
+    margin-left: 10px;
+    margin-top: 3px;
+    height: 32px;
+}
+
+.filterButton {
+    margin-left: 20px;
+}
+
+.container-fluid {
+    max-width: 100vw;
+}
+
+.hideDetail {
+    display: none !important;
+}
