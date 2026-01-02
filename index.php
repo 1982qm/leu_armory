@@ -23,6 +23,7 @@
 
 <script src="lib/jquery-3.5.1.min.js"></script>
 <script src="lib/bootstrap.bundle.min.js"></script>
+
 <script>
   function LoadPage(url) {
     $('#frame').attr('src', url)
@@ -45,7 +46,7 @@
            onmouseover="$('#playerImg').attr('src','img\\players_dark.svg')"
            onmouseout ="$('#playerImg').attr('src','img\\players.svg')"
            >
-           <img id="playerImg" src="img\\players.svg" width="24px" height="24px" style="margin: 0px"/>
+           <img id="playerImg" src="img\\players.svg" width="32px" height="32px" style="margin: 0px"/>
            Players
           </a>
         <a class="link" 
@@ -65,8 +66,8 @@
            onmouseover="$('#itemsImg').attr('src','img\\items_dark.svg')"
            onmouseout ="$('#itemsImg').attr('src','img\\items.svg')"
            >
-           <img id="itemsImg" src="img\\items.svg" width="24px" height="24px" style="margin: 0px"/>
-           Items
+           <img id="itemsImg" src="img\\items.svg" width="32px" height="32px" style="margin: 0px"/>
+           Oggetti
           </a>
         <?php if ($isLoggedIn && $user['user_type'] == "1") {?>
           <a class="link" 
@@ -76,7 +77,7 @@
             onmouseover="$('#builderImg').attr('src','img\\builder_dark.svg')"
             onmouseout ="$('#builderImg').attr('src','img\\builder.svg')"
             >
-            <img id="builderImg" src="img\\builder.svg" width="24px" height="24px" style="margin: 0px" />
+            <img id="builderImg" src="img\\builder.svg" width="32px" height="32px" style="margin: 0px" />
             Builder
             </a>
         <?php } ?>
@@ -93,6 +94,34 @@
       </div>
     </div>
     <iframe name="frame" id="frame" style="border:0px; top: 0; left: 0; bottom: 0px; right: 0; width: 100%; height: calc(100dvh - 55px);" src="players.php" >
+    
+    <script>
+        //PRELOAD
+        var images = [];
+
+        function preload() {
+          for (var i = 0; i < arguments.length; i++) {
+            images[i] = new Image();
+            images[i].src = preload.arguments[i];
+          }
+        }
+
+        preload (
+          "/armory/img/players.png",
+          "/armory/img/players_dark.png",
+          "/armory/img/builder.png",
+          "/armory/img/builder_dark.png",
+          "/armory/img/logout.png",
+          "/armory/img/logout_dark.png",
+          "/armory/img/items.png",
+          "/armory/img/items_dark.png",
+          "/armory/img/compare.png",
+          "/armory/img/compare_dark.png",
+          "/armory/img/logo.svg",
+          "/armory/img/background.jpg"
+        )
+    </script>
+
 </body>
 
 </html>

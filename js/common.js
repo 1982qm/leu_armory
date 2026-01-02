@@ -157,3 +157,12 @@ function isNull(txt, def) {
         return txt;
     }
 }
+
+function CatchKeypress(id, key, _fun) {
+    $('#' + id).on('keypress', function (e) {
+        if (e.which === key) {
+            $('#' + id).blur();
+            _fun();
+        }
+    });
+}

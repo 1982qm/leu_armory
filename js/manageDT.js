@@ -1,12 +1,14 @@
 //-----------------------------------------------------------------------------
 // CREAZIONE DATATABLE
 //-----------------------------------------------------------------------------
-function CreateDataTable(myDt, addFun, editFun, delFun) {
+function CreateDataTable(myDt, addText, addFun, editText, editFun, delText, delFun) {
+    var selectable = (addFun != undefined || editFun != undefined || delFun != undefined);
+
     var buttons = [];
     if (addFun != undefined) {
         buttons.push(
             {
-                text: 'Nuova Build',
+                text: addText,
                 className: 'customButton btn btn-primary btn-sm',
                 action: function (e, dt, node, config) {
                     addFun(dt);
@@ -17,7 +19,7 @@ function CreateDataTable(myDt, addFun, editFun, delFun) {
     if (editFun != undefined) {
         buttons.push(
             {
-                text: 'Modifica',
+                text: editText,
                 className: 'customButton btn btn-primary btn-sm',
                 action: function (e, dt, node, config) {
                     editFun(dt);
@@ -28,7 +30,7 @@ function CreateDataTable(myDt, addFun, editFun, delFun) {
     if (delFun != undefined) {
         buttons.push(
             {
-                text: 'Elimina',
+                text: delText,
                 className: 'customButton btn btn-danger btn-sm',
                 action: function (e, dt, node, config) {
                     delFun(dt);
@@ -40,7 +42,7 @@ function CreateDataTable(myDt, addFun, editFun, delFun) {
     // Creo la tabella
     var table = $(myDt).DataTable({
         // Abilito la selezione del record
-        //select: true,
+        select: selectable,
         // Abilito il responsive (per la disposizione automatica)
         responsive: true,
         // Visualizzo 20 righe per pagina

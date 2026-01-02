@@ -1,0 +1,26 @@
+.formInputContainer {
+    margin: 5px 5px 5px 20px;
+    height: 50px;
+}
+
+.formLabel {
+    width: 200px;
+    margin: 0px;
+    font-weight: bold;
+}
+
+.formSelect {
+    width: 400px;
+    margin-left: 10px;
+}
+
+.formValue {
+    width: 400px;
+    margin-left: 10px;
+    margin-top: 3px;
+    height: 32px;
+}
+
+.formButton {
+    margin-left: 20px;
+}

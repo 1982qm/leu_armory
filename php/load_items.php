@@ -5,19 +5,25 @@
 
     if($data){
         $dbnu = new PDO('sqlite:'.$dbu);
-        $stmt=$dbnu->prepare("SELECT * " .
-                             "  FROM v_items " .
-                             " WHERE (length(:nome) = 0 OR instr(upper(nome),upper(:nome)) > 0)" .
-                             "   AND (length(:percorso) = 0 OR instr(upper(percorso),upper(:percorso)) > 0)" .
-                             "   AND (length(:slot) = 0 OR instr(upper(:slot)||',',upper(slot)||',') > 0)" .
+        $stmt=$dbnu->prepare("SELECT i.* " .
+                             "      , b.nome as bonus_nome " .
+                             "      , b.potere_2p_nome as bonus_2p_nome " .
+                             "      , b.potere_2p_valore as bonus_2p_valore " .
+                             "      , b.potere_4p_nome  as bonus_4p_nome " .
+                             "      , b.potere_4p_valore as bonus_4p_valore " .
+                             "  FROM items i" .
+                             "  LEFT JOIN bonus b on i.bonus = b.nome" .
+                             " WHERE (length(:nome) = 0 OR instr(upper(i.nome),upper(:nome)) > 0)" .
+                             "   AND (length(:percorso) = 0 OR instr(upper(:percorso)||',',upper(i.percorso)||',') > 0)" .
+                             "   AND (length(:slot) = 0 OR instr(upper(:slot)||',',upper(i.slot)||',') > 0)" .
                              "   AND ( " .
                              "       length(:potere) = 0" .
-                             "    OR instr(upper(potere_1),upper(:potere)) > 0" .
-                             "    OR instr(upper(potere_2),upper(:potere)) > 0" .
-                             "    OR instr(upper(potere_3),upper(:potere)) > 0" .
-                             "    OR instr(upper(potere_4),upper(:potere)) > 0" .
-                             "    OR instr(upper(potere_5),upper(:potere)) > 0" .
-                             "    OR instr(upper(potere_6),upper(:potere)) > 0" .
+                             "    OR instr(upper(i.potere_1_nome),upper(:potere)) > 0" .
+                             "    OR instr(upper(i.potere_2_nome),upper(:potere)) > 0" .
+                             "    OR instr(upper(i.potere_3_nome),upper(:potere)) > 0" .
+                             "    OR instr(upper(i.potere_4_nome),upper(:potere)) > 0" .
+                             "    OR instr(upper(i.potere_5_nome),upper(:potere)) > 0" .
+                             "    OR instr(upper(i.potere_6_nome),upper(:potere)) > 0" .
                              "   ) "
                              );
         $stmt->bindValue(":nome",$data["nome"], PDO::PARAM_STR);

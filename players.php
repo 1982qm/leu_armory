@@ -281,7 +281,7 @@
             Chart.defaults.color = "#fff";
             if(input_name) input_name = input_name.toString().replace(/"/g,"");
             InitImgBtn();
-            CreateDataTable($("#datatablePlayers"), undefined, undefined, undefined);
+            CreateDataTable($("#datatablePlayers"));
             window.addEventListener('orientationchange', function (){
                 var dtTable = $("#datatablePlayers").DataTable();
                 dtTable.columns.adjust();

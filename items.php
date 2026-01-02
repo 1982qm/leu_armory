@@ -26,9 +26,11 @@
     <link href="css/content.css?1.4" rel="stylesheet" />
     <link href="css/login.css" rel="stylesheet" />
     <link href="css/filters.css?1.0" rel="stylesheet" />
+    <link href="css/forms.css" rel="stylesheet" />
 </head>
 
 <script src="lib/jquery-3.5.1.min.js"></script>
+<script src="lib/fontawesome.all.js"></script>
 <script src="lib/bootstrap.bundle.min.js"></script>
 <script src="lib/md5.js"></script>
 <script src="lib/select2.min.js"></script>
@@ -39,8 +41,41 @@
 <script src="js/manageDT.js?1.0"></script>
 <script src="js/common.js"></script>
 
-<body>
+<?php if ($isLoggedIn && $user['user_type'] == "1") {?>
+  <script src="js/messages.js"></script>
+<?php }?>
+
+<body id="body">
   <main>
+
+    <?php if ($isLoggedIn && $user['user_type'] == "1") {?>
+      <div id="confirm-modal" class="modal" style="display: none">
+        <div class="modal-content">
+            <center>
+                  <div class="modal-header">
+                      <div class="modal-title">
+                          <h5 class="text-white">Confermi?</h5>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary btn-sm" id="modal-confirm-btn-yes"
+                          data-dismiss="modal">Si</button>
+                      <button type="button" class="btn btn-primary btn-sm" id="modal-confirm-btn-no"
+                          data-dismiss="modal">No</button>
+                  </div>
+            </center>
+        </div>
+      </div>  
+
+      <div id="messages-modal" class="modal" style="display: none">
+        <div id="messages-modal-content" class="modal-content">
+            <center>
+                <span id="messages-modal-text" style="position:relative; padding:20px;"></span>
+            </center>
+        </div>
+      </div>
+    <?php }?>
+
     <div id="loadingDiv" class="modal" style="display: none">
       <div id="loadingDivContent" class="modal-content">
           <center>
@@ -52,8 +87,12 @@
     <div id="filters" class="container-fluid px-4" style="top: 30px; position: relative;">
       <div class="card bg-dark text-white mb-4" style="opacity: 95%;">
           <div class="card-header d-flex align-items-center">
-              <img src="img\items.svg" width="36px" height="36px" />
+              <img src="img\filter.svg" width="24px" height="24px" />
               <span style="padding-left: 15px;">Filtri</span>
+              <a class="ms-auto p-2" href="#" data-bs-toggle="collapse" data-bs-target="#filtersContainer"
+                  aria-expanded="true" aria-controls="filtersContainer">
+                  <div class="sb-sidenav-collapse-arrow"><i class="fas fa-angle-down"></i></div>
+              </a>
           </div>
           <div id="filtersContainer" class="collapse show" style="font-size: 14px;">
             <form style="margin: 20px; display: flex; flex-wrap: wrap;">
@@ -63,7 +102,9 @@
               </div>
               <div class="filterInputContainer">
                 <label for="fItemPercorso" class="filterLabel">Percorso:</label><br>
-                <input type="text" id="fItemPercorso" name="fItemPercorso" class="filterValue">
+                <div class="filterSelect">
+                  <select id="fItemPercorso" name="fItemPercorso" multiple></select>
+                </div>
               </div>
               <div class="filterInputContainer">
                 <label for="fItemSlot" class="filterLabel">Slot:</label><br>
@@ -104,11 +145,11 @@
       </div>
     </div>
     
-    <div id="content" class="container-fluid px-4" style="display: none;top: 30px;position: relative;">
+    <div id="content" class="container-fluid px-4" style="display: none; top: 30px;position: relative;">
       <div class="card bg-dark text-white mb-4" style="opacity: 95%;">
           <div class="card-header d-flex align-items-center">
               <img src="img\items.svg" width="36px" height="36px" />
-              <span id="datatableTitle" style="padding-left: 15px;">Items</span>
+              <span id="datatableTitle" style="padding-left: 15px;">Oggetti</span>
           </div>
           <div id="gridContainer" class="collapse show" style="font-size: 14px;">
               <div class="card-body">
@@ -155,7 +196,152 @@
           </div>
       </div>
     </div>
-   
+
+    <?php if ($isLoggedIn && $user['user_type'] == "1") {?>
+      <!-- Form di inserimento / modifica - inizio -->
+      <div id="editForm" class="container-fluid px-4" style="display: none; top: 30px; position: relative;">
+        <div class="card bg-dark text-white mb-4" style="opacity: 95%;">
+            <div class="card-header d-flex align-items-center">
+                <img src="img\items.svg" width="24px" height="24px" />
+                <span id="formModificaTitle" style="padding-left: 15px;">Inserisci/Modifica</span>
+            </div>
+            <div id="formInputContainer" class="collapse show" style="font-size: 14px;">
+              <form style="margin: 20px; display: flex; flex-wrap: wrap;">
+                <!-- ident -->
+                <div class="formInputContainer">
+                  <label for="frmItemIdent" class="formLabel">Ident:</label><br>
+                  <input type="text" id="frmItemIdent" name="frmItemIdent" class="formValue" placeholder="Incolla qui l'ident per il parsing...">
+                </div>
+                <!-- nome -->
+                <div class="formInputContainer">
+                  <label for="frmItemNome" class="formLabel">Nome:</label><br>
+                  <input type="text" id="frmItemNome" name="frmItemNome" class="formValue">
+                </div>
+                <!-- slot -->
+                <div class="formInputContainer">
+                  <label for="frmItemSlot" class="formLabel">Slot:</label><br>
+                  <div class="formSelect">
+                    <select id="frmItemSlot" name="frmItemSlot">
+                      <option value="Luce">Luce</option>
+                      <option value="Dita">Dita</option>
+                      <option value="Collo">Collo</option>
+                      <option value="Corpo">Corpo</option>
+                      <option value="Testa">Testa</option>
+                      <option value="Gambe">Gambe</option>
+                      <option value="Piedi">Piedi</option>
+                      <option value="Mani">Mani</option>
+                      <option value="Braccia">Braccia</option>
+                      <option value="Scudo">Scudo</option>
+                      <option value="Attorno">Attorno</option>
+                      <option value="Vita">Vita</option>
+                      <option value="Polso">Polso</option>
+                      <option value="Impugnato">Impugnato</option>
+                      <option value="Arma">Arma</option>
+                      <option value="Arma Afferrato">Arma Afferrato</option>
+                      <option value="Afferrato">Afferrato</option>
+                      <option value="Schiena">Schiena</option>
+                      <option value="Orecchie">Orecchie</option>
+                      <option value="Viso">Viso</option>
+                      <option value="Incoccato">Incoccato</option>
+                      <option value="Aura">Aura</option>
+                    </select>
+                  </div>
+                </div>
+                <!-- rarita -->
+                <div class="formInputContainer">
+                  <label for="frmItemRarita" class="formLabel">Rarità:</label><br>
+                  <input type="text" id="frmItemRarita" name="frmItemRarita" class="formValue">
+                </div>
+                <!-- percorso -->
+                <div class="formInputContainer">
+                  <label for="frmItemPercorso" class="formLabel">Percorso:</label><br>
+                  <input type="text" id="frmItemPercorso" name="frmItemPercorso" class="formValue">
+                </div>
+                <!-- livello percorso -->
+                <div class="formInputContainer">
+                  <label for="frmItemLivPercorso" class="formLabel">Livello Percorso:</label><br>
+                  <input type="text" id="frmItemLivPercorso" name="frmItemLivPercorso" class="formValue">
+                </div>
+                <!-- livello percorso max -->
+                <div class="formInputContainer">
+                  <label for="frmItemLivPercorsoMax" class="formLabel">Livello Percorso Max:</label><br>
+                  <input type="text" id="frmItemLivPercorsoMax" name="frmItemLivPercorsoMax" class="formValue">
+                </div>                                
+                <!-- limitato -->
+                <div class="formInputContainer">
+                  <label for="frmItemLimitato" class="formLabel">Limitato:</label><br>
+                  <input type="text" id="frmItemLimitato" name="frmItemLimitato" class="formValue">
+                </div>       
+                <!-- ac -->
+                <div class="formInputContainer">
+                  <label for="frmItemAC" class="formLabel">AC:</label><br>
+                  <input type="text" id="frmItemAC" name="frmItemAC" class="formValue">
+                </div>
+                <!-- dadi -->
+                <div class="formInputContainer">
+                  <label for="frmItemDadi" class="formLabel">Dadi:</label><br>
+                  <input type="text" id="frmItemDadi" name="frmItemDadi" class="formValue">
+                </div>
+                <!-- tipo danno -->
+                <div class="formInputContainer">
+                  <label for="frmItemTipoDanno" class="formLabel">Tipo Danno:</label><br>
+                  <input type="text" id="frmItemTipoDanno" name="frmItemTipoDanno" class="formValue">
+                </div>                  
+                <!-- perc fisico -->
+                <div class="formInputContainer">
+                  <label for="frmItemPercFisico" class="formLabel">% Danno Fisico:</label><br>
+                  <input type="text" id="frmItemPercFisico" name="frmItemPercFisico" class="formValue">
+                </div>             
+                <!-- perc magico -->
+                <div class="formInputContainer">
+                  <label for="frmItemPercMagico" class="formLabel">% Danno Magico:</label><br>
+                  <input type="text" id="frmItemPercMagico" name="frmItemPercMagico" class="formValue">
+                </div>
+                <!-- potere 1 -->
+                <div class="formInputContainer">
+                  <label for="frmItemPotere1" class="filterLabel">Potere 1:</label><br>
+                  <input type="text" id="frmItemPotere1" name="frmItemPotere1" class="formValue">
+                </div>
+                <!-- potere 2 -->
+                <div class="formInputContainer">
+                  <label for="frmItemPotere2" class="filterLabel">Potere 2:</label><br>
+                  <input type="text" id="frmItemPotere2" name="frmItemPotere2" class="formValue">
+                </div>
+                <!-- potere 3 -->
+                <div class="formInputContainer">
+                  <label for="frmItemPotere3" class="filterLabel">Potere 3:</label><br>
+                  <input type="text" id="frmItemPotere3" name="frmItemPotere3" class="formValue">
+                </div>
+                <!-- potere 4 -->
+                <div class="formInputContainer">
+                  <label for="frmItemPotere4" class="filterLabel">Potere 4:</label><br>
+                  <input type="text" id="frmItemPotere4" name="frmItemPotere4" class="formValue">
+                </div>
+                <!-- potere 5 -->
+                <div class="formInputContainer">
+                  <label for="frmItemPotere5" class="filterLabel">Potere 5:</label><br>
+                  <input type="text" id="frmItemPotere5" name="frmItemPotere5" class="formValue">
+                </div>
+                <!-- potere 6 -->
+                <div class="formInputContainer">
+                  <label for="frmItemPotere6" class="filterLabel">Potere 6:</label><br>
+                  <input type="text" id="frmItemPotere6" name="frmItemPotere6" class="formValue">
+                </div>
+                <!-- bonus -->
+                <div class="formInputContainer">
+                  <label for="frmItemBonus" class="filterLabel">Bonus:</label><br>
+                  <input type="text" id="frmItemBonus" name="frmItemBonus" class="formValue">
+                </div>                
+              </form>
+              <div class="formInputContainer">
+                <input type="submit" onclick="SaveItem()" class="btn btn-success btm-sm editFormButton" value="Salva">
+                <input type="submit" onclick="CancelEditing()" class="btn btn-secondary btm-sm editFormButton" value="Annulla">
+              </div>
+            </div>
+        </div>
+      </div> 
+      <!-- Form di inserimento / modifica - fine -->
+    <?php } ?>
   </main>  
 
   <script>
@@ -166,20 +352,57 @@
         $.getJSON("database/spell_armi.json", function (json) { json_spell_armi = json; });
 
         document.addEventListener("DOMContentLoaded", function () {
-            CreateDataTable($("#datatableItems"), undefined, undefined, undefined);
+            CreateDataTable($("#datatableItems"),
+                              <?php if ($isLoggedIn && $user['user_type'] == "1") {?>
+                                'Aggiungi', AddItem, 'Modifica', EditItem, 'Elimina', DeleteItem
+                              <?php } ?>
+                            );
             window.addEventListener('orientationchange', function (){
                 var dtTable = $("#datatableItems").DataTable();
                 dtTable.columns.adjust();
             });
-            InitializeStep2();
-            //FetchItems();
-        })
-
-        function InitializeStep2 () {
             $("#fItemSlot").select2({
               placeholder: "Seleziona gli slot...",
               language: "it"
             });
+            <?php if ($isLoggedIn && $user['user_type'] == "1") {?>
+              $("#frmItemSlot").select2({
+                placeholder: "Seleziona lo slot...",
+                language: "it"
+              });
+            <?php } ?>
+            FetchItemsPercorsi();
+            //Gestione dell'enter sui filtri di tipo text
+            CatchKeypress("fItemNome",13,FetchItems);
+            CatchKeypress("fItemPotere",13,FetchItems);
+        })
+
+        function FetchItemsPercorsi () {
+          fetch('php/load_items_percorsi.php', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              }
+          })
+          .then(response => response.json())
+          .then(data => LoadItemsPercorsi(data))
+          .catch(error => console.log("Errore in caricamento: " + error));
+        }
+
+        function LoadItemsPercorsi (data) {
+          data.forEach(
+              element => {
+                  // Aggiungo la riga alla lista
+                  var opt = document.createElement ("option");
+                  $(opt).val(element.percorso);
+                  $(opt).text(element.percorso);
+                  $("#fItemPercorso").append(opt);
+              }
+          );
+          $("#fItemPercorso").select2({
+            placeholder: "Seleziona i percorsi...",
+            language: "it"
+          });
         }
 
         function FetchItems () {
@@ -190,7 +413,7 @@
                   'Content-Type': 'application/json'
               },
               body: '{  "nome" : "' + $("#fItemNome").val() + '"' + 
-                    '  ,"percorso" : "' + $("#fItemPercorso").val() + '"' + 
+                    '  ,"percorso" : "' + $("#fItemPercorso").val().toString() + '"' + 
                     '  ,"slot" : "' + $("#fItemSlot").val().toString() + '"' + 
                     '  ,"potere" : "' + $("#fItemPotere").val() + '"' + 
                     '}'
@@ -207,24 +430,21 @@
                                         return [element.nome,
                                                 element.slot,
                                                 element.rarita,
-                                                element.percorso,
+                                                getPercorso(element.percorso,element.livello_percorso,element.livello_percorso_max),
                                                 element.ac,
-                                                element.arma,
-                                                element.potere_1,
-                                                element.potere_2,
-                                                element.potere_3,
-                                                element.potere_4,
-                                                element.potere_5,
-                                                element.potere_6,
-                                                element.bonus_2p,
-                                                element.bonus_4p
+                                                getDannoArma(element.dadi, element.tipo_danno, element.perc_fisico, element.perc_magico),
+                                                getPower(element.potere_1_tipo, element.potere_1_nome, element.potere_1_valore),
+                                                getPower(element.potere_2_tipo, element.potere_2_nome, element.potere_2_valore),
+                                                getPower(element.potere_3_tipo, element.potere_3_nome, element.potere_3_valore),
+                                                getPower(element.potere_4_tipo, element.potere_4_nome, element.potere_4_valore),
+                                                getPower(element.potere_5_tipo, element.potere_5_nome, element.potere_5_valore),
+                                                getPower(element.potere_6_tipo, element.potere_6_nome, element.potere_6_valore),
+                                                getBonus(element.bonus_nome, element.bonus_2p_nome, element.bonus_2p_valore),
+                                                getBonus(element.bonus_nome, element.bonus_4p_nome, element.bonus_4p_valore)
                                                ];
                                     },
                                     undefined
           );
-          //table .column('5')
-          //      .order('desc')
-          //      .draw();
           
           $(".dt-search").parent().css("position","absolute");
           $(".dt-search").parent().css("top","-72px");
@@ -246,7 +466,97 @@
           }, 300);
         }
 
-</script>
+        function getPercorso (percorso, livello_percorso, livello_percorso_max) {
+          return (percorso + ' (' + livello_percorso + '/' + livello_percorso_max + ')');
+        }
+
+        function getDannoArma (dadi, tipo_danno, perc_fisico, perc_magico) {
+          if (dadi != undefined && dadi.length > 0) {
+            var dice = dadi.toString().split("D");
+            var media = ((parseFloat(isNull(dice[0],'0')) * parseFloat(isNull(dice[1],'0')) + parseFloat(isNull(dice[0],'0')))/2);
+            return (dadi + ' (media ' + media + ') di tipologia ' + tipo_danno + ", %" + perc_fisico + ' danno fisico, %' + perc_magico + ' potere magico');
+          } else {
+            return "";
+          }
+        }        
+
+        function getPower (tipo, nome, valore) {
+          var out = "";
+          if (tipo != undefined && tipo.length > 0) {
+            out = '[' + tipo + '] ';
+            if (valore != undefined && valore.length > 0) {
+              out += '+' + valore + ' ' + nome;
+            } else {
+              out += nome;
+            }
+          }
+
+          return out;
+        }
+
+        function getBonus (bonus, nome, valore) {
+          if (valore != undefined && valore.length > 0) {
+            return ("+" + valore + " " + nome);
+          } else {
+            return "";
+          }
+        }        
+
+        <?php if ($isLoggedIn && $user['user_type'] == "1") {?>
+          function AddItem (el) {
+            console.log("AddItem");
+            console.log(el);
+            $("#formModificaTitle").text("Aggiungi Oggetto");
+            $("#editForm").show();
+            // Scrollo la pagina sulla form
+            document.getElementById("editForm").scrollIntoView();          
+          }
+
+          function EditItem (el) {
+            // Recupero il record selezionato
+            var selected = document.getElementsByClassName("selected");
+            // Deve essere selezionato un record
+            if (selected.length == 1) {
+              console.log("EditItem");
+              console.log(el);
+              $("#formModificaTitle").text("Modifica Oggetto");
+              $("#editForm").show();
+              // Scrollo la pagina sulla form
+              document.getElementById("editForm").scrollIntoView();
+            } else {
+                // Non è stato selezionato il record
+                show_error('Seleziona un elemento');
+            }          
+          }
+
+          function DeleteItem (el) {
+            // Recupero il record selezionato
+            var selected = document.getElementsByClassName("selected");
+            // Deve essere selezionato un record
+            if (selected.length == 1) {
+                var delitem = function () {
+                  console.log("Cancellare l'item");
+                };
+                show_confirmation_modal (delitem);
+                console.log("DeleteItem");
+                console.log(el);
+            } else {
+                // Non è stato selezionato il record
+                show_error('Seleziona un elemento');
+            }          
+          }
+
+          function CancelEditing () {
+            console.log("CancelEditing");
+            $("#editForm").hide();
+          }
+
+          function SaveItem () {
+            console.log("SaveItem");
+          }
+        <?php }?>
+
+  </script>
 
 </body>
 

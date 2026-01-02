@@ -386,6 +386,15 @@ input {
     }
 }
 
+.card-header .sb-sidenav-collapse-arrow {
+    display: inline-block;
+    margin-left: auto;
+    transition: transform 0.15s ease;
+}
+
+.card-header .collapsed .sb-sidenav-collapse-arrow {
+    transform: rotate(90deg);
+}
 
 /* Modal */
 .modal {
@@ -713,4 +722,19 @@ tfoot {
 #oggettiLimitati_1 {
     text-align: left;
     float: left;
+}
+
+/* Dettaglio datatable */
+.dtr-title {
+    width: 150px;
+}
+
+.dtr-data {
+    font-weight: normal;
+    font-size: 13px;
+    color: #e7e7e7;
+}
+
+.dtr-details li {
+    padding: 2px 0px !important;
 }

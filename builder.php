@@ -52,7 +52,7 @@
       <div class="card bg-dark text-white mb-4" style="opacity: 95%;">
           <div class="card-header d-flex align-items-center">
               <img src="img\builder.svg" width="36px" height="36px" />
-              <span id="datatableTitle" style="padding-left: 15px;">Builds</span>
+              <span id="datatableTitle" style="padding-left: 15px;">Builder</span>
           </div>
           <div id="gridContainer" class="collapse show" style="font-size: 14px;">
               <div class="card-body">
@@ -261,7 +261,7 @@
             Chart.defaults.font.family = "'DejaVu Sans Mono', monospace";
             Chart.defaults.color = "#fff";
             if(input_name) input_name = input_name.toString().replace(/"/g,"");
-            CreateDataTable($("#datatableBuilds"), NewBuild, undefined, undefined);
+            CreateDataTable($("#datatableBuilds"), 'Nuova build', NewBuild);
             window.addEventListener('orientationchange', function (){
                 var dtTable = $("#datatableBuilds").DataTable();
                 dtTable.columns.adjust();
