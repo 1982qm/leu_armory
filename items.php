@@ -215,42 +215,58 @@
                 <!-- nome -->
                 <div class="formInputContainer">
                   <label for="frmItemNome" class="formLabel">Nome:</label><br>
-                  <input type="text" id="frmItemNome" name="frmItemNome" class="formValue">
+                  <input type="text" id="frmItemNome" name="frmItemNome" class="formValue" placeholder="Nome dell'oggetto">
                 </div>
-                <!-- slot -->
-                <div class="formInputContainer" style="width: 192px !important">
-                  <label for="frmItemSlot" class="formLabel" style="width: 100px !important">Slot:</label><br>
-                  <div class="formSelect" style="width: 180px !important">
-                    <select id="frmItemSlot" name="frmItemSlot">
-                      <option value="Luce">Luce</option>
-                      <option value="Dita">Dita</option>
-                      <option value="Collo">Collo</option>
-                      <option value="Corpo">Corpo</option>
-                      <option value="Testa">Testa</option>
-                      <option value="Gambe">Gambe</option>
-                      <option value="Piedi">Piedi</option>
-                      <option value="Mani">Mani</option>
-                      <option value="Braccia">Braccia</option>
-                      <option value="Scudo">Scudo</option>
-                      <option value="Attorno">Attorno</option>
-                      <option value="Vita">Vita</option>
-                      <option value="Polso">Polso</option>
-                      <option value="Impugnato">Impugnato</option>
-                      <option value="Arma">Arma</option>
-                      <option value="Arma Afferrato">Arma Afferrato</option>
-                      <option value="Afferrato">Afferrato</option>
-                      <option value="Schiena">Schiena</option>
-                      <option value="Orecchie">Orecchie</option>
-                      <option value="Viso">Viso</option>
-                      <option value="Incoccato">Incoccato</option>
-                      <option value="Aura">Aura</option>
-                    </select>
+                <div class="formInputContainer" style="width: 410px !important">
+                  <div style="width: 100%; display: flex">
+                    <!-- slot -->
+                    <div style="width: 50%">
+                      <label for="frmItemSlot" class="formLabel" style="width: 100px !important">Slot:</label><br>
+                      <div class="formSelect" style="width: 190px !important">
+                        <select id="frmItemSlot" name="frmItemSlot">
+                          <option value=""></option>
+                          <option value="Luce">Luce</option>
+                          <option value="Dita">Dita</option>
+                          <option value="Collo">Collo</option>
+                          <option value="Corpo">Corpo</option>
+                          <option value="Testa">Testa</option>
+                          <option value="Gambe">Gambe</option>
+                          <option value="Piedi">Piedi</option>
+                          <option value="Mani">Mani</option>
+                          <option value="Braccia">Braccia</option>
+                          <option value="Scudo">Scudo</option>
+                          <option value="Attorno">Attorno</option>
+                          <option value="Vita">Vita</option>
+                          <option value="Polso">Polso</option>
+                          <option value="Impugnato">Impugnato</option>
+                          <option value="Arma">Arma</option>
+                          <option value="Arma Afferrato">Arma Afferrato</option>
+                          <option value="Afferrato">Afferrato</option>
+                          <option value="Schiena">Schiena</option>
+                          <option value="Orecchie">Orecchie</option>
+                          <option value="Viso">Viso</option>
+                          <option value="Incoccato">Incoccato</option>
+                          <option value="Aura">Aura</option>
+                        </select>
+                      </div>
+                    </div>
+                    <div style="width: 50%">
+                      <!-- rarita -->
+                      <label for="frmItemRarita" class="formLabel" style="width: 100px !important">Rarità:</label><br>
+                      <div class="formSelect" style="width: 190px !important">
+                        <select id="frmItemRarita" name="frmItemRarita">
+                          <option value=""></option>
+                          <option value="Astrale">Astrale</option>
+                          <option value="Comune">Comune</option>
+                          <option value="Epico">Epico</option>
+                          <option value="Leggendario">Leggendario</option>
+                          <option value="Raro">Raro</option>
+                          <option value="Set">Set</option>
+                          <option value="Unico">Unico</option>
+                        </select>
+                      </div>
+                    </div>
                   </div>
-                </div>
-                <!-- rarita -->
-                <div class="formInputContainer" style="width: 192px !important">
-                  <label for="frmItemRarita" class="formLabel" style="width: 100px !important">Rarità:</label><br>
-                  <input type="text" id="frmItemRarita" name="frmItemRarita" class="formValue" style="width: 180px !important">
                 </div>
                 <!-- percorso -->
                 <div class="formInputContainer">
@@ -263,7 +279,7 @@
                 <!-- bonus -->
                 <div class="formInputContainer">
                   <label for="frmItemBonus" class="filterLabel">Bonus:</label><br>
-                  <input type="text" id="frmItemBonus" name="frmItemBonus" class="formValue">
+                  <input type="text" id="frmItemBonus" name="frmItemBonus" class="formValue" placeholder="Nome del Bonus">
                 </div>                
                 <div class="formInputContainer">
                 <!-- ac -->
@@ -350,9 +366,14 @@
               placeholder: "Seleziona gli slot...",
               language: "it"
             });
+            
             <?php if ($isLoggedIn && $user['user_type'] == "1") {?>
               $("#frmItemSlot").select2({
                 placeholder: "Seleziona lo slot...",
+                language: "it"
+              });
+              $("#frmItemRarita").select2({
+                placeholder: "Seleziona la rarità...",
                 language: "it"
               });
             <?php } ?>
