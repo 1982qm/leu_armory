@@ -738,3 +738,21 @@ tfoot {
 .dtr-details li {
     padding: 2px 0px !important;
 }
+
+.select2-container--default .select2-selection--multiple,
+.select2-container--default .select2-selection--single {
+    border-radius: 2px !important;
+    border-color: color-mix(in srgb, FieldText 50%, transparent) !important;
+    background-color: field !important;
+    height: 32px !important;
+}
+
+.select2-container--default .select2-selection--multiple:hover,
+.select2-container--default .select2-selection--single:hover {
+    border-color: color-mix(in srgb, FieldText 80%, transparent) !important;
+}
+
+.select2-container--default .select2-dropdown {
+    background-color: field !important;
+    border-color: color-mix(in srgb, FieldText 50%, transparent) !important;
+}
