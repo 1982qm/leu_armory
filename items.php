@@ -218,9 +218,9 @@
                   <input type="text" id="frmItemNome" name="frmItemNome" class="formValue">
                 </div>
                 <!-- slot -->
-                <div class="formInputContainer">
-                  <label for="frmItemSlot" class="formLabel">Slot:</label><br>
-                  <div class="formSelect">
+                <div class="formInputContainer" style="width: 192px !important">
+                  <label for="frmItemSlot" class="formLabel" style="width: 100px !important">Slot:</label><br>
+                  <div class="formSelect" style="width: 180px !important">
                     <select id="frmItemSlot" name="frmItemSlot">
                       <option value="Luce">Luce</option>
                       <option value="Dita">Dita</option>
@@ -248,94 +248,79 @@
                   </div>
                 </div>
                 <!-- rarita -->
-                <div class="formInputContainer">
-                  <label for="frmItemRarita" class="formLabel">Rarità:</label><br>
-                  <input type="text" id="frmItemRarita" name="frmItemRarita" class="formValue">
+                <div class="formInputContainer" style="width: 192px !important">
+                  <label for="frmItemRarita" class="formLabel" style="width: 100px !important">Rarità:</label><br>
+                  <input type="text" id="frmItemRarita" name="frmItemRarita" class="formValue" style="width: 180px !important">
                 </div>
                 <!-- percorso -->
                 <div class="formInputContainer">
                   <label for="frmItemPercorso" class="formLabel">Percorso:</label><br>
-                  <input type="text" id="frmItemPercorso" name="frmItemPercorso" class="formValue">
-                </div>
-                <!-- livello percorso -->
-                <div class="formInputContainer">
-                  <label for="frmItemLivPercorso" class="formLabel">Livello Percorso:</label><br>
-                  <input type="text" id="frmItemLivPercorso" name="frmItemLivPercorso" class="formValue">
-                </div>
-                <!-- livello percorso max -->
-                <div class="formInputContainer">
-                  <label for="frmItemLivPercorsoMax" class="formLabel">Livello Percorso Max:</label><br>
-                  <input type="text" id="frmItemLivPercorsoMax" name="frmItemLivPercorsoMax" class="formValue">
-                </div>                                
-                <!-- limitato -->
-                <div class="formInputContainer">
-                  <label for="frmItemLimitato" class="formLabel">Limitato:</label><br>
-                  <input type="text" id="frmItemLimitato" name="frmItemLimitato" class="formValue">
-                </div>       
-                <!-- ac -->
-                <div class="formInputContainer">
-                  <label for="frmItemAC" class="formLabel">AC:</label><br>
-                  <input type="text" id="frmItemAC" name="frmItemAC" class="formValue">
-                </div>
-                <!-- dadi -->
-                <div class="formInputContainer">
-                  <label for="frmItemDadi" class="formLabel">Dadi:</label><br>
-                  <input type="text" id="frmItemDadi" name="frmItemDadi" class="formValue">
-                </div>
-                <!-- tipo danno -->
-                <div class="formInputContainer">
-                  <label for="frmItemTipoDanno" class="formLabel">Tipo Danno:</label><br>
-                  <input type="text" id="frmItemTipoDanno" name="frmItemTipoDanno" class="formValue">
-                </div>                  
-                <!-- perc fisico -->
-                <div class="formInputContainer">
-                  <label for="frmItemPercFisico" class="formLabel">% Danno Fisico:</label><br>
-                  <input type="text" id="frmItemPercFisico" name="frmItemPercFisico" class="formValue">
-                </div>             
-                <!-- perc magico -->
-                <div class="formInputContainer">
-                  <label for="frmItemPercMagico" class="formLabel">% Danno Magico:</label><br>
-                  <input type="text" id="frmItemPercMagico" name="frmItemPercMagico" class="formValue">
-                </div>
-                <!-- potere 1 -->
-                <div class="formInputContainer">
-                  <label for="frmItemPotere1" class="filterLabel">Potere 1:</label><br>
-                  <input type="text" id="frmItemPotere1" name="frmItemPotere1" class="formValue">
-                </div>
-                <!-- potere 2 -->
-                <div class="formInputContainer">
-                  <label for="frmItemPotere2" class="filterLabel">Potere 2:</label><br>
-                  <input type="text" id="frmItemPotere2" name="frmItemPotere2" class="formValue">
-                </div>
-                <!-- potere 3 -->
-                <div class="formInputContainer">
-                  <label for="frmItemPotere3" class="filterLabel">Potere 3:</label><br>
-                  <input type="text" id="frmItemPotere3" name="frmItemPotere3" class="formValue">
-                </div>
-                <!-- potere 4 -->
-                <div class="formInputContainer">
-                  <label for="frmItemPotere4" class="filterLabel">Potere 4:</label><br>
-                  <input type="text" id="frmItemPotere4" name="frmItemPotere4" class="formValue">
-                </div>
-                <!-- potere 5 -->
-                <div class="formInputContainer">
-                  <label for="frmItemPotere5" class="filterLabel">Potere 5:</label><br>
-                  <input type="text" id="frmItemPotere5" name="frmItemPotere5" class="formValue">
-                </div>
-                <!-- potere 6 -->
-                <div class="formInputContainer">
-                  <label for="frmItemPotere6" class="filterLabel">Potere 6:</label><br>
-                  <input type="text" id="frmItemPotere6" name="frmItemPotere6" class="formValue">
+                  <input type="text" id="frmItemPercorso" name="frmItemPercorso" class="formValue" style="width: 135px !important" placeholder="Nome">
+                  <input type="text" id="frmItemLivPercorso" name="frmItemLivPercorso" class="formValue" style="width: 70px !important" placeholder="Livello">
+                  <input type="text" id="frmItemLivPercorsoMax" name="frmItemLivPercorsoMax" class="formValue" style="width: 70px !important" placeholder="Liv. Max">
+                  <input type="text" id="frmItemLimitato" name="frmItemLimitato" class="formValue" style="width: 70px !important" placeholder="Limitato">
                 </div>
                 <!-- bonus -->
                 <div class="formInputContainer">
                   <label for="frmItemBonus" class="filterLabel">Bonus:</label><br>
                   <input type="text" id="frmItemBonus" name="frmItemBonus" class="formValue">
                 </div>                
+                <div class="formInputContainer">
+                <!-- ac -->
+                  <label for="frmItemAC" class="formLabel" style="white-space: preserve; width: 300px !important;">AC:      Danni Arma:</label><br>
+                  <input type="text" id="frmItemAC" name="frmItemAC" class="formValue" style="width: 30px !important" placeholder="AC">
+                <!-- arma -->
+                  <input type="text" id="frmItemDadi" name="frmItemDadi" class="formValue" style="width: 60px !important" placeholder="Dadi">
+                  <input type="text" id="frmItemTipoDanno" name="frmItemTipoDanno" class="formValue" style="width: 100px !important" placeholder="Tipo Danno">
+                  <input type="text" id="frmItemPercFisico" name="frmItemPercFisico" class="formValue" style="width: 70px !important" placeholder="% Fisico">
+                  <input type="text" id="frmItemPercMagico" name="frmItemPercMagico" class="formValue" style="width: 70px !important" placeholder="% Magico">
+                </div>
+                <!-- potere 1 -->
+                <div class="formInputContainer">
+                  <label for="frmItemPotere1" class="filterLabel">Potere 1:</label><br>
+                  <input type="text" id="frmItemPotere1" name="frmItemPotere1" class="formValue" style="width: 122px !important" placeholder="Tipo">
+                  <input type="text" id="frmItemPotere1_nome" name="frmItemPotere1_nome" class="formValue" style="width: 182px !important" placeholder="Nome">
+                  <input type="text" id="frmItemPotere1_val" name="frmItemPotere1_val" class="formValue" style="width: 60px !important" placeholder="Valore">
+                </div>
+                <!-- potere 2 -->
+                <div class="formInputContainer">
+                  <label for="frmItemPotere2" class="filterLabel">Potere 2:</label><br>
+                  <input type="text" id="frmItemPotere2" name="frmItemPotere2" class="formValue" style="width: 122px !important" placeholder="Tipo">
+                  <input type="text" id="frmItemPotere2_nome" name="frmItemPotere2_nome" class="formValue" style="width: 182px !important" placeholder="Nome">
+                  <input type="text" id="frmItemPotere2_val" name="frmItemPotere2_val" class="formValue" style="width: 60px !important" placeholder="Valore">
+                </div>
+                <!-- potere 3 -->
+                <div class="formInputContainer">
+                  <label for="frmItemPotere3" class="filterLabel">Potere 3:</label><br>
+                  <input type="text" id="frmItemPotere3" name="frmItemPotere3" class="formValue" style="width: 122px !important" placeholder="Tipo">
+                  <input type="text" id="frmItemPotere3_nome" name="frmItemPotere3_nome" class="formValue" style="width: 182px !important" placeholder="Nome">
+                  <input type="text" id="frmItemPotere3_val" name="frmItemPotere3_val" class="formValue" style="width: 60px !important" placeholder="Valore">
+                </div>
+                <!-- potere 4 -->
+                <div class="formInputContainer">
+                  <label for="frmItemPotere4" class="filterLabel">Potere 4:</label><br>
+                  <input type="text" id="frmItemPotere4" name="frmItemPotere4" class="formValue" style="width: 122px !important" placeholder="Tipo">
+                  <input type="text" id="frmItemPotere4_nome" name="frmItemPotere4_nome" class="formValue" style="width: 182px !important" placeholder="Nome">
+                  <input type="text" id="frmItemPotere4_val" name="frmItemPotere4_val" class="formValue" style="width: 60px !important" placeholder="Valore">
+                </div>
+                <!-- potere 5 -->
+                <div class="formInputContainer">
+                  <label for="frmItemPotere5" class="filterLabel">Potere 5:</label><br>
+                  <input type="text" id="frmItemPotere5" name="frmItemPotere5" class="formValue" style="width: 122px !important" placeholder="Tipo">
+                  <input type="text" id="frmItemPotere5_nome" name="frmItemPotere5_nome" class="formValue" style="width: 182px !important" placeholder="Nome">
+                  <input type="text" id="frmItemPotere5_val" name="frmItemPotere5_val" class="formValue" style="width: 60px !important" placeholder="Valore">
+                </div>
+                <!-- potere 6 -->
+                <div class="formInputContainer">
+                  <label for="frmItemPotere6" class="filterLabel">Potere 6:</label><br>
+                  <input type="text" id="frmItemPotere6" name="frmItemPotere6" class="formValue" style="width: 122px !important" placeholder="Tipo">
+                  <input type="text" id="frmItemPotere6_nome" name="frmItemPotere6_nome" class="formValue" style="width: 182px !important" placeholder="Nome">
+                  <input type="text" id="frmItemPotere6_val" name="frmItemPotere6_val" class="formValue" style="width: 60px !important" placeholder="Valore">
+                </div>
               </form>
               <div class="formInputContainer">
-                <input type="submit" onclick="SaveItem()" class="btn btn-success btm-sm editFormButton" value="Salva">
-                <input type="submit" onclick="CancelEditing()" class="btn btn-secondary btm-sm editFormButton" value="Annulla">
+                <input type="submit" onclick="SaveItem()" class="btn btn-success btm-sm formButton" value="Salva">
+                <input type="submit" onclick="CancelEditing()" class="btn btn-secondary btm-sm formButton" value="Annulla">
               </div>
             </div>
         </div>
