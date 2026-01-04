@@ -54,7 +54,7 @@
             <center>
                   <div class="modal-header">
                       <div class="modal-title">
-                          <h5 class="text-white">Confermi?</h5>
+                          <span id="confirm-modal-text" class="text-white">Confermi?</span>
                       </div>
                   </div>
                   <div class="modal-footer">
@@ -210,7 +210,7 @@
                 <!-- ident -->
                 <div class="formInputContainer">
                   <label for="frmItemIdent" class="formLabel">Ident:</label><br>
-                  <input type="text" id="frmItemIdent" name="frmItemIdent" class="formValue" placeholder="Incolla qui l'ident per il parsing...">
+                  <textarea type="text" id="frmItemIdent" name="frmItemIdent" class="formValue" onchange="ParseIdent()" style="white-space: pre-wrap" placeholder="Incolla qui l'ident per il parsing..."></textarea>
                 </div>
                 <!-- nome -->
                 <div class="formInputContainer">
@@ -283,7 +283,7 @@
                 </div>                
                 <div class="formInputContainer">
                 <!-- ac -->
-                  <label for="frmItemAC" class="formLabel" style="white-space: preserve; width: 300px !important;">AC:      Danni Arma:</label><br>
+                  <label for="frmItemAC" class="formLabel" style="white-space: preserve; width: 300px !important;">AC:   Danni Arma:</label><br>
                   <input type="text" id="frmItemAC" name="frmItemAC" class="formValue" style="width: 30px !important" placeholder="AC">
                 <!-- arma -->
                   <input type="text" id="frmItemDadi" name="frmItemDadi" class="formValue" style="width: 60px !important" placeholder="Dadi">
@@ -510,8 +510,7 @@
 
         <?php if ($isLoggedIn && $user['user_type'] == "1") {?>
           function AddItem (el) {
-            console.log("AddItem");
-            console.log(el);
+            ResetForm ();
             $("#formModificaTitle").text("Aggiungi Oggetto");
             $("#editForm").show();
             // Scrollo la pagina sulla form
@@ -519,20 +518,79 @@
           }
 
           function EditItem (el) {
+            ResetForm ();
             // Recupero il record selezionato
             var selected = document.getElementsByClassName("selected");
             // Deve essere selezionato un record
             if (selected.length == 1) {
-              console.log("EditItem");
-              console.log(el);
-              $("#formModificaTitle").text("Modifica Oggetto");
-              $("#editForm").show();
-              // Scrollo la pagina sulla form
-              document.getElementById("editForm").scrollIntoView();
+              var itemName = selected[0].childNodes[0].innerText;
+              FetchItemDetail(itemName);
             } else {
                 // Non è stato selezionato il record
                 show_error('Seleziona un elemento');
             }          
+          }
+
+          function FetchItemDetail(name) {
+              fetch('php/load_item_detail.php', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json'
+                  },
+                  body: '{"nome" : "' + name + '"}'
+              })
+              .then(response => response.json())
+              .then(data => LoadItemDetail(data))
+              .catch(error => console.log("Errore in caricamento: " + error));
+          }
+
+          function LoadItemDetail(data) {
+              var el = data[0];
+
+              $("#frmItemNome").val(el.nome);
+
+              $("#frmItemSlot").val(el.slot).trigger('change');
+              $("#frmItemRarita").val(el.rarita).trigger('change');
+
+              $("#frmItemPercorso").val(el.percorso);
+              $("#frmItemLivPercorso").val(el.livello_percorso);
+              $("#frmItemLivPercorsoMax").val(el.livello_percorso_max);
+              $("#frmItemLimitato").val(el.limitato);
+              $("#frmItemBonus").val(el.bonus);            
+              $("#frmItemAC").val(el.ac);
+              $("#frmItemDadi").val(el.dadi);
+              $("#frmItemTipoDanno").val(el.tipo_danno);
+              $("#frmItemPercFisico").val(el.perc_fisico);
+              $("#frmItemPercMagico").val(el.perc_magico);
+
+              $("#frmItemPotere1").val(el.potere_1_tipo);
+              $("#frmItemPotere1_nome").val(el.potere_1_nome);
+              $("#frmItemPotere1_val").val(el.potere_1_valore);
+              
+              $("#frmItemPotere2").val(el.potere_2_tipo);
+              $("#frmItemPotere2_nome").val(el.potere_2_nome);
+              $("#frmItemPotere2_val").val(el.potere_2_valore);
+              
+              $("#frmItemPotere3").val(el.potere_3_tipo);
+              $("#frmItemPotere3_nome").val(el.potere_3_nome);
+              $("#frmItemPotere3_val").val(el.potere_3_valore);
+              
+              $("#frmItemPotere4").val(el.potere_4_tipo);
+              $("#frmItemPotere4_nome").val(el.potere_4_nome);
+              $("#frmItemPotere4_val").val(el.potere_4_valore);
+
+              $("#frmItemPotere5").val(el.potere_5_tipo);
+              $("#frmItemPotere5_nome").val(el.potere_5_nome);
+              $("#frmItemPotere5_val").val(el.potere_5_valore);
+
+              $("#frmItemPotere6").val(el.potere_6_tipo);
+              $("#frmItemPotere6_nome").val(el.potere_6_nome);
+              $("#frmItemPotere6_val").val(el.potere_6_valore);
+
+              $("#formModificaTitle").text("Modifica Oggetto");
+              $("#editForm").show();
+              // Scrollo la pagina sulla form
+              document.getElementById("editForm").scrollIntoView();
           }
 
           function DeleteItem (el) {
@@ -540,26 +598,367 @@
             var selected = document.getElementsByClassName("selected");
             // Deve essere selezionato un record
             if (selected.length == 1) {
+                var itemName = selected[0].childNodes[0].innerText;
                 var delitem = function () {
-                  console.log("Cancellare l'item");
+                  ExecDeleteItem(itemName);
                 };
-                show_confirmation_modal (delitem);
-                console.log("DeleteItem");
-                console.log(el);
+                show_confirmation_modal ("Confermi la cancellazione di: '" + itemName + "'?", delitem);
             } else {
                 // Non è stato selezionato il record
                 show_error('Seleziona un elemento');
-            }          
+            }
+          }
+
+          function ExecDeleteItem (name) {
+              fetch('php/delete_item.php', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json'
+                  },
+                  body: '{"nome" : "' + name + '"}'
+              })
+              .then(response => FetchItems ())
+              .catch(error => console.log("Errore in caricamento: " + error));
           }
 
           function CancelEditing () {
-            console.log("CancelEditing");
             $("#editForm").hide();
           }
 
           function SaveItem () {
-            console.log("SaveItem");
+            var itemName = $("#frmItemNome").val();
+            ExecSaveItem(itemName);
+            $("#editForm").hide();
           }
+
+          function ExecSaveItem (name) {
+              fetch('php/insert_item.php', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json'
+                  },
+                  body: '{' +
+                           '"nome" : "'                 +  $("#frmItemNome").val()           + '",' + 
+                           '"slot" : "'                 +  $("#frmItemSlot").val()           + '",' + 
+                           '"rarita" : "'               +  $("#frmItemRarita").val()         + '",' + 
+                           '"percorso" : "'             +  $("#frmItemPercorso").val()       + '",' + 
+                           '"livello_percorso" : "'     +  $("#frmItemLivPercorso").val()    + '",' + 
+                           '"livello_percorso_max" : "' +  $("#frmItemLivPercorsoMax").val() + '",' + 
+                           '"limitato" : "'             +  $("#frmItemLimitato").val()       + '",' + 
+                           '"bonus" : "'                +  $("#frmItemBonus").val()          + '",' + 
+                           '"ac" : "'                   +  $("#frmItemAC").val()             + '",' + 
+                           '"dadi" : "'                 +  $("#frmItemDadi").val()           + '",' + 
+                           '"tipo_danno" : "'           +  $("#frmItemTipoDanno").val()      + '",' + 
+                           '"perc_fisico" : "'          +  $("#frmItemPercFisico").val()     + '",' + 
+                           '"perc_magico" : "'          +  $("#frmItemPercMagico").val()     + '",' + 
+                           '"potere_1_tipo" : "'        +  $("#frmItemPotere1").val()        + '",' + 
+                           '"potere_1_nome" : "'        +  $("#frmItemPotere1_nome").val()   + '",' + 
+                           '"potere_1_valore" : "'      +  $("#frmItemPotere1_val").val()    + '",' + 
+                           '"potere_2_tipo" : "'        +  $("#frmItemPotere2").val()        + '",' + 
+                           '"potere_2_nome" : "'        +  $("#frmItemPotere2_nome").val()   + '",' + 
+                           '"potere_2_valore" : "'      +  $("#frmItemPotere2_val").val()    + '",' + 
+                           '"potere_3_tipo" : "'        +  $("#frmItemPotere3").val()        + '",' + 
+                           '"potere_3_nome" : "'        +  $("#frmItemPotere3_nome").val()   + '",' + 
+                           '"potere_3_valore" : "'      +  $("#frmItemPotere3_val").val()    + '",' + 
+                           '"potere_4_tipo" : "'        +  $("#frmItemPotere4").val()        + '",' + 
+                           '"potere_4_nome" : "'        +  $("#frmItemPotere4_nome").val()   + '",' + 
+                           '"potere_4_valore" : "'      +  $("#frmItemPotere4_val").val()    + '",' + 
+                           '"potere_5_tipo" : "'        +  $("#frmItemPotere5").val()        + '",' + 
+                           '"potere_5_nome" : "'        +  $("#frmItemPotere5_nome").val()   + '",' + 
+                           '"potere_5_valore" : "'      +  $("#frmItemPotere5_val").val()    + '",' + 
+                           '"potere_6_tipo" : "'        +  $("#frmItemPotere6").val()        + '",' + 
+                           '"potere_6_nome" : "'        +  $("#frmItemPotere6_nome").val()   + '",' + 
+                           '"potere_6_valore" : "'      +  $("#frmItemPotere6_val").val()    + '"' + 
+                        '}' 
+              })
+              .then(response => FetchItems ())
+              .catch(error => console.log("Errore in caricamento: " + error));
+          }
+
+          function ParseIdent () {
+            var rows = $("#frmItemIdent").val().split("\n");
+            var nome = "";
+            var percorso = "";
+            var percorso_livello = "";
+            var percorso_livello_max = "";
+            var limitato = "";
+            var bonus = "";
+            var rarita = "";
+            var slot = "";
+            var ac = "";
+            var dadi = "";
+            var tipo_danno = "";
+            var perc_fisico = "";
+            var perc_magico = "";
+            var potere_1_tipo = "";
+            var potere_1_nome = "";
+            var potere_1_valore = "";
+            var potere_2_tipo = "";
+            var potere_2_nome = "";
+            var potere_2_valore = "";
+            var potere_3_tipo = "";
+            var potere_3_nome = "";
+            var potere_3_valore = "";
+            var potere_4_tipo = "";
+            var potere_4_nome = "";
+            var potere_4_valore = "";
+            var potere_5_tipo = "";
+            var potere_5_nome = "";
+            var potere_5_valore = "";
+            var potere_6_tipo = "";
+            var potere_6_nome = "";
+            var potere_6_valore = "";
+
+            var idx;
+
+            if (rows.length > 0) {
+              rows.forEach(el => {
+                //nome
+                if (nome.length == 0) {
+                  idx = el.indexOf("Tipologia");
+                  if (idx > -1) {
+                    idx = el.indexOf("(");
+                    nome = el.substr(0,idx-1);
+                    return;
+                  }
+                }
+
+                //slot
+                idx = el.indexOf("Indossabilita` : ");
+                if (idx > -1) {
+                  slot = el.substr(17,el.length-18);
+                  return;
+                }
+
+                //rarita
+                idx = el.indexOf("Rarita`        : ");
+                if (idx > -1) {
+                  rarita = el.substr(17,el.length-17);
+                  return;
+                }
+
+                //limitato
+                idx = el.indexOf("Contribuisce");
+                if (idx > -1) {
+                  idx = el.indexOf("(");
+                  limitato = el.substr(idx+1,1);
+                  return;
+                }
+
+                //percorso
+                idx = el.indexOf("Percorso ");
+                if (idx > -1) {
+                  idx = el.indexOf("(");
+                  percorso = el.substr(9,idx-9);
+                  idx += el.substr(idx+1).indexOf("(") + 1;
+                  percorso_livello = el.substr(idx+1,2);
+                  percorso_livello_max = el.substr(el.trim().lastIndexOf(" ")+1,2);
+                  return;
+                }
+
+                //ac
+                idx = el.indexOf("Garantisce un bonus all'Armatura di ");
+                if (idx > -1) {
+                  ac = el.substr(36,1);
+                  return;
+                }
+
+                //danni
+                idx = el.indexOf("Causa ");
+                if (idx > -1) {
+                  dadi = el.substr(6,el.indexOf(" ", 7) - 6);
+                  idx = el.indexOf("di tipologia ");
+                  tipo_danno = el.substr(idx+13, el.length - idx - 14);
+                  return;
+                }
+
+                //perc fisico, magico
+                idx = el.indexOf("Guadagna ");
+                if (idx > -1) {
+                  perc_fisico = el.substr(9,el.indexOf("%", 9) - 9);
+                  idx = el.indexOf("del danno fisico e ");
+                  perc_magico = el.substr(idx+19,el.indexOf("%", idx+19) - idx - 19);
+                  return;
+                }
+
+                //bonus
+                idx = el.indexOf("Questo oggetto fa parte del set ");
+                if (idx > -1) {
+                  bonus = el.substr(32,el.indexOf(".", 32) - 32);
+                  return;
+                }
+
+                //potere1
+                idx = el.indexOf("[1][");
+                if (idx > -1) {
+                  var res = EstraiPotere(el);
+                  potere_1_tipo = res.tipo;
+                  potere_1_nome = res.nome;
+                  potere_1_valore = res.valore;
+                  return;
+                }
+
+                //potere2
+                idx = el.indexOf("[2][");
+                if (idx > -1) {
+                  var res = EstraiPotere(el);
+                  potere_2_tipo = res.tipo;
+                  potere_2_nome = res.nome;
+                  potere_2_valore = res.valore;
+                  return;
+                }
+
+                //potere3
+                idx = el.indexOf("[3][");
+                if (idx > -1) {
+                  var res = EstraiPotere(el);
+                  potere_3_tipo = res.tipo;
+                  potere_3_nome = res.nome;
+                  potere_3_valore = res.valore;
+                  return;
+                }
+
+                //potere4
+                idx = el.indexOf("[4][");
+                if (idx > -1) {
+                  var res = EstraiPotere(el);
+                  potere_4_tipo = res.tipo;
+                  potere_4_nome = res.nome;
+                  potere_4_valore = res.valore;
+                  return;
+                }
+
+                //potere5
+                idx = el.indexOf("[5][");
+                if (idx > -1) {
+                  var res = EstraiPotere(el);
+                  potere_5_tipo = res.tipo;
+                  potere_5_nome = res.nome;
+                  potere_5_valore = res.valore;
+                  return;
+                }
+
+                //potere6
+                idx = el.indexOf("[6][");
+                if (idx > -1) {
+                  var res = EstraiPotere(el);
+                  potere_6_tipo = res.tipo;
+                  potere_6_nome = res.nome;
+                  potere_6_valore = res.valore;
+                  return;
+                }
+              })
+            
+              $("#frmItemNome").val(nome);
+
+              $("#frmItemSlot").val(slot).trigger('change');
+              $("#frmItemRarita").val(rarita).trigger('change');
+
+              $("#frmItemPercorso").val(percorso);
+              $("#frmItemLivPercorso").val(percorso_livello);
+              $("#frmItemLivPercorsoMax").val(percorso_livello_max);
+              $("#frmItemLimitato").val(limitato);
+              $("#frmItemBonus").val(bonus);            
+              $("#frmItemAC").val(ac);
+              $("#frmItemDadi").val(dadi);
+              $("#frmItemTipoDanno").val(tipo_danno);
+              $("#frmItemPercFisico").val(perc_fisico);
+              $("#frmItemPercMagico").val(perc_magico);
+
+              $("#frmItemPotere1").val(potere_1_tipo);
+              $("#frmItemPotere1_nome").val(potere_1_nome);
+              $("#frmItemPotere1_val").val(potere_1_valore);
+              
+              $("#frmItemPotere2").val(potere_2_tipo);
+              $("#frmItemPotere2_nome").val(potere_2_nome);
+              $("#frmItemPotere2_val").val(potere_2_valore);
+              
+              $("#frmItemPotere3").val(potere_3_tipo);
+              $("#frmItemPotere3_nome").val(potere_3_nome);
+              $("#frmItemPotere3_val").val(potere_3_valore);
+              
+              $("#frmItemPotere4").val(potere_4_tipo);
+              $("#frmItemPotere4_nome").val(potere_4_nome);
+              $("#frmItemPotere4_val").val(potere_4_valore);
+
+              $("#frmItemPotere5").val(potere_5_tipo);
+              $("#frmItemPotere5_nome").val(potere_5_nome);
+              $("#frmItemPotere5_val").val(potere_5_valore);
+
+              $("#frmItemPotere6").val(potere_6_tipo);
+              $("#frmItemPotere6_nome").val(potere_6_nome);
+              $("#frmItemPotere6_val").val(potere_6_valore);
+
+              $("#frmItemIdent").val("");
+            }
+          }
+
+          function EstraiPotere (el) {
+            var idx;
+            var tipo;
+            var nome;
+            var valore;
+
+            idx = el.indexOf("]", 4);
+            tipo = el.substr(4,idx - 4).trim();
+            valore = el.substr(idx+2);
+            if (valore.substr(0,1) == "+") {
+              nome = valore.substr(valore.indexOf(" ")+1);
+              valore = valore.substr(1,valore.indexOf(" ")-1);
+            } else {
+              nome = valore;
+              valore = "";
+            }
+            valore = valore.replace("%","");
+            nome = nome.replace(" [Preservato]", "");
+            nome = nome.replace("Incantesimo su Arma: ", "");            
+            return {tipo : tipo, nome : nome, valore : valore};
+          } 
+
+          function ResetForm () {
+              $("#frmItemNome").val("");
+
+              $("#frmItemSlot").val("").trigger('change');
+              $("#frmItemRarita").val("").trigger('change');
+
+              $("#frmItemPercorso").val("");
+              $("#frmItemLivPercorso").val("");
+              $("#frmItemLivPercorsoMax").val("");
+              $("#frmItemLimitato").val("");
+              $("#frmItemBonus").val("");            
+              $("#frmItemAC").val("");
+              $("#frmItemDadi").val("");
+              $("#frmItemTipoDanno").val("");
+              $("#frmItemPercFisico").val("");
+              $("#frmItemPercMagico").val("");
+
+              $("#frmItemPotere1").val("");
+              $("#frmItemPotere1_nome").val("");
+              $("#frmItemPotere1_val").val("");
+              
+              $("#frmItemPotere2").val("");
+              $("#frmItemPotere2_nome").val("");
+              $("#frmItemPotere2_val").val("");
+              
+              $("#frmItemPotere3").val("");
+              $("#frmItemPotere3_nome").val("");
+              $("#frmItemPotere3_val").val("");
+              
+              $("#frmItemPotere4").val("");
+              $("#frmItemPotere4_nome").val("");
+              $("#frmItemPotere4_val").val("");
+
+              $("#frmItemPotere5").val("");
+              $("#frmItemPotere5_nome").val("");
+              $("#frmItemPotere5_val").val("");
+
+              $("#frmItemPotere6").val("");
+              $("#frmItemPotere6_nome").val("");
+              $("#frmItemPotere6_val").val("");
+
+              $("#frmItemIdent").val("");
+          }
+
         <?php }?>
 
   </script>

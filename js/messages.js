@@ -30,9 +30,10 @@ function show_modal(modalName, enterButton) {
     };
 };
 
-function show_confirmation_modal(callback) {
+function show_confirmation_modal(msg, callback) {
     $('#modal-confirm-btn-yes').on("click", function () { hide_modal("confirm-modal"); callback() });
     $('#modal-confirm-btn-no').on("click", function () { hide_modal("confirm-modal") });
+    $("#confirm-modal-text").text(msg);
     $('#confirm-modal').show();
     $('#confirm-modal').keypress(function (e) {
         if (e.which == 13) {
