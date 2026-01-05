@@ -1,0 +1,45 @@
+/* Builder */
+.potere_numero {
+    width: 25px;
+    margin-left: 10px;
+}
+
+.sel_potere_tipo,
+.sel_potere_nome {
+    height: 20px;
+    width: 155px;
+    margin-left: 10px;
+}
+
+.sel_item {
+    height: 20px;
+    width: 90%;
+    margin-left: 10px;
+}
+
+.potere_valore {
+    height: 20px;
+    margin-left: 10px;
+}
+
+.eqrow_edit {
+    padding: 0px !important;
+    margin: 5px 0px;
+    font-size: 13px;
+    font-weight: bold;
+    display: flex;
+}
+
+.percorso {
+    margin: 0px 10px;
+    font-style: italic;
+    color: #e2b42b;
+}
+
+.percorso_livello {
+    margin: 0px 10px;
+}
+
+.edit_item {
+    background-color: #343434;
+}

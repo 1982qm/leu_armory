@@ -46,7 +46,7 @@
                                                  "potere_6_valore" .
                                               ")" .
                             "VALUES (" .
-                                                 ":nome," .
+                                                 "upper(substr(:nome,1,1))||substr(:nome,2)," .
                                                  ":slot," .
                                                  ":rarita," .
                                                  ":percorso," .

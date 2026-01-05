@@ -25,6 +25,7 @@
     <link href="css/dataTables.bootstrap5.css" rel="stylesheet">
     <link href="css/content.css?1.4" rel="stylesheet" />
     <link href="css/login.css" rel="stylesheet" />
+    <link href="css/builder.css" rel="stylesheet" />
 </head>
 
 <script src="lib/jquery-3.5.1.min.js"></script>
@@ -37,6 +38,7 @@
 <script src="js/make_chart.js"></script>
 <script src="js/manageDT.js?1.0"></script>
 <script src="js/common.js"></script>
+<script src="js/semaphore.js"></script>
 
 <body>
   <main>
@@ -56,7 +58,7 @@
           </div>
           <div id="gridContainer" class="collapse show" style="font-size: 14px;">
               <div class="card-body">
-                  <table id="datatableBuilds" class="table table-striped hover compact">
+                  <table id="datatableBuilds" class="table table-striped hover compact dt-tables">
                       <thead>
                           <tr>
                               <th>Nome</th>
@@ -95,8 +97,17 @@
                 <!-- PG -->
                 <div class="card" style="width: 20rem; border: 0px; background: linear-gradient(black, transparent 70%); margin-left: 10px;">
                   <div class="card-body" style="z-index: 1; max-height: calc(100dvh - 150px);">
-                    <h5 class="card-title" style="text-shadow: 2px 2px 4px black;"><input id="buildName" placeholder="Nome build"></input></h5>
+                    <h3 id="buildName" class="card-title" style="text-shadow: 2px 2px 4px black;"></h3>
+                    <input id="buildName_edit" class="card-title" style="text-shadow: 2px 2px 4px black;" placeholder="Nome della build"></input>
                     <h5 id="className" class="card-title"></h5>
+                    <div id="classNameDiv_edit">
+                      <select id="className_edit" class="card-title">
+                        <option value=""></option>
+                        <option value="Chierico">Chierico</option>
+                        <option value="Ranger">Ranger</option>
+                        <option value="Paladino">Paladino</option>
+                      </select>
+                    </div>
                     <h3 id="avg_eq_level" class="card-title" style="position: absolute; color: #00FE1E; top: 15px; right: 20px; text-shadow: 1px 1px 2px black;"></h3>
                     <div style="height: 430px; width: auto; margin-top: -60px; margin-bottom: 90px; align-content: center;" >
                       <img id="classImg" class="card-img-top" style="scale: 80%;">
@@ -113,7 +124,15 @@
                   <div class="card-body">
                     <h5 class="card-title" style="text-shadow: 1px 1px 2px black;">Statistiche</h5>
                     <ul id="listaStats" class="list-group list-group-flush">
-                      <li class="list-group-item list"><div class="info"><span class="stat">Razza</span><span id="razza" class="number_value"></span></div></li>
+                      <li class="list-group-item list" id="razza_li"><div class="info"><span class="stat">Razza</span><span id="razza" class="number_value"></span></div></li>
+                      <li class="list-group-item list" id="razza_li_edit" style="height: 35px; border: 0px;">
+                        <div class="info">
+                          <select id="razza_edit">
+                            <option value=""></option>
+                            <option value="Umano">Umano</option>
+                          </select>
+                        </div>
+                      </li>
                       <li class="list-group-item list separatore"></li>
                       <li class="list-group-item list"><div class="info"><span class="stat">HP </span><span id="hp" class="number_value"></span></div></li>
                       <li class="list-group-item list"><div class="info"><span class="stat">Mana</span><span id="mana" class="number_value"></span></div></li>
@@ -136,7 +155,89 @@
                     <h5 class="card-title" style="text-shadow: 1px 1px 2px black;">Equipaggiamento<span id="oggettiLimitati">Oggetti limitati <span id="oggettiLimitatiMin"></span>/<span id="oggettiLimitatiMax"></span></span></h5>
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item list"><div class="eqrow"><span class="slot">come luce</span><span id="come_luce" class="eq"></span></div></li>
-                      <li class="list-group-item list"><div class="eqrow"><span class="slot">mano destra</span><span id="mano_destra" class="eq"></span></div></li>
+
+                      <li class="list-group-item list edit_link" onclick="ToggleEdit('mano_destra_edit')"><div class="eqrow"><span class="slot">mano destra</span><span id="mano_destra" class="eq"></span></div></li>
+
+                      <li id="mano_destra_edit" class="list-group-item list edit_item" style="height: auto">
+                        <div class="eqrow_edit">
+                          <select id="mano_destra_sel_item" class="sel_item" slot="Dita">
+                            <option value=""></option>
+                          </select>
+                        </div>
+                        <div id="mano_destra_edit_details" style="display: none;">
+                          <div class="eqrow_edit">
+                            <span>Percorso:</span><span id="mano_destra_percorso_nome" class="percorso"></span>
+                            <span>Livello:</span>
+                            <select id="mano_destra_percorso_livello" class="percorso_livello">
+                            </select>
+                          </div>
+                          <div class="eqrow_edit">
+                            <span class="potere_numero">AC</span>
+                            <input id="mano_destra_ac" placeholder="AC" class="potere_valore" readonly></input>
+                          </div>
+                          <div class="eqrow_edit">
+                            <span class="potere_numero">[1]</span>
+                            <select id="mano_destra_pow_1_tipo" class="sel_potere_tipo">
+                              <option value=""></option>
+                            </select>
+                            <input id="mano_destra_pow_1_valore" placeholder="Valore" class="potere_valore" readonly></input>
+                            <select id="mano_destra_pow_1_nome" class="sel_potere_nome">
+                              <option value=""></option>
+                            </select>
+                          </div>
+                          <div class="eqrow_edit">
+                            <span class="potere_numero">[2]</span>
+                            <select id="mano_destra_pow_2_tipo" class="sel_potere_tipo">
+                              <option value=""></option>
+                            </select>
+                            <input id="mano_destra_pow_2_valore" placeholder="Valore" class="potere_valore" readonly></input>
+                            <select id="mano_destra_pow_2_nome" class="sel_potere_nome">
+                              <option value=""></option>
+                            </select>
+                          </div>
+                          <div class="eqrow_edit">
+                            <span class="potere_numero">[3]</span>
+                            <select id="mano_destra_pow_3_tipo" class="sel_potere_tipo">
+                              <option value=""></option>
+                            </select>
+                            <input id="mano_destra_pow_3_valore" placeholder="Valore" class="potere_valore" readonly></input>
+                            <select id="mano_destra_pow_3_nome" class="sel_potere_nome">
+                              <option value=""></option>
+                            </select>
+                          </div>
+                          <div class="eqrow_edit">
+                            <span class="potere_numero">[4]</span>
+                            <select id="mano_destra_pow_4_tipo" class="sel_potere_tipo">
+                              <option value=""></option>
+                            </select>
+                            <input id="mano_destra_pow_4_valore" placeholder="Valore" class="potere_valore" readonly></input>
+                            <select id="mano_destra_pow_4_nome" class="sel_potere_nome">
+                              <option value=""></option>
+                            </select>
+                          </div>
+                          <div class="eqrow_edit">
+                            <span class="potere_numero">[5]</span>
+                            <select id="mano_destra_pow_5_tipo" class="sel_potere_tipo">
+                              <option value=""></option>
+                            </select>
+                            <input id="mano_destra_pow_5_valore" placeholder="Valore" class="potere_valore" readonly></input>
+                            <select id="mano_destra_pow_5_nome" class="sel_potere_nome">
+                              <option value=""></option>
+                            </select>
+                          </div>
+                          <div class="eqrow_edit">
+                            <span class="potere_numero">[6]</span>
+                            <select id="mano_destra_pow_6_tipo" class="sel_potere_tipo">
+                              <option value=""></option>
+                            </select>
+                            <input id="mano_destra_pow_6_valore" placeholder="Valore" class="potere_valore" readonly></input>
+                            <select id="mano_destra_pow_6_nome" class="sel_potere_nome">
+                              <option value=""></option>
+                            </select>
+                          </div>
+                        </div>
+                      </li>
+
                       <li class="list-group-item list"><div class="eqrow"><span class="slot">mano sinistra</span><span id="mano_sinistra" class="eq"></span></div></li>
                       <li class="list-group-item list"><div class="eqrow"><span class="slot">al collo</span><span id="al_collo_1" class="eq"></span></div></li>
                       <li class="list-group-item list"><div class="eqrow"><span class="slot">al collo</span><span id="al_collo_2" class="eq"></span></div></li>
@@ -257,6 +358,9 @@
         var json_spell_armi;
         $.getJSON("database/spell_armi.json", function (json) { json_spell_armi = json; });
 
+        // Semafori, il numero è il parallelismo. Deve essere uguale al numero di fetch che devo fare parallelamente
+        let sema = new Semaphore(2);
+
         document.addEventListener("DOMContentLoaded", function () {
             Chart.defaults.font.family = "'DejaVu Sans Mono', monospace";
             Chart.defaults.color = "#fff";
@@ -266,14 +370,52 @@
                 var dtTable = $("#datatableBuilds").DataTable();
                 dtTable.columns.adjust();
             });
+            $("#className_edit").select2({
+              placeholder: "Seleziona la classe...",
+              language: "it"
+            });
+            $("#razza_edit").select2({
+              placeholder: "Seleziona la razza...",
+              language: "it"
+            });
+            $(".sel_item").each(function( index ) {
+              $(this).select2({
+                placeholder: "Seleziona un oggetto...",
+                language: "it"
+              });
+            });
+            FetchItems();
             FetchBuilds();
+            ShowContent();
         })
+
+        async function ShowContent() {
+            //Prendo due semafori in modo da partire per forza dopo che le load hanno finito
+            //il numero di semafori deve essere uguale al numero di fetch parallele che lancio, per ora sono 2
+            await sema.acquire();
+            await sema.acquire();
+            document.getElementById("loadingDiv").style.display = "none";
+            document.getElementById("content").style.display = "block";
+            //if (input_name) FetchPlayerDetailsByName(input_name);
+            //Libero tutti i semafori
+            sema.release();
+            sema.release();
+        }
 
         function NewBuild() {
           console.log("NewBuild");
         }
 
-        function FetchBuilds () {
+        async function FetchItems () {
+          // Blocco il semaforo
+          await sema.acquire();
+          // Libero il semaforo
+          sema.release();
+        }        
+
+        async function FetchBuilds () {
+          // Blocco il semaforo
+          await sema.acquire();
           fetch('php/load_builds.php', {
               method: 'POST',
               headers: {
@@ -299,7 +441,8 @@
                                                 element.visibilita
                                                ];
                                     },
-                                    ShowPlayer
+                                    ShowBuild,
+                                    true
           );
           table .column('5')
                 .order('desc')
@@ -311,14 +454,11 @@
           $(".dt-search").parent().css("font-size","14px");
           $(".dt-search input").css("border-color","#464D54");
 
-          setTimeout(() => {
-            document.getElementById("loadingDiv").style.display = "none";
-            document.getElementById("content").style.display = "block";
-            //if (input_name) FetchPlayerDetailsByName(input_name);
-          }, 300);
+          // Libero il semaforo
+          sema.release();
         }
 
-        function ShowPlayer (tr) {
+        function ShowBuild (tr) {
           nome=$(tr).find("td").eq(0).text();
           FetchBuildDetails(nome);
         }
@@ -332,12 +472,13 @@
               body: '{"nome" : "' + nome + '", "account" : "<?php if ($isLoggedIn) { echo $user['user_name']; } ?>"}'
           })
           .then(response => response.json())
-          .then(data => LoadPlayerDetails(data))
+          .then(data => LoadBuildDetails(data))
           .catch(error => console.log("Errore in caricamento: " + error));
         }
 
-        function LoadPlayerDetails (data) {
+        function LoadBuildDetails (data) {
           $('.dynamic-generated').remove();
+          $(".edit_item").hide();
 
           var json = JSON.parse(data.json);
           json_p1 = json;
@@ -346,7 +487,25 @@
             console.log(json);
           <?php } ?>
 
-          $("#buildName").val(json.player.nome);
+          if ("<?php if ($isLoggedIn) { echo $user['user_name']; } ?>" == data.json.account) {
+            $(".edit_link").css("cursor", "pointer");
+            $("#buildName").hide();
+            $("#className").hide();
+            $("#razza_li").hide();
+            $("#buildName_edit").show();
+            $("#classNameDiv_edit").show();
+            $("#razza_li_edit").show();
+          } else {
+            $(".edit_link").css("cursor", "default");
+            $("#buildName").show();
+            $("#className").show();
+            $("#razza_li").show();
+            $("#buildName_edit").hide();
+            $("#classNameDiv_edit").hide();
+            $("#razza_li_edit").hide();
+          }
+
+          setText("buildName", json.player.nome);
           setText("avg_eq_level", json.player.avg_eq_level);
 
           if(json.player.classe != undefined) {
@@ -591,7 +750,13 @@
           chart_stat = CreaChartStat('chart_stat', json, undefined, false);
 
           $('#gridContainer').hide();
-          $("#player").show();          
+          $("#player").show();
+        }
+
+        function ToggleEdit(id) {
+          if ("<?php if ($isLoggedIn) { echo $user['user_name']; } ?>" == json_p1.account) {
+            $("#"+id).toggle();
+          }
         }
 
 </script>

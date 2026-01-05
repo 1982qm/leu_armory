@@ -59,7 +59,7 @@
           </div>
           <div id="gridContainer" class="collapse show" style="font-size: 14px;">
               <div class="card-body">
-                  <table id="datatablePlayers" class="table table-striped hover compact">
+                  <table id="datatablePlayers" class="table table-striped hover compact dt-tables">
                       <thead>
                           <tr>
                               <th>Nome</th>
