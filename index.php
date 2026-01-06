@@ -59,17 +59,17 @@
            <img id="compareImg" src="img\\compare.svg" width="24px" height="24px" style="margin: 0px"/>
            Confronta
           </a>
-        <a class="link" 
-           href="javascript:LoadPage('items.php')"
-           draggable="false"
-           style="padding:5px; margin: 0px;"
-           onmouseover="$('#itemsImg').attr('src','img\\items_dark.svg')"
-           onmouseout ="$('#itemsImg').attr('src','img\\items.svg')"
+        <?php if ($isLoggedIn && $user['user_type'] == "1") {?>
+          <a class="link" 
+            href="javascript:LoadPage('items.php')"
+            draggable="false"
+            style="padding:5px; margin: 0px;"
+            onmouseover="$('#itemsImg').attr('src','img\\items_dark.svg')"
+            onmouseout ="$('#itemsImg').attr('src','img\\items.svg')"
            >
            <img id="itemsImg" src="img\\items.svg" width="32px" height="32px" style="margin: 0px"/>
            Oggetti
           </a>
-        <?php if ($isLoggedIn && $user['user_type'] == "1") {?>
           <a class="link" 
             href="javascript:LoadPage('builder.php')"
             draggable="false"
