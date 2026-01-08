@@ -39,7 +39,7 @@ if (abs($ratio - $expectedRatio) > 0.01) {
 }
 
 // Upload
-$uploadDir = '../uploads/';
+$uploadDir = realpath(__DIR__).'/../uploads/';
 if (!is_dir($uploadDir)) {
     mkdir($uploadDir, 0755, true);
 }
@@ -81,6 +81,12 @@ if ($id_image_db == null) {
     $stmt->execute();
 
     $id_image_db = $dbnu->lastInsertId();
+} else {
+    // Controllo se il file esiste, in caso lo ricarico
+    $destination = $uploadDir.str_replace("uploads\\","",$path);
+    if (!file_exists($destination)) {
+        move_uploaded_file($file['tmp_name'], $destination);
+    }
 }
 
 // Invalido le immagini precedenti

@@ -449,7 +449,8 @@
                                                 getBonus(element.bonus_nome, element.bonus_4p_nome, element.bonus_4p_valore)
                                                ];
                                     },
-                                    undefined
+                                    undefined,
+                                    true
           );
           
           $(".dt-search").parent().css("position","absolute");

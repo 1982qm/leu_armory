@@ -458,7 +458,7 @@ input {
     }
 }
 
-#datatablePlayers tbody tr {
+.dt-tables tbody tr {
     cursor: pointer;
 }
 

@@ -93,7 +93,7 @@ function CreateDataTable(myDt, addText, addFun, editText, editFun, delText, delF
 //-----------------------------------------------------------------------------
 // CARICAMENTO DATATABLE, SI ASPETTA SEMPRE DUE CAMPI: ID E NAME
 //-----------------------------------------------------------------------------
-function LoadDataTable(myDt, array, makeRow, clickFun) {
+function LoadDataTable(myDt, array, makeRow, clickFun, selectable) {
     // Pulizia dataTable
     var dtTable = $(myDt).DataTable();
     dtTable.clear();
@@ -110,11 +110,13 @@ function LoadDataTable(myDt, array, makeRow, clickFun) {
         $(myDt).find('tbody').off('click', 'tr');
         // Ad ogni riga associo un evento dbclick per editare il record
         $(myDt).find('tbody').on('click', 'tr', function () {
-            // Deseleziono eventuali righe già selezionate
-            //$(".selected").removeClass("selected");
             // Seleziono il record sul quale è stato eseguito il dbclick
             var tr = dtTable.row(this).node();
-            //tr.classList.add('selected');
+            if (selectable != undefined && selectable == true) {
+                // Deseleziono eventuali righe già selezionate
+                $(".selected").removeClass("selected");
+                tr.classList.add('selected');
+            }
             // Mostro la form di editing del record
             clickFun(tr);
         });
