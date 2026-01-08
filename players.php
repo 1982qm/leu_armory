@@ -138,6 +138,9 @@
                       <li class="list-group-item list"><div class="info"><span class="stat">Mana</span><span id="mana" class="number_value"></span></div></li>
                       <li class="list-group-item list"><div class="info"><span class="stat">Energia</span><span id="energia" class="number_value"></span></div></li>
                       <li class="list-group-item list separatore"></li>
+                      <li class="list-group-item list"><div class="info"><span class="stat">Danno Fisico</span><span id="danno_fisico" class="number_value"></span></div></li>
+                      <li class="list-group-item list"><div class="info"><span class="stat">Potere Magico</span><span id="potere_magico" class="number_value"></span></div></li>
+                      <li class="list-group-item list separatore"></li>
                       <li class="list-group-item list"><div class="info"><span class="stat">Forza</span><span id="forza" class="number_value"></span></div></li>
                       <li class="list-group-item list"><div class="info"><span class="stat">Intelligenza</span><span id="intelligenza" class="number_value"></span></div></li>
                       <li class="list-group-item list"><div class="info"><span class="stat">Saggezza</span><span id="saggezza" class="number_value"></span></div></li>
@@ -462,6 +465,8 @@
           setText("hp", json.player.hp);
           setText("mana", json.player.mana);
           setText("energia", json.player.energia);
+          setText("danno_fisico", json.player.dannoFisico);
+          setText("potere_magico", json.player.potereMagico);          
           setText("forza", json.player.forza);
           setText("intelligenza", json.player.intelligenza);
           setText("saggezza", json.player.saggezza);
@@ -660,30 +665,32 @@
           setText("res_caos", getResistenza(json.resistenze, "Caos"));
 
           // EQUIPAGGIAMENTO
-          $("#come_luce").html(getEq(json.equipment["come luce"]));
-          $("#mano_destra").html(getEq(json.equipment["mano destra"]));
-          $("#mano_sinistra").html(getEq(json.equipment["mano sinistra"]));
-          $("#al_collo_1").html(getEq(json.equipment["al collo 1"]));
-          $("#al_collo_2").html(getEq(json.equipment["al collo 2"]));
-          $("#sul_corpo").html(getEq(json.equipment["sul corpo"]));
-          $("#in_testa").html(getEq(json.equipment["in testa"]));
-          $("#sulle_gambe").html(getEq(json.equipment["sulle gambe"]));
-          $("#ai_piedi").html(getEq(json.equipment["ai piedi"]));
-          $("#sulle_mani").html(getEq(json.equipment["sulle mani"]));
-          $("#sulle_braccia").html(getEq(json.equipment["sulle braccia"]));
-          $("#come_scudo").html(getEq(json.equipment["come scudo"]));
-          $("#attorno_al_corpo").html(getEq(json.equipment["attorno al corpo"]));
-          $("#alla_vita").html(getEq(json.equipment["alla vita"]));
-          $("#polso_destro").html(getEq(json.equipment["polso destro"]));
-          $("#polso_sinistro").html(getEq(json.equipment["polso sinistro"]));
-          $("#impugnato").html(getEq(json.equipment["impugnato"]));
-          $("#afferrato").html(getEq(json.equipment["afferrato"]));
-          $("#sulla_schiena").html(getEq(json.equipment["sulla schiena"]));
-          $("#orecchio_destro").html(getEq(json.equipment["orecchio destro"]));
-          $("#orecchio_sinistro").html(getEq(json.equipment["orecchio sinistro"]));
-          $("#sul_viso").html(getEq(json.equipment["sul viso"]));
-          $("#incoccato").html(getEq(json.equipment["incoccato"]));
-          $("#come_aura").html(getEq(json.equipment["come aura"]));
+          if (Object.keys(json.equipment).length > 0) {
+            $("#come_luce").html(getEq(json.equipment["come luce"]));
+            $("#mano_destra").html(getEq(json.equipment["mano destra"]));
+            $("#mano_sinistra").html(getEq(json.equipment["mano sinistra"]));
+            $("#al_collo_1").html(getEq(json.equipment["al collo 1"]));
+            $("#al_collo_2").html(getEq(json.equipment["al collo 2"]));
+            $("#sul_corpo").html(getEq(json.equipment["sul corpo"]));
+            $("#in_testa").html(getEq(json.equipment["in testa"]));
+            $("#sulle_gambe").html(getEq(json.equipment["sulle gambe"]));
+            $("#ai_piedi").html(getEq(json.equipment["ai piedi"]));
+            $("#sulle_mani").html(getEq(json.equipment["sulle mani"]));
+            $("#sulle_braccia").html(getEq(json.equipment["sulle braccia"]));
+            $("#come_scudo").html(getEq(json.equipment["come scudo"]));
+            $("#attorno_al_corpo").html(getEq(json.equipment["attorno al corpo"]));
+            $("#alla_vita").html(getEq(json.equipment["alla vita"]));
+            $("#polso_destro").html(getEq(json.equipment["polso destro"]));
+            $("#polso_sinistro").html(getEq(json.equipment["polso sinistro"]));
+            $("#impugnato").html(getEq(json.equipment["impugnato"]));
+            $("#afferrato").html(getEq(json.equipment["afferrato"]));
+            $("#sulla_schiena").html(getEq(json.equipment["sulla schiena"]));
+            $("#orecchio_destro").html(getEq(json.equipment["orecchio destro"]));
+            $("#orecchio_sinistro").html(getEq(json.equipment["orecchio sinistro"]));
+            $("#sul_viso").html(getEq(json.equipment["sul viso"]));
+            $("#incoccato").html(getEq(json.equipment["incoccato"]));
+            $("#come_aura").html(getEq(json.equipment["come aura"]));
+          }
 
           // Creo il grafico Stat
           if (chart_stat) chart_stat.destroy();

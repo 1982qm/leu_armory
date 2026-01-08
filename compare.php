@@ -122,6 +122,9 @@
                       <li class="list-group-item list"><div class="compare_info"><span id="mana_1" class="number_value_1"></span></div></li>
                       <li class="list-group-item list"><div class="compare_info"><span id="energia_1" class="number_value_1"></span></div></li>
                       <li class="list-group-item list separatore"></li>
+                      <li class="list-group-item list"><div class="compare_info"><span id="danno_fisico_1" class="number_value_1"></span></div></li>
+                      <li class="list-group-item list"><div class="compare_info"><span id="potere_magico_1" class="number_value_1"></span></div></li>
+                      <li class="list-group-item list separatore"></li>
                       <li class="list-group-item list"><div class="compare_info"><span id="forza_1" class="number_value_1"></span></div></li>
                       <li class="list-group-item list"><div class="compare_info"><span id="intelligenza_1" class="number_value_1"></span></div></li>
                       <li class="list-group-item list"><div class="compare_info"><span id="saggezza_1" class="number_value_1"></span></div></li>
@@ -210,6 +213,9 @@
                       <li class="list-group-item list"><span class="compare_label">Mana</span></li>
                       <li class="list-group-item list"><span class="compare_label">Energia</span></li>
                       <li class="list-group-item list separatore"></li>
+                      <li class="list-group-item list"><span class="compare_label">Danno Fisico</span></li>
+                      <li class="list-group-item list"><span class="compare_label">Potere Magico</span></li>
+                      <li class="list-group-item list separatore"></li>
                       <li class="list-group-item list"><span class="compare_label">Forza</span></li>
                       <li class="list-group-item list"><span class="compare_label">Intelligenza</span></li>
                       <li class="list-group-item list"><span class="compare_label">Saggezza</span></li>
@@ -297,6 +303,9 @@
                       <li class="list-group-item list"><div class="compare_info"><span id="hp_2" class="number_value_2"></span></div></li>
                       <li class="list-group-item list"><div class="compare_info"><span id="mana_2" class="number_value_2"></span></div></li>
                       <li class="list-group-item list"><div class="compare_info"><span id="energia_2" class="number_value_2"></span></div></li>
+                      <li class="list-group-item list separatore"></li>
+                      <li class="list-group-item list"><div class="compare_info"><span id="danno_fisico_2" class="number_value_2"></span></div></li>
+                      <li class="list-group-item list"><div class="compare_info"><span id="potere_magico_2" class="number_value_2"></span></div></li>
                       <li class="list-group-item list separatore"></li>
                       <li class="list-group-item list"><div class="compare_info"><span id="forza_2" class="number_value_2"></span></div></li>
                       <li class="list-group-item list"><div class="compare_info"><span id="intelligenza_2" class="number_value_2"></span></div></li>
@@ -633,10 +642,15 @@
         }
 
         function updateEquip(slot) {
-          // come luce
-          $("#"+slot.replaceAll(" ","_")+"_1").html(getEq(json_p1.equipment[slot],"_1"));
-          $("#"+slot.replaceAll(" ","_")+"_2").html(getEq(json_p2.equipment[slot],"_2"));
-          updatePowerCompare (slot);
+          if (Object.keys(json_p1.equipment).length > 0) {
+            $("#"+slot.replaceAll(" ","_")+"_1").html(getEq(json_p1.equipment[slot],"_1"));
+          }
+          if (Object.keys(json_p2.equipment).length > 0) {
+            $("#"+slot.replaceAll(" ","_")+"_2").html(getEq(json_p2.equipment[slot],"_2"));
+          }
+          if ((Object.keys(json_p1.equipment).length > 0) &&  (Object.keys(json_p2.equipment).length > 0)) {
+            updatePowerCompare (slot);
+          }
         }
 
         function updatePowerCompare(slot) {
@@ -828,6 +842,10 @@
           setText("hp_1", json_p1.player.hp);
           setText("mana_1", json_p1.player.mana);
           setText("energia_1", json_p1.player.energia);
+
+          setText("danno_fisico_1", json_p1.player.dannoFisico);
+          setText("potere_magico_1", json_p1.player.potereMagico);          
+          
           setText("forza_1", json_p1.player.forza);
           setText("intelligenza_1", json_p1.player.intelligenza);
           setText("saggezza_1", json_p1.player.saggezza);
@@ -839,6 +857,10 @@
           setText("hp_2", json_p2.player.hp);
           setText("mana_2", json_p2.player.mana);
           setText("energia_2", json_p2.player.energia);
+
+          setText("danno_fisico_2", json_p2.player.dannoFisico);
+          setText("potere_magico_2", json_p2.player.potereMagico);          
+
           setText("forza_2", json_p2.player.forza);
           setText("intelligenza_2", json_p2.player.intelligenza);
           setText("saggezza_2", json_p2.player.saggezza);
@@ -849,6 +871,8 @@
           if (parseFloat(isNull($("#hp_1").text(),'0'))               > parseFloat(isNull($("#hp_2").text(),'0'))               ) $("#hp_1").addClass("highValue");
           if (parseFloat(isNull($("#mana_1").text(),'0'))             > parseFloat(isNull($("#mana_2").text(),'0'))             ) $("#mana_1").addClass("highValue");
           if (parseFloat(isNull($("#energia_1").text(),'0'))          > parseFloat(isNull($("#energia_2").text(),'0'))          ) $("#energia_1").addClass("highValue");
+          if (parseFloat(isNull($("#danno_fisico_1").text(),'0'))     > parseFloat(isNull($("#danno_fisico_2").text(),'0'))     ) $("#danno_fisico_1").addClass("highValue");
+          if (parseFloat(isNull($("#potere_magico_1").text(),'0'))    > parseFloat(isNull($("#potere_magico_2").text(),'0'))    ) $("#potere_magico_1").addClass("highValue");
           if (parseFloat(isNull($("#forza_1").text(),'0'))            > parseFloat(isNull($("#forza_2").text(),'0'))            ) $("#forza_1").addClass("highValue");
           if (parseFloat(isNull($("#intelligenza_1").text(),'0'))     > parseFloat(isNull($("#intelligenza_2").text(),'0'))     ) $("#intelligenza_1").addClass("highValue");
           if (parseFloat(isNull($("#saggezza_1").text(),'0'))         > parseFloat(isNull($("#saggezza_2").text(),'0'))         ) $("#saggezza_1").addClass("highValue");
@@ -859,6 +883,8 @@
           if (parseFloat(isNull($("#hp_2").text(),'0'))               > parseFloat(isNull($("#hp_1").text(),'0'))               ) $("#hp_2").addClass("highValue");
           if (parseFloat(isNull($("#mana_2").text(),'0'))             > parseFloat(isNull($("#mana_1").text(),'0'))             ) $("#mana_2").addClass("highValue");
           if (parseFloat(isNull($("#energia_2").text(),'0'))          > parseFloat(isNull($("#energia_1").text(),'0'))          ) $("#energia_2").addClass("highValue");
+          if (parseFloat(isNull($("#danno_fisico_2").text(),'0'))     > parseFloat(isNull($("#danno_fisico_1").text(),'0'))     ) $("#danno_fisico_2").addClass("highValue");
+          if (parseFloat(isNull($("#potere_magico_2").text(),'0'))    > parseFloat(isNull($("#potere_magico_1").text(),'0'))    ) $("#potere_magico_2").addClass("highValue");
           if (parseFloat(isNull($("#forza_2").text(),'0'))            > parseFloat(isNull($("#forza_1").text(),'0'))            ) $("#forza_2").addClass("highValue");
           if (parseFloat(isNull($("#intelligenza_2").text(),'0'))     > parseFloat(isNull($("#intelligenza_1").text(),'0'))     ) $("#intelligenza_2").addClass("highValue");
           if (parseFloat(isNull($("#saggezza_2").text(),'0'))         > parseFloat(isNull($("#saggezza_1").text(),'0'))         ) $("#saggezza_2").addClass("highValue");
