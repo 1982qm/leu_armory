@@ -144,6 +144,24 @@
       </div>
     </div>
 
+    <div id="confirm-modal" class="modal" style="display: none">
+      <div class="modal-content">
+          <center>
+                <div class="modal-header">
+                    <div class="modal-title">
+                        <span id="confirm-modal-text" class="text-white">Confermi?</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" id="modal-confirm-btn-yes"
+                        data-dismiss="modal">Si</button>
+                    <button type="button" class="btn btn-primary btn-sm" id="modal-confirm-btn-no"
+                        data-dismiss="modal">No</button>
+                </div>
+          </center>
+      </div>
+    </div>  
+
     <div id="messages-modal" class="modal" style="display: none">
       <div id="messages-modal-content" class="modal-content">
           <center>
