@@ -62,14 +62,17 @@
   }
 
   function WipePlayers () {
-    fetch('php/wipe_players.php', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-    })
-    .then(data => show_info("Wipe eseguita"))
-    .catch(error => show_error("Errore in wipe players: " + error));
+    var wipe = function () {
+      fetch('php/wipe_players.php', {
+          method: 'POST',
+          headers: {
+              'Content-Type': 'application/json'
+          },
+      })
+      .then(data => show_info("Wipe eseguita"))
+      .catch(error => show_error("Errore in wipe players: " + error));
+    };
+    show_confirmation_modal("Sei sicuro?", wipe);
   }  
 
   function SetPwd () {
