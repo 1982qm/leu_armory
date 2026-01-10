@@ -7,7 +7,14 @@
         $user=$isLoggedIn;
         updateExpire($user['id']);
       } else {
-        header('location:login.php');
+        //header('location:../login.php?logout=y');
+        echo "<script>
+                var url = (window.location != window.parent.location)
+                        ? document.referrer
+                        : document.location.href;
+                window.top.location.href=url;
+              </script>";
+        die();
       }
 ?>
 

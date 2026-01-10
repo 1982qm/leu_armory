@@ -58,7 +58,7 @@
            >
            <img id="compareImg" src="img\\compare.svg" width="24px" height="24px" style="margin: 0px"/>
            Confronta
-          </a>
+          </a>          
         <?php if ($isLoggedIn && $user['user_type'] == "1") {?>
           <a class="link" 
             href="javascript:LoadPage('items.php')"
@@ -80,6 +80,28 @@
             <img id="builderImg" src="img\\builder.svg" width="32px" height="32px" style="margin: 0px" />
             Builder
             </a>
+          <a class="link" 
+            href="javascript:LoadPage('admin.php')"
+            draggable="false"
+            style="padding:5px; margin: 0px;"
+            onmouseover="$('#adminImg').attr('src','img\\admin_dark.svg')"
+            onmouseout ="$('#adminImg').attr('src','img\\admin.svg')"
+            >
+            <img id="adminImg" src="img\\admin.svg" width="32px" height="32px" style="margin: 0px" />
+            Admin
+            </a>
+        <?php } ?>
+        <?php if ($isLoggedIn && $user['user_type'] != "2") {?>
+          <a class="link" 
+            href="javascript:LoadPage('pwd.php')"
+            draggable="false"
+            style="padding:5px; margin: 0px;"
+            onmouseover="$('#pwdImg').attr('src','img\\pwd_dark.svg')"
+            onmouseout ="$('#pwdImg').attr('src','img\\pwd.svg')"
+            >
+            <img id="pwdImg" src="img\\pwd.svg" width="32px" height="32px" style="margin: 0px" />
+            Cambia Password
+            </a>          
         <?php } ?>
         <a class="link" 
            href="login.php?logout=y"
@@ -117,6 +139,8 @@
           "/armory/img/items_dark.png",
           "/armory/img/compare.png",
           "/armory/img/compare_dark.png",
+          "/armory/img/admin.png",
+          "/armory/img/admin_dark.png",
           "/armory/img/logo.svg",
           "/armory/img/background.jpg"
         )
