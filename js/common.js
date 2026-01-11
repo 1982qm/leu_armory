@@ -141,11 +141,11 @@ function setPlayerImg(json, custom_path, imgid) {
         $("#" + imgid).attr("src", custom_path + forza_reload);
     } else {
         if (json.player.classe != undefined) {
-            if (json.player.main_class != undefined) {
-                $("#" + imgid).attr("src", "img\\" + json.player.main_class.toLowerCase() + ".png" + forza_reload);
-            } else {
-                $("#" + imgid).attr("src", "img\\" + json.player.classe.toLowerCase() + ".png" + forza_reload);
-            }
+            //if (json.player.main_class != undefined && json.player.main_class != "Nessuna") {
+            //    $("#" + imgid).attr("src", "img\\" + json.player.main_class.toLowerCase() + ".png" + forza_reload);
+            //} else {
+            $("#" + imgid).attr("src", "img\\" + json.player.classe.toLowerCase() + ".png" + forza_reload);
+            //}
         }
     }
 }

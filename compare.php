@@ -585,7 +585,7 @@
           setText("avg_eq_level"+suffix, json.player.avg_eq_level);
 
           if(json.player.classe != undefined) {
-              if(json.player.main_class != undefined) {
+              if(json.player.main_class != undefined && json.player.main_class != "Nessuna") {
                 setText("className"+suffix, json.player.classe + ' (' + json.player.main_class + ')');
               } else {
                 setText("className"+suffix, json.player.classe);

@@ -459,7 +459,7 @@
           $("#compareToDiv").show();
 
           if(json.player.classe != undefined) {
-              if(json.player.main_class != undefined) {
+              if(json.player.main_class != undefined && json.player.main_class != "Nessuna") {
                 setText("className", json.player.classe + ' (' + json.player.main_class + ')');
               } else {
                 setText("className", json.player.classe);
