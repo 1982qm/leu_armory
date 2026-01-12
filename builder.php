@@ -164,112 +164,30 @@
                   <div class="card-body">
                     <h5 class="card-title" style="text-shadow: 1px 1px 2px black;">Equipaggiamento<span id="oggettiLimitati">Oggetti limitati <span id="oggettiLimitatiMin"></span>/<span id="oggettiLimitatiMax"></span></span></h5>
                     <ul class="list-group list-group-flush">
-                      <li class="list-group-item list"><div class="eqrow"><span class="slot">come luce</span><span id="come_luce" class="eq"></span></div></li>
-
-                      <li class="list-group-item list edit_link" onclick="ToggleEdit('mano_destra_edit')"><div class="eqrow"><span class="slot">mano destra</span><span id="mano_destra" class="eq"></span></div></li>
-
-                      <li id="mano_destra_edit" class="list-group-item list edit_item" style="height: auto">
-                        <div class="eqrow_edit">
-                          <select id="mano_destra_sel_item" class="sel_item" slot="Dita">
-                            <option value=""></option>
-                          </select>
-                        </div>
-                        <div id="mano_destra_edit_details" style="display: none;">
-                          <div class="eqrow_edit">
-                            <span>Percorso:</span><span id="mano_destra_percorso_nome" class="percorso"></span>
-                            <span>Livello:</span>
-                            <select id="mano_destra_percorso_livello" class="percorso_livello">
-                            </select>
-                          </div>
-                          <div class="eqrow_edit">
-                            <span class="potere_numero">AC</span>
-                            <input id="mano_destra_ac" placeholder="AC" class="potere_valore" readonly></input>
-                          </div>
-                          <div class="eqrow_edit">
-                            <span class="potere_numero">[1]</span>
-                            <select id="mano_destra_pow_1_tipo" class="sel_potere_tipo">
-                              <option value=""></option>
-                            </select>
-                            <input id="mano_destra_pow_1_valore" placeholder="Valore" class="potere_valore" readonly></input>
-                            <select id="mano_destra_pow_1_nome" class="sel_potere_nome">
-                              <option value=""></option>
-                            </select>
-                          </div>
-                          <div class="eqrow_edit">
-                            <span class="potere_numero">[2]</span>
-                            <select id="mano_destra_pow_2_tipo" class="sel_potere_tipo">
-                              <option value=""></option>
-                            </select>
-                            <input id="mano_destra_pow_2_valore" placeholder="Valore" class="potere_valore" readonly></input>
-                            <select id="mano_destra_pow_2_nome" class="sel_potere_nome">
-                              <option value=""></option>
-                            </select>
-                          </div>
-                          <div class="eqrow_edit">
-                            <span class="potere_numero">[3]</span>
-                            <select id="mano_destra_pow_3_tipo" class="sel_potere_tipo">
-                              <option value=""></option>
-                            </select>
-                            <input id="mano_destra_pow_3_valore" placeholder="Valore" class="potere_valore" readonly></input>
-                            <select id="mano_destra_pow_3_nome" class="sel_potere_nome">
-                              <option value=""></option>
-                            </select>
-                          </div>
-                          <div class="eqrow_edit">
-                            <span class="potere_numero">[4]</span>
-                            <select id="mano_destra_pow_4_tipo" class="sel_potere_tipo">
-                              <option value=""></option>
-                            </select>
-                            <input id="mano_destra_pow_4_valore" placeholder="Valore" class="potere_valore" readonly></input>
-                            <select id="mano_destra_pow_4_nome" class="sel_potere_nome">
-                              <option value=""></option>
-                            </select>
-                          </div>
-                          <div class="eqrow_edit">
-                            <span class="potere_numero">[5]</span>
-                            <select id="mano_destra_pow_5_tipo" class="sel_potere_tipo">
-                              <option value=""></option>
-                            </select>
-                            <input id="mano_destra_pow_5_valore" placeholder="Valore" class="potere_valore" readonly></input>
-                            <select id="mano_destra_pow_5_nome" class="sel_potere_nome">
-                              <option value=""></option>
-                            </select>
-                          </div>
-                          <div class="eqrow_edit">
-                            <span class="potere_numero">[6]</span>
-                            <select id="mano_destra_pow_6_tipo" class="sel_potere_tipo">
-                              <option value=""></option>
-                            </select>
-                            <input id="mano_destra_pow_6_valore" placeholder="Valore" class="potere_valore" readonly></input>
-                            <select id="mano_destra_pow_6_nome" class="sel_potere_nome">
-                              <option value=""></option>
-                            </select>
-                          </div>
-                        </div>
-                      </li>
-
-                      <li class="list-group-item list"><div class="eqrow"><span class="slot">mano sinistra</span><span id="mano_sinistra" class="eq"></span></div></li>
-                      <li class="list-group-item list"><div class="eqrow"><span class="slot">al collo</span><span id="al_collo_1" class="eq"></span></div></li>
-                      <li class="list-group-item list"><div class="eqrow"><span class="slot">al collo</span><span id="al_collo_2" class="eq"></span></div></li>
-                      <li class="list-group-item list"><div class="eqrow"><span class="slot">sul corpo</span><span id="sul_corpo" class="eq"></span></div></li>
-                      <li class="list-group-item list"><div class="eqrow"><span class="slot">in testa</span><span id="in_testa" class="eq"></span></div></li>
-                      <li class="list-group-item list"><div class="eqrow"><span class="slot">sulle gambe</span><span id="sulle_gambe" class="eq"></span></div></li>
-                      <li class="list-group-item list"><div class="eqrow"><span class="slot">ai piedi</span><span id="ai_piedi" class="eq"></span></div></li>
-                      <li class="list-group-item list"><div class="eqrow"><span class="slot">sule mani</span><span id="sulle_mani" class="eq"></span></div></li>
-                      <li class="list-group-item list"><div class="eqrow"><span class="slot">sulle braccia</span><span id="sulle_braccia" class="eq"></span></div></li>
-                      <li class="list-group-item list"><div class="eqrow"><span class="slot">come scudo</span><span id="come_scudo" class="eq"></span></div></li>
-                      <li class="list-group-item list"><div class="eqrow"><span class="slot">attorno al corpo</span><span id="attorno_al_corpo" class="eq"></span></div></li>
-                      <li class="list-group-item list"><div class="eqrow"><span class="slot">alla vita</span><span id="alla_vita" class="eq"></span></div></li>
-                      <li class="list-group-item list"><div class="eqrow"><span class="slot">polso destro</span><span id="polso_destro" class="eq"></span></div></li>
-                      <li class="list-group-item list"><div class="eqrow"><span class="slot">polso sinistro</span><span id="polso_sinistro" class="eq"></span></div></li>
-                      <li class="list-group-item list"><div class="eqrow"><span class="slot">impugnato</span><span id="impugnato" class="eq"></span></div></li>
-                      <li class="list-group-item list"><div class="eqrow"><span class="slot">afferrato</span><span id="afferrato" class="eq"></span></div></li>
-                      <li class="list-group-item list"><div class="eqrow"><span class="slot">sulla schiena</span><span id="sulla_schiena" class="eq"></span></div></li>
-                      <li class="list-group-item list"><div class="eqrow"><span class="slot">orecchio destro</span><span id="orecchio_destro" class="eq"></span></div></li>
-                      <li class="list-group-item list"><div class="eqrow"><span class="slot">orecchio sinistro</span><span id="orecchio_sinistro" class="eq"></span></div></li>
-                      <li class="list-group-item list"><div class="eqrow"><span class="slot">sul viso</span><span id="sul_viso" class="eq"></span></div></li>
-                      <li class="list-group-item list"><div class="eqrow"><span class="slot">incoccato</span><span id="incoccato" class="eq"></span></div></li>
-                      <li class="list-group-item list"><div class="eqrow"><span class="slot">come aura</span><span id="come_aura" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="come luce" slot_db="Luce"><div class="eqrow"><span class="slot">come luce</span><span id="come_luce" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="mano_destra" slot_db="Dita"><div class="eqrow"><span class="slot">mano destra</span><span id="mano_destra" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="mano_sinistra" slot_db="Dita"><div class="eqrow"><span class="slot">mano sinistra</span><span id="mano_sinistra" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="al_collo_1" slot_db="Collo"><div class="eqrow"><span class="slot">al collo</span><span id="al_collo_1" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="al_collo_2" slot_db="Collo"><div class="eqrow"><span class="slot">al collo</span><span id="al_collo_2" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="sul_corpo" slot_db="Corpo"><div class="eqrow"><span class="slot">sul corpo</span><span id="sul_corpo" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="in_testa" slot_db="Testa"><div class="eqrow"><span class="slot">in testa</span><span id="in_testa" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="sulle_gambe" slot_db="Gambe"><div class="eqrow"><span class="slot">sulle gambe</span><span id="sulle_gambe" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="ai_piedi" slot_db="Piedi"><div class="eqrow"><span class="slot">ai piedi</span><span id="ai_piedi" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="sulle_mani" slot_db="Mani"><div class="eqrow"><span class="slot">sule mani</span><span id="sulle_mani" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="sulle_braccia" slot_db="Braccia"><div class="eqrow"><span class="slot">sulle braccia</span><span id="sulle_braccia" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="come_scudo" slot_db="Scudo"><div class="eqrow"><span class="slot">come scudo</span><span id="come_scudo" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="attorno_al_corpo" slot_db="Attorno"><div class="eqrow"><span class="slot">attorno al corpo</span><span id="attorno_al_corpo" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="alla_vita" slot_db="Vita"><div class="eqrow"><span class="slot">alla vita</span><span id="alla_vita" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="polso_destro" slot_db="Polso"><div class="eqrow"><span class="slot">polso destro</span><span id="polso_destro" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="polso_sinistro" slot_db="Polso"><div class="eqrow"><span class="slot">polso sinistro</span><span id="polso_sinistro" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="impugnato" slot_db="Impugnato"><div class="eqrow"><span class="slot">impugnato</span><span id="impugnato" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="afferrato" slot_db="Afferrato"><div class="eqrow"><span class="slot">afferrato</span><span id="afferrato" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="sulla_schiena" slot_db="Schiena"><div class="eqrow"><span class="slot">sulla schiena</span><span id="sulla_schiena" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="orecchio_destro" slot_db="Orecchie"><div class="eqrow"><span class="slot">orecchio destro</span><span id="orecchio_destro" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="orecchio_sinistro" slot_db="Orecchie"><div class="eqrow"><span class="slot">orecchio sinistro</span><span id="orecchio_sinistro" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="sul_viso" slot_db="Viso"><div class="eqrow"><span class="slot">sul viso</span><span id="sul_viso" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="incoccato" slot_db="Incoccato"><div class="eqrow"><span class="slot">incoccato</span><span id="incoccato" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="come_aura" slot_db="Aura"><div class="eqrow"><span class="slot">come aura</span><span id="come_aura" class="eq"></span></div></li>
                       <li class="list-group-item list separatore"></li>
                     </ul>
                   </div>
@@ -396,16 +314,106 @@
               placeholder: "Seleziona la razza...",
               language: "it"
             });
-            $(".sel_item").each(function( index ) {
-              $(this).select2({
-                placeholder: "Seleziona un oggetto...",
-                language: "it"
-              });
-            });
+            $(".edit_link").each(function( index ) {
+              CreateElements (this);
+            })                  
             FetchItems();
             FetchBuilds();
             ShowContent();
         })
+
+
+        function CreateElements (el) {
+            var html = `<li id="#slot#_edit" class="list-group-item list edit_item" style="height: auto"> ` +
+                       `  <div class="eqrow_edit"> ` +
+                       `    <select id="#slot#_sel_item" class="sel_item" slot="#slot_db#" onchange="javascript:$('##slot#_edit_details').show();"> ` +
+                       `      <option value=""></option> ` +
+                       `    </select> ` +
+                       `  </div> ` +
+                       `  <div id="#slot#_edit_details" style="display: none;"> ` +
+                       `    <div class="eqrow_edit"> ` +
+                       `      <span>Percorso:</span><span id="#slot#_percorso_nome" class="percorso"></span> ` +
+                       `      <span>Livello:</span> ` +
+                       `      <select id="#slot#_percorso_livello" class="percorso_livello"> ` +
+                       `      </select> ` +
+                       `    </div> ` +
+                       `    <div class="eqrow_edit"> ` +
+                       `      <span class="potere_numero">AC</span> ` +
+                       `      <input id="#slot#_ac" placeholder="AC" class="potere_valore" readonly></input> ` +
+                       `    </div> ` +
+                       `    <div class="eqrow_edit"> ` +
+                       `      <span class="potere_numero">[1]</span> ` +
+                       `      <select id="#slot#_pow_1_tipo" class="sel_potere_tipo"> ` +
+                       `        <option value=""></option> ` +
+                       `      </select> ` +
+                       `      <input id="#slot#_pow_1_valore" placeholder="Valore" class="potere_valore" readonly></input> ` +
+                       `      <select id="#slot#_pow_1_nome" class="sel_potere_nome"> ` +
+                       `        <option value=""></option> ` +
+                       `      </select> ` +
+                       `    </div> ` +
+                       `    <div class="eqrow_edit"> ` +
+                       `      <span class="potere_numero">[2]</span> ` +
+                       `      <select id="#slot#_pow_2_tipo" class="sel_potere_tipo"> ` +
+                       `        <option value=""></option> ` +
+                       `      </select> ` +
+                       `      <input id="#slot#_pow_2_valore" placeholder="Valore" class="potere_valore" readonly></input> ` +
+                       `      <select id="#slot#_pow_2_nome" class="sel_potere_nome"> ` +
+                       `        <option value=""></option> ` +
+                       `      </select> ` +
+                       `    </div> ` +
+                       `    <div class="eqrow_edit"> ` +
+                       `      <span class="potere_numero">[3]</span> ` +
+                       `      <select id="#slot#_pow_3_tipo" class="sel_potere_tipo"> ` +
+                       `        <option value=""></option> ` +
+                       `      </select> ` +
+                       `      <input id="#slot#_pow_3_valore" placeholder="Valore" class="potere_valore" readonly></input> ` +
+                       `      <select id="#slot#_pow_3_nome" class="sel_potere_nome"> ` +
+                       `        <option value=""></option> ` +
+                       `      </select> ` +
+                       `    </div> ` +
+                       `    <div class="eqrow_edit"> ` +
+                       `      <span class="potere_numero">[4]</span> ` +
+                       `      <select id="#slot#_pow_4_tipo" class="sel_potere_tipo"> ` +
+                       `        <option value=""></option> ` +
+                       `      </select> ` +
+                       `      <input id="#slot#_pow_4_valore" placeholder="Valore" class="potere_valore" readonly></input> ` +
+                       `      <select id="#slot#_pow_4_nome" class="sel_potere_nome"> ` +
+                       `        <option value=""></option> ` +
+                       `      </select> ` +
+                       `    </div> ` +
+                       `    <div class="eqrow_edit"> ` +
+                       `      <span class="potere_numero">[5]</span> ` +
+                       `      <select id="#slot#_pow_5_tipo" class="sel_potere_tipo"> ` +
+                       `        <option value=""></option> ` +
+                       `      </select> ` +
+                       `      <input id="#slot#_pow_5_valore" placeholder="Valore" class="potere_valore" readonly></input> ` +
+                       `      <select id="#slot#_pow_5_nome" class="sel_potere_nome"> ` +
+                       `        <option value=""></option> ` +
+                       `      </select> ` +
+                       `    </div> ` +
+                       `    <div class="eqrow_edit"> ` +
+                       `      <span class="potere_numero">[6]</span> ` +
+                       `      <select id="#slot#_pow_6_tipo" class="sel_potere_tipo"> ` +
+                       `        <option value=""></option> ` +
+                       `      </select> ` +
+                       `      <input id="#slot#_pow_6_valore" placeholder="Valore" class="potere_valore" readonly></input> ` +
+                       `      <select id="#slot#_pow_6_nome" class="sel_potere_nome"> ` +
+                       `        <option value=""></option> ` +
+                       `      </select> ` +
+                       `    </div> ` +
+                       `  </div> ` +
+                       `</li>`
+            ;
+
+            var slot = $(el).attr("slot");
+            var slot_db = $(el).attr("slot_db");
+
+            $(el).click(ToggleEdit);
+
+            html = html.replaceAll("#slot#", slot).replaceAll("#slot_db#", slot_db);
+
+            $(el).after(html);
+        }
 
         async function ShowContent() {
             //Prendo due semafori in modo da partire per forza dopo che le load hanno finito
@@ -427,6 +435,49 @@
         async function FetchItems () {
           // Blocco il semaforo
           await sema.acquire();
+          fetch('php/load_items.php', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json'
+              },
+              body: '{  "nome" : ""' + 
+                    '  ,"percorso" : ""' + 
+                    '  ,"slot" : ""' + 
+                    '  ,"potere" : ""' + 
+                    '}'
+          })
+          .then(response => response.json())
+          .then(data => LoadItems(data))
+          .catch(error => console.log("Errore in caricamento: " + error));
+        }
+
+        function LoadItems (data) {
+          $(".sel_item").each(function( index ) {
+            data.forEach(
+              element => {
+                  if (($(this).attr("slot") == element.slot) ||
+                      ($(this).attr("slot") == "Impugnato" && element.slot == "Arma") ||
+                      ($(this).attr("slot") == "Impugnato" && element.slot == "Arma Afferrato") ||
+                      ($(this).attr("slot") == "Afferrato" && element.slot == "Arma Afferrato")
+                  ) {
+                    // Aggiungo la riga alla lista
+                    var opt = document.createElement ("option");
+                    $(opt).val(element.nome);
+                    $(opt).text(element.nome);
+                    $(this).append(opt);
+                  }
+              }
+            );
+          })
+
+          $(".sel_item").each(function( index ) {
+            $(this).select2({
+              placeholder: "Seleziona un oggetto...",
+              language: "it",
+              sorter: data => data.sort((a, b) => a.text.localeCompare(b.text)),
+            });
+          });
+
           // Libero il semaforo
           sema.release();
         }        
@@ -775,10 +826,10 @@
           $("#player").show();
         }
 
-        function ToggleEdit(id) {
-          if ("<?php if ($isLoggedIn) { echo $user['user_name']; } ?>" == json_p1.account) {
-            $("#"+id).toggle();
-          }
+        function ToggleEdit(el) {
+          //if ("<?php if ($isLoggedIn) { echo $user['user_name']; } ?>" == json_p1.account) {
+            $("#"+($(el.currentTarget).attr("slot")) + "_edit").toggle();
+          //}
         }
 
 </script>
