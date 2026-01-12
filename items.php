@@ -359,7 +359,23 @@
         var json_spell_armi;
         $.getJSON("database/spell_armi.json", function (json) { json_spell_armi = json; });
 
-        document.addEventListener("DOMContentLoaded", function () {
+        //PRELOAD
+        var images = [];
+
+        function preload() {
+          for (var i = 0; i < arguments.length; i++) {
+            images[i] = new Image();
+            images[i].src = preload.arguments[i];
+          }
+        }
+
+        preload (
+          "/armory/img/filter.svg",
+          "/armory/img/items.svg",
+          "/armory/img/background.jpg"
+        )
+
+        window.addEventListener("load", function () {
             CreateDataTable($("#datatableItems"),
                               <?php if ($isLoggedIn && $user['user_type'] == "1") {?>
                                 'Aggiungi', AddItem, 'Modifica', EditItem, 'Elimina', DeleteItem

@@ -389,6 +389,12 @@
         var input_p1 = urlParams.get('p1');
         var input_p2 = urlParams.get('p2');
 
+        var json_poteri_speciali;
+        $.getJSON("database/poteri_speciali.json", function (json) { json_poteri_speciali = json; });
+
+        var json_spell_armi;
+        $.getJSON("database/spell_armi.json", function (json) { json_spell_armi = json; });
+
         //PRELOAD
         var images = [];
 
@@ -410,17 +416,18 @@
           "/armory/img/paladino.png",
           "/armory/img/psionico.png",
           "/armory/img/ranger.png",
-          "/armory/img/players.svg",
+          "/armory/img/arcanista.png",
+          "/armory/img/asceta.png",
+          "/armory/img/condottiero.png",
+          "/armory/img/errante.png",
+          "/armory/img/illusionista.png",
+          "/armory/img/mistificatore.png",
+          "/armory/img/schermidore.png",
+          "/armory/img/templare.png",
           "/armory/img/background.jpg"
         )
 
-        var json_poteri_speciali;
-        $.getJSON("database/poteri_speciali.json", function (json) { json_poteri_speciali = json; });
-
-        var json_spell_armi;
-        $.getJSON("database/spell_armi.json", function (json) { json_spell_armi = json; });
-
-        document.addEventListener("DOMContentLoaded", function () {
+        window.addEventListener("load", function () {
             Chart.defaults.font.family = "'DejaVu Sans Mono', monospace";
             Chart.defaults.color = "#fff";
             if(input_p1) input_p1 = input_p1.toString().replace(/"/g,"");

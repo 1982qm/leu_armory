@@ -216,7 +216,7 @@
 	<?php
 	if(!(isset($_GET['logout']) AND $_GET['logout']=='y')) {
 	?>
-		document.addEventListener("DOMContentLoaded", function () {
+		window.addEventListener("load", function () {
 			$("#username").val("Guest");
 			$("#password").val("guest");
 			$("#submitButton").click();

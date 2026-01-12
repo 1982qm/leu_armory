@@ -129,18 +129,18 @@
         }
 
         preload (
-          "/armory/img/players.png",
-          "/armory/img/players_dark.png",
-          "/armory/img/builder.png",
-          "/armory/img/builder_dark.png",
-          "/armory/img/logout.png",
-          "/armory/img/logout_dark.png",
-          "/armory/img/items.png",
-          "/armory/img/items_dark.png",
-          "/armory/img/compare.png",
-          "/armory/img/compare_dark.png",
-          "/armory/img/admin.png",
-          "/armory/img/admin_dark.png",
+          "/armory/img/players.svg",
+          "/armory/img/players_dark.svg",
+          "/armory/img/builder.svg",
+          "/armory/img/builder_dark.svg",
+          "/armory/img/logout.svg",
+          "/armory/img/logout_dark.svg",
+          "/armory/img/items.svg",
+          "/armory/img/items_dark.svg",
+          "/armory/img/compare.svg",
+          "/armory/img/compare_dark.svg",
+          "/armory/img/admin.svg",
+          "/armory/img/admin_dark.svg",
           "/armory/img/logo.svg",
           "/armory/img/background.jpg"
         )

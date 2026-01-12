@@ -136,6 +136,7 @@ function CreaChartDmg(chart_id, json_p1, json_p2) {
         type: 'bar',
         data: dataChart,
         options: {
+            responsive: false,
             elements: {
                 bar: {
                     borderWidth: 2
