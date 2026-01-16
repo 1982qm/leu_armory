@@ -7,7 +7,7 @@
     if($data){
         $dbnu = new PDO('sqlite:'.$dbu);
 
-        $stmt=$dbnu->prepare("SELECT json FROM builds WHERE upper(nome) = upper(:nome) AND upper(account) = upper(:account) LIMIT 1");
+        $stmt=$dbnu->prepare("SELECT * FROM builds WHERE upper(nome) = upper(:nome) AND upper(account) = upper(:account) LIMIT 1");
         $stmt->bindValue(":nome",$data['nome'], PDO::PARAM_STR);
         $stmt->bindValue(":account",$data['account'], PDO::PARAM_STR);
 

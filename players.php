@@ -300,10 +300,6 @@
             if(input_name) input_name = input_name.toString().replace(/"/g,"");
             InitImgBtn();
             CreateDataTable($("#datatablePlayers"));
-            window.addEventListener('orientationchange', function (){
-                var dtTable = $("#datatablePlayers").DataTable();
-                dtTable.columns.adjust();
-            });
             FetchPlayers();
         })
 
@@ -338,6 +334,10 @@
           $(".dt-search input").css("border-color","#464D54");
 
           setTimeout(() => {
+            window.addEventListener('orientationchange', function (){
+                var dtTable = $("#datatablePlayers").DataTable();
+                dtTable.columns.adjust();
+            });
             LoadPlayersToCompare(data);
             document.getElementById("loadingDiv").style.display = "none";
             document.getElementById("content").style.display = "block";

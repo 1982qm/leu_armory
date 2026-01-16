@@ -41,14 +41,39 @@
 <script src="lib/select2.min.js"></script>
 <script src="lib/select2.it.min.js"></script>
 <script src="lib/datatables.min.js"></script>
-<script src="lib/chart.js"></script>
-<script src="js/make_chart.js"></script>
 <script src="js/manageDT.js?1.0"></script>
 <script src="js/common.js"></script>
 <script src="js/semaphore.js"></script>
+<script src="js/messages.js"></script>
 
 <body>
   <main>
+    <div id="confirm-modal" class="modal" style="display: none">
+      <div class="modal-content">
+          <center>
+                <div class="modal-header">
+                    <div class="modal-title">
+                        <span id="confirm-modal-text" class="text-white">Confermi?</span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-sm" id="modal-confirm-btn-yes"
+                        data-dismiss="modal">Si</button>
+                    <button type="button" class="btn btn-primary btn-sm" id="modal-confirm-btn-no"
+                        data-dismiss="modal">No</button>
+                </div>
+          </center>
+      </div>
+    </div>  
+
+    <div id="messages-modal" class="modal" style="display: none">
+      <div id="messages-modal-content" class="modal-content">
+          <center>
+              <span id="messages-modal-text" style="position:relative; padding:20px;"></span>
+          </center>
+      </div>
+    </div>
+        
     <div id="loadingDiv" class="modal">
       <div id="loadingDivContent" class="modal-content">
           <center>
@@ -70,7 +95,6 @@
                           <tr>
                               <th>Nome</th>
                               <th>Classe</th>
-                              <th>Livello Medio Eq</th>
                               <th>Note</th>
                               <th>Creata Da</th>
                               <th>Data Caricamento</th>
@@ -81,7 +105,6 @@
                           <tr>
                               <th>Nome</th>
                               <th>Classe</th>
-                              <th>Livello Medio Eq</th>
                               <th>Note</th>
                               <th>Creata Da</th>
                               <th>Data Caricamento</th>
@@ -95,74 +118,58 @@
       </div>
     </div>
 
-    <div id="player" class="container-fluid px-4" style="top: 30px;position: relative; display: none;">
-      <a href="#" class="close" onclick="javascript:$('#player').hide();$('#gridContainer').show();"></a>
+    <div id="build" class="container-fluid px-4" style="top: 30px;position: relative; display: none;">
+      <a href="#" class="close" onclick="javascript:$('#build').hide();$('#gridContainer').show();"></a>
       <div class="card bg-dark text-white mb-4" style="opacity: 97%; min-height: 750px;">
-          <div id="playerContainer" class="collapse show">
+          <div id="buildContainer" class="collapse show">
               <div class="card-body" style="display: flex;">
 
                 <!-- PG -->
                 <div class="card" style="width: 20rem; border: 0px; background: linear-gradient(black, transparent 70%); margin-left: 10px;">
                   <div class="card-body" style="z-index: 1; max-height: calc(100dvh - 150px);">
+                    <!-- PUBBLICA -->
+                    <div id="buildPubblica_switch" class="form-check form-switch " style="margin-bottom: 20px; cursor: pointer;">
+                      <input class="form-check-input" type="checkbox" role="switch" id="buildPubblica" style="cursor: inherit;" onchange="SetPubblicaLabel()">
+                      <label id="buildPubblicaLabel" class="form-check-label" for="buildPubblica" style="cursor: inherit;">Privata</label>
+                      <button id="saveButton" class="btn btn-primary btn-sm" style="float: right; margin-left: 10px" onclick="SaveBuild()">Salva</button>
+                      <button id="delButton" class="btn btn-danger btn-sm" style="float: right;" onclick="DeleteBuild()">Elimina</button>
+                    </div>
                     <h3 id="buildName" class="card-title" style="text-shadow: 2px 2px 4px black;"></h3>
-                    <input id="buildName_edit" class="card-title" style="text-shadow: 2px 2px 4px black;" placeholder="Nome della build"></input>
+                    <input id="buildName_edit" class="card-title" style="text-shadow: 2px 2px 4px black; width: 100%" placeholder="Nome della build"></input>
                     <h5 id="className" class="card-title"></h5>
                     <div id="classNameDiv_edit">
-                      <select id="className_edit" class="card-title">
+                      <select id="className_edit" class="card-title" onchange="setImg()">
                         <option value=""></option>
+                        <option value="Barbaro">Barbaro</option>
                         <option value="Chierico">Chierico</option>
-                        <option value="Ranger">Ranger</option>
+                        <option value="Druido">Druido</option>
+                        <option value="Guerriero">Guerriero</option>
+                        <option value="Ladro">Ladro</option>
+                        <option value="Mago">Mago</option>
+                        <option value="Monaco">Monaco</option>
                         <option value="Paladino">Paladino</option>
+                        <option value="Psionico">Psionico</option>
+                        <option value="Ranger">Ranger</option>
+                        <option value="Arcanista">Arcanista (Chierico/Mago)</option>
+                        <option value="Asceta">Asceta (Druido/Guerriero)</option>
+                        <option value="Illusionista">Illusionista (Guerriero/Mago)</option>
+                        <option value="Mistificatore">Mistificatore (Ladro/Mago)</option>
+                        <option value="Schermidore">Schermidore (Guerriero/Ladro)</option>
+                        <option value="Templare">Templare (Chierico/Guerriero)</option>
+                        <option value="Condottiero">Condottiero (Chierico/Guerriero/Mago)</option>
+                        <option value="Errante">Errante (Chierico/Ladro/Mago)</option>
                       </select>
                     </div>
-                    <h3 id="avg_eq_level" class="card-title" style="position: absolute; color: #00FE1E; top: 15px; right: 20px; text-shadow: 1px 1px 2px black;"></h3>
-                    <div style="height: 430px; width: auto; margin-top: -60px; margin-bottom: 90px; align-content: center;" >
-                      <img id="classImg" class="card-img-top" style="scale: 80%;">
+                    <div style="margin-top: 30px;" >
+                      <img id="classImg" class="card-img-top">
                     </div>
-                    
-                    <div class="chart_player" style="top:-90px">
-                      <canvas id="chart_stat" style="width: 300px; height:300px"></canvas>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- STATISTICHE -->
-                <div class="card" style="width: 18rem; border: 0px; margin-left: 10px;">
-                  <div class="card-body">
-                    <h5 class="card-title" style="text-shadow: 1px 1px 2px black;">Statistiche</h5>
-                    <ul id="listaStats" class="list-group list-group-flush">
-                      <li class="list-group-item list" id="razza_li"><div class="info"><span class="stat">Razza</span><span id="razza" class="number_value"></span></div></li>
-                      <li class="list-group-item list" id="razza_li_edit" style="height: 35px; border: 0px;">
-                        <div class="info">
-                          <select id="razza_edit">
-                            <option value=""></option>
-                            <option value="Umano">Umano</option>
-                          </select>
-                        </div>
-                      </li>
-                      <li class="list-group-item list separatore"></li>
-                      <li class="list-group-item list"><div class="info"><span class="stat">HP </span><span id="hp" class="number_value"></span></div></li>
-                      <li class="list-group-item list"><div class="info"><span class="stat">Mana</span><span id="mana" class="number_value"></span></div></li>
-                      <li class="list-group-item list"><div class="info"><span class="stat">Energia</span><span id="energia" class="number_value"></span></div></li>
-                      <li class="list-group-item list separatore"></li>
-                      <li class="list-group-item list"><div class="info"><span class="stat">Danno Fisico</span><span id="danno_fisico" class="number_value"></span></div></li>
-                      <li class="list-group-item list"><div class="info"><span class="stat">Potere Magico</span><span id="potere_magico" class="number_value"></span></div></li>
-                      <li class="list-group-item list separatore"></li>
-                      <li class="list-group-item list"><div class="info"><span class="stat">Forza</span><span id="forza" class="number_value"></span></div></li>
-                      <li class="list-group-item list"><div class="info"><span class="stat">Intelligenza</span><span id="intelligenza" class="number_value"></span></div></li>
-                      <li class="list-group-item list"><div class="info"><span class="stat">Saggezza</span><span id="saggezza" class="number_value"></span></div></li>
-                      <li class="list-group-item list"><div class="info"><span class="stat">Destrezza</span><span id="destrezza" class="number_value"></span></div></li>
-                      <li class="list-group-item list"><div class="info"><span class="stat">Costituzione</span><span id="costituzione" class="number_value"></span></div></li>
-                      <li class="list-group-item list"><div class="info"><span class="stat">Carisma</span><span id="carisma" class="number_value"></span></div></li>
-                      <li class="list-group-item list separatore"></li>
-                    </ul>
                   </div>
                 </div>
 
                 <!-- EQUIPAGGIAMENTO -->
-                <div class="card" style="min-width: 18rem; width: max-content; border: 0px; margin-left: 10px;">
+                <div class="card" style="min-width: 35rem; width: max-content; border: 0px; margin-left: 10px;">
                   <div class="card-body">
-                    <h5 class="card-title" style="text-shadow: 1px 1px 2px black;">Equipaggiamento<span id="oggettiLimitati">Oggetti limitati <span id="oggettiLimitatiMin"></span>/<span id="oggettiLimitatiMax"></span></span></h5>
+                    <h5 class="card-title" style="text-shadow: 1px 1px 2px black;">Equipaggiamento<span id="oggettiLimitati">Oggetti limitati <span id="oggettiLimitatiMin">0</span>/<span id="oggettiLimitatiMax">36</span></span></h5>
                     <ul class="list-group list-group-flush">
                       <li class="list-group-item list edit_link" slot="come luce" slot_db="Luce"><div class="eqrow"><span class="slot">come luce</span><span id="come_luce" class="eq"></span></div></li>
                       <li class="list-group-item list edit_link" slot="mano_destra" slot_db="Dita"><div class="eqrow"><span class="slot">mano destra</span><span id="mano_destra" class="eq"></span></div></li>
@@ -193,49 +200,21 @@
                   </div>
                 </div>
 
-                <div class="card" style="width: 18rem; border: 0px; margin-left: 10px;">
+                <div class="card" style="min-width: 22rem; width: max-content; border: 0px; margin-left: 10px;">
                   <div class="card-body">
-                    <!-- RESISTENZE -->
-                    <h5 class="card-title" style="text-shadow: 1px 1px 2px black;">Resistenze</h5>
-                    <ul class="list-group list-group-flush">
-                      <li class="list-group-item list"><div class="info"><span class="resi">Assorbimento Fisico</span><span id="ass_fisico" class="number_value"></span></div></li>
-                      <li class="list-group-item list"><div class="info"><span class="resi">Assorbimento Magico</span><span id="ass_magico" class="number_value"></span></div></li>
-                      <li class="list-group-item list separatore"></li>
-                      <li class="list-group-item list"><div class="info"><span class="resi">Impatto</span><span id="res_impatto" class="number_value"></span></div></li>
-                      <li class="list-group-item list"><div class="info"><span class="resi">Perforazione</span><span id="res_perforazione" class="number_value"></span></div></li>
-                      <li class="list-group-item list"><div class="info"><span class="resi">Taglio</span><span id="res_taglio" class="number_value"></span></div></li>
-                      <li class="list-group-item list"><div class="info"><span class="resi">Trauma</span><span id="res_trauma" class="number_value"></span></div></li>
-                      <li class="list-group-item list separatore"></li>
-                      <li class="list-group-item list"><div class="info"><span class="resi">Fuoco</span><span id="res_fuoco" class="number_value"></span></div></li>
-                      <li class="list-group-item list"><div class="info"><span class="resi">Freddo</span><span id="res_freddo" class="number_value"></span></div></li>
-                      <li class="list-group-item list"><div class="info"><span class="resi">Elettricità</span><span id="res_elettricita" class="number_value"></span></div></li>
-                      <li class="list-group-item list"><div class="info"><span class="resi">Acido</span><span id="res_acido" class="number_value"></span></div></li>
-                      <li class="list-group-item list"><div class="info"><span class="resi">Energia</span><span id="res_energia" class="number_value"></span></div></li>
-                      <li class="list-group-item list separatore"></li>
-                      <li class="list-group-item list"><div class="info"><span class="resi">Natura</span><span id="res_natura" class="number_value"></span></div></li>
-                      <li class="list-group-item list"><div class="info"><span class="resi">Psichico</span><span id="res_psichico" class="number_value"></span></div></li>
-                      <li class="list-group-item list"><div class="info"><span class="resi">Lumen</span><span id="res_lumen" class="number_value"></span></div></li>
-                      <li class="list-group-item list"><div class="info"><span class="resi">Umbra</span><span id="res_umbra" class="number_value"></span></div></li>
-                      <li class="list-group-item list separatore"></li>
-                      <li class="list-group-item list"><div class="info"><span class="resi">Caos</span><span id="res_caos" class="number_value"></span></div></li>
-                      <li class="list-group-item list separatore"></li>
-                    </ul>
-                  </div>
-                </div>
-
-                <div class="card" style="min-width: 18rem; width: max-content; border: 0px; margin-left: 10px;">
-                  <div class="card-body">
-                    <!-- ATTACCHI -->
-                    <h5 class="card-title" style="text-shadow: 1px 1px 2px black;">Attacchi</h5>
-                    <ul id="listaAttacchi" class="list-group list-group-flush">
-                      <li class="list-group-item list"><div class="info"><span class="resi">Numero attacchi</span><span id="num_attacks" class="number_value"></span></div></li>
-                      <li class="list-group-item list"><div class="info"><span class="resi">Chance di critico</span><span id="crit_chance" class="number_value"></span></div></li>
-                      <li class="list-group-item list"><div class="info"><span class="resi" style="white-space: pre">Moltiplicatore</span><span id="crit_molt" class="number_value"></span></div></li>
-                    </ul>
                     <!-- BONUS -->
                     <h5 class="card-title" style="text-shadow: 1px 1px 2px black;">Bonus Attivi</h5>
                     <ul id="listaBonus" class="list-group list-group-flush">
                     </ul>
+                  </div>
+                </div>
+
+                <div class="card" style="min-width: 22rem; width: max-content; border: 0px; margin-left: 10px;">
+                  <div class="card-body">
+                    <!-- NOTE -->
+                    <h5 class="card-title" style="text-shadow: 1px 1px 2px black;">Note della build</h5>
+                    <label id="buildNotes" class="buildNotes" readonly></label>
+                    <textarea id="buildNotes_edit" class="buildNotes" placeholder="Inserisci qui eventuali note sulla build"></textarea>
                   </div>
                 </div>
 
@@ -247,19 +226,9 @@
   </main>  
 
   <script>
-        var optgroupState;
-        var chart_stat;
         var json_p1;
-
-        const queryString = window.location.search;
-        const urlParams = new URLSearchParams(queryString);
-        var input_name = urlParams.get('name');
-        
-        var json_poteri_speciali;
-        $.getJSON("database/poteri_speciali.json", function (json) { json_poteri_speciali = json; });
-
-        var json_spell_armi;
-        $.getJSON("database/spell_armi.json", function (json) { json_spell_armi = json; });
+        var oggetti_db;
+        var oggetti_build;
 
         // Semafori, il numero è il parallelismo. Deve essere uguale al numero di fetch che devo fare parallelamente
         let sema = new Semaphore(2);
@@ -298,35 +267,20 @@
         )
 
         window.addEventListener("load", function () {
-            Chart.defaults.font.family = "'DejaVu Sans Mono', monospace";
-            Chart.defaults.color = "#fff";
-            if(input_name) input_name = input_name.toString().replace(/"/g,"");
             CreateDataTable($("#datatableBuilds"), 'Nuova build', NewBuild);
-            window.addEventListener('orientationchange', function (){
-                var dtTable = $("#datatableBuilds").DataTable();
-                dtTable.columns.adjust();
-            });
             $("#className_edit").select2({
               placeholder: "Seleziona la classe...",
               language: "it"
             });
-            $("#razza_edit").select2({
-              placeholder: "Seleziona la razza...",
-              language: "it"
-            });
-            $(".edit_link").each(function( index ) {
-              CreateElements (this);
-            })                  
             FetchItems();
             FetchBuilds();
             ShowContent();
         })
 
-
         function CreateElements (el) {
-            var html = `<li id="#slot#_edit" class="list-group-item list edit_item" style="height: auto"> ` +
+            var html_start = `<li id="#slot#_edit" class="list-group-item list edit_item dynamic-generated" style="height: auto"> ` +
                        `  <div class="eqrow_edit"> ` +
-                       `    <select id="#slot#_sel_item" class="sel_item" slot="#slot_db#" onchange="javascript:$('##slot#_edit_details').show();"> ` +
+                       `    <select id="#slot#_sel_item" class="sel_item" slot="#slot#" slot_db="#slot_db#" onchange="setObject('#slot#_sel_item')"> ` +
                        `      <option value=""></option> ` +
                        `    </select> ` +
                        `  </div> ` +
@@ -334,14 +288,25 @@
                        `    <div class="eqrow_edit"> ` +
                        `      <span>Percorso:</span><span id="#slot#_percorso_nome" class="percorso"></span> ` +
                        `      <span>Livello:</span> ` +
-                       `      <select id="#slot#_percorso_livello" class="percorso_livello"> ` +
+                       `      <select id="#slot#_percorso_livello" class="percorso_livello" onchange="updateObject('#slot#')"> ` +
                        `      </select> ` +
-                       `    </div> ` +
-                       `    <div class="eqrow_edit"> ` +
+                       `    </div> `
+            ;
+
+            var html_ac = ` <div class="eqrow_edit"> ` +
                        `      <span class="potere_numero">AC</span> ` +
                        `      <input id="#slot#_ac" placeholder="AC" class="potere_valore" readonly></input> ` +
-                       `    </div> ` +
+                       `    </div> `
+            ;
+
+            var html_dice = 
                        `    <div class="eqrow_edit"> ` +
+                       `      <span class="danno_label">Danni</span> ` +
+                       `      <input id="#slot#_danni" placeholder="Danni" class="danno_valore" readonly></input> ` +
+                       `    </div> `
+            ;
+            
+            var html_prop =  `  <div class="eqrow_edit"> ` +
                        `      <span class="potere_numero">[1]</span> ` +
                        `      <select id="#slot#_pow_1_tipo" class="sel_potere_tipo"> ` +
                        `        <option value=""></option> ` +
@@ -400,19 +365,28 @@
                        `      <select id="#slot#_pow_6_nome" class="sel_potere_nome"> ` +
                        `        <option value=""></option> ` +
                        `      </select> ` +
-                       `    </div> ` +
-                       `  </div> ` +
-                       `</li>`
+                       `    </div> `
             ;
+            var html_end =  `  </div> ` +
+                       `</li>`
+            ;            
 
             var slot = $(el).attr("slot");
             var slot_db = $(el).attr("slot_db");
 
-            $(el).click(ToggleEdit);
+            html_start = html_start.replaceAll("#slot#", slot).replaceAll("#slot_db#", slot_db);
+            html_ac = html_ac.replaceAll("#slot#", slot).replaceAll("#slot_db#", slot_db);
+            html_dice = html_dice.replaceAll("#slot#", slot).replaceAll("#slot_db#", slot_db);
+            html_prop = html_prop.replaceAll("#slot#", slot).replaceAll("#slot_db#", slot_db);
+            html_end = html_end.replaceAll("#slot#", slot).replaceAll("#slot_db#", slot_db);
 
-            html = html.replaceAll("#slot#", slot).replaceAll("#slot_db#", slot_db);
+            $(el).after(html_start+html_end);     
 
-            $(el).after(html);
+            //if (slot == "afferrato" || slot == "impugnato") {
+            //  $(el).after(html_start+html_dice+html_prop+html_end);
+            //} else {
+            //  $(el).after(html_start+html_ac+html_prop+html_end);              
+            //}
         }
 
         async function ShowContent() {
@@ -422,14 +396,49 @@
             await sema.acquire();
             document.getElementById("loadingDiv").style.display = "none";
             document.getElementById("content").style.display = "block";
-            //if (input_name) FetchPlayerDetailsByName(input_name);
             //Libero tutti i semafori
             sema.release();
             sema.release();
         }
 
         function NewBuild() {
-          console.log("NewBuild");
+            $('.dynamic-generated').remove();
+            
+            oggetti_build = [];
+
+            $(".edit_link").css("cursor", "pointer");
+            $("#buildName").hide();
+            $("#className").hide();
+            $("#buildName_edit").show();
+            $("#classNameDiv_edit").show();
+            $("#buildPubblica_switch").show();
+            $("#delButton").hide();
+            $("#saveButton").show();
+
+            $("#buildName").val("");
+            $("#buildName_edit").val("");
+            $("#className").val("");
+            $("#classNameDiv_edit").val("");
+
+            $(".eq").text("");
+            $("#oggettiLimitatiMin").text("0");
+            $("#classImg").attr("src","");
+
+            $(".edit_link").each(function( index ) {
+              CreateElements (this);
+              $(this).unbind('click');
+              $(this).click(ToggleEdit);
+            })
+
+            $(".edit_item").hide();
+            
+            LoadItems();
+
+            $("#buildPubblica").prop( "checked", false );
+            $("#buildPubblica").trigger('change');
+
+            $('#gridContainer').hide();
+            $("#build").show();
         }
 
         async function FetchItems () {
@@ -447,28 +456,34 @@
                     '}'
           })
           .then(response => response.json())
-          .then(data => LoadItems(data))
+          .then(data => { oggetti_db = data; sema.release(); })
           .catch(error => console.log("Errore in caricamento: " + error));
         }
 
         function LoadItems (data) {
-          $(".sel_item").each(function( index ) {
-            data.forEach(
-              element => {
-                  if (($(this).attr("slot") == element.slot) ||
-                      ($(this).attr("slot") == "Impugnato" && element.slot == "Arma") ||
-                      ($(this).attr("slot") == "Impugnato" && element.slot == "Arma Afferrato") ||
-                      ($(this).attr("slot") == "Afferrato" && element.slot == "Arma Afferrato")
-                  ) {
-                    // Aggiungo la riga alla lista
-                    var opt = document.createElement ("option");
-                    $(opt).val(element.nome);
-                    $(opt).text(element.nome);
-                    $(this).append(opt);
-                  }
-              }
-            );
-          })
+          var data = oggetti_db;
+
+          data.forEach(
+            element => {
+                // Aggiungo la riga alla lista
+                var opt = document.createElement ("option");
+                $(opt).val(element.nome);
+                $(opt).text(element.nome);
+
+                if (element.slot == "Arma") {
+                  $("select[slot_db='Impugnato']").append(opt);
+                } else if (element.slot == "Arma Afferrato") {
+                  $("select[slot_db='Impugnato']").append(opt);
+                  // Aggiungo la riga alla lista
+                  var opt2 = document.createElement ("option");
+                  $(opt2).val(element.nome);
+                  $(opt2).text(element.nome);
+                  $("select[slot_db='Afferrato']").append(opt2);
+                } else {
+                  $("select[slot_db='"+element.slot+"']").append(opt);
+                }
+            }
+          );
 
           $(".sel_item").each(function( index ) {
             $(this).select2({
@@ -478,8 +493,61 @@
             });
           });
 
-          // Libero il semaforo
-          sema.release();
+          AddPoteriTipo ("Brutale");
+          AddPoteriTipo ("Cardinale");
+          AddPoteriTipo ("Incantato");
+          AddPoteriTipo ("Innato");
+          AddPoteriTipo ("Mistico");
+          AddPoteriTipo ("Progressivo");
+          AddPoteriTipo ("Resiliente");
+          AddPoteriTipo ("Volatile");
+                    
+          AddPoteriNome ("Astuzia");
+          AddPoteriNome ("Bloccare con lo scudo");
+          AddPoteriNome ("Causa ferite leggere");
+          AddPoteriNome ("Colpo Critico");
+          AddPoteriNome ("Danno Elettrico");
+          AddPoteriNome ("Danno Energia");
+          AddPoteriNome ("Danno Fisico");
+          AddPoteriNome ("Danno Fisico/Potere Magico");
+          AddPoteriNome ("Danno Freddo");
+          AddPoteriNome ("Danno Fuoco");
+          AddPoteriNome ("Danno Impatto");
+          AddPoteriNome ("Danno Lumen");
+          AddPoteriNome ("Danno Natura");
+          AddPoteriNome ("Danno Perforazione");
+          AddPoteriNome ("Danno Psichico");
+          AddPoteriNome ("Danno Taglio");
+          AddPoteriNome ("Danno Trauma");
+          AddPoteriNome ("Danno Umbra");
+          AddPoteriNome ("Eff. Abilita` (Elettrico)");
+          AddPoteriNome ("Eff. Abilita` (Energia)");
+          AddPoteriNome ("Eff. Abilita` (Freddo)");
+          AddPoteriNome ("Eff. Abilita` (Fuoco)");
+          AddPoteriNome ("Eff. Abilita` (Impatto)");
+          AddPoteriNome ("Eff. Abilita` (Lumen)");
+          AddPoteriNome ("Eff. Abilita` (Natura)");
+          AddPoteriNome ("Eff. Abilita` (Perforazione)");
+          AddPoteriNome ("Eff. Abilita` (Psichico)");
+          AddPoteriNome ("Eff. Abilita` (Taglio)");
+          AddPoteriNome ("Eff. Abilita` (Trauma)");
+          AddPoteriNome ("Eff. Abilita` (Umbra)");
+          AddPoteriNome ("Eff. Corpo a Corpo (Fisico)");
+          AddPoteriNome ("Eff. Corpo a Corpo (Magico)");
+          AddPoteriNome ("Letalita`");
+          AddPoteriNome ("Penetrazione");
+          AddPoteriNome ("Potere Magico");
+          AddPoteriNome ("Precisione");
+          AddPoteriNome ("Punti Ferita");
+          AddPoteriNome ("Recupero Punti Ferita");
+          AddPoteriNome ("Res. al Fuoco");
+          AddPoteriNome ("Res. all'Impatto");
+          AddPoteriNome ("Resistenza a Tutto");
+          AddPoteriNome ("Resistenza al Divino");
+          AddPoteriNome ("Resistenza al Fisico");
+          AddPoteriNome ("Resistenza al Magico");
+          AddPoteriNome ("Resistenza alla Perforazione");
+          AddPoteriNome ("Vitalita`");          
         }        
 
         async function FetchBuilds () {
@@ -503,17 +571,16 @@
                                     function (element) {
                                         return [element.nome,
                                                 element.classe,
-                                                element.avg_eq_level,
                                                 element.note,
                                                 element.account,
                                                 element.data_caricamento,
-                                                element.visibilita
+                                                element.pubblica == 1 ? "Pubblica" : "Privata"
                                                ];
                                     },
                                     ShowBuild,
                                     true
           );
-          table .column('5')
+          table .column('4')
                 .order('desc')
                 .draw();
           
@@ -523,22 +590,30 @@
           $(".dt-search").parent().css("font-size","14px");
           $(".dt-search input").css("border-color","#464D54");
 
+          setTimeout(() => {
+            window.addEventListener('orientationchange', function (){
+                var dtTable = $("#datatableBuilds").DataTable();
+                dtTable.columns.adjust();
+            });
+          }, 300);          
+
           // Libero il semaforo
           sema.release();
         }
 
         function ShowBuild (tr) {
           nome=$(tr).find("td").eq(0).text();
-          FetchBuildDetails(nome);
+          account=$(tr).find("td").eq(3).text();
+          FetchBuildDetails(nome, account);
         }
 
-        function FetchBuildDetails (nome) {
+        function FetchBuildDetails (nome, account) {
           fetch('php/load_build_details.php', {
               method: 'POST',
               headers: {
                   'Content-Type': 'application/json'
               },
-              body: '{"nome" : "' + nome + '", "account" : "<?php if ($isLoggedIn) { echo $user['user_name']; } ?>"}'
+              body: '{"nome" : "' + nome + '", "account" : "' + account + '"}'
           })
           .then(response => response.json())
           .then(data => LoadBuildDetails(data))
@@ -547,289 +622,422 @@
 
         function LoadBuildDetails (data) {
           $('.dynamic-generated').remove();
-          $(".edit_item").hide();
 
-          var json = JSON.parse(data.json);
-          json_p1 = json;
+          oggetti_build = [];
+
+          json_p1 = data;
+          var json =  JSON.parse(data.json.replaceAll('§','"'));
+
+          $(".edit_link").each(function( index ) {
+            CreateElements (this);
+            $(this).unbind('click');
+          })
+
+          $(".edit_item").hide();
+          $("#oggettiLimitatiMin").text("0");
+
+          LoadItems();
 
           <?php if ($isLoggedIn && $user['user_type'] == "1") {?>
-            console.log(json);
+            console.log(json_p1);
           <?php } ?>
 
-          if ("<?php if ($isLoggedIn) { echo $user['user_name']; } ?>" == data.json.account) {
+          if ("<?php if ($isLoggedIn) { echo $user['user_name']; } ?>" == json_p1.account ||
+              "<?php if ($isLoggedIn) { echo $user['user_type']; } ?>" == "1") {
             $(".edit_link").css("cursor", "pointer");
             $("#buildName").hide();
             $("#className").hide();
-            $("#razza_li").hide();
             $("#buildName_edit").show();
             $("#classNameDiv_edit").show();
-            $("#razza_li_edit").show();
+            $("#buildPubblica_switch").show();
+            $("#buildNotes").hide();
+            $("#buildNotes_edit").show(); 
+            $("#delButton").show();
+            $("#saveButton").show();
+            $(".edit_link").each(function( index ) {
+              $(this).click(ToggleEdit);
+            })
           } else {
             $(".edit_link").css("cursor", "default");
             $("#buildName").show();
             $("#className").show();
-            $("#razza_li").show();
             $("#buildName_edit").hide();
             $("#classNameDiv_edit").hide();
-            $("#razza_li_edit").hide();
+            $("#buildPubblica_switch").hide();
+            $("#buildNotes").show();
+            $("#buildNotes_edit").hide();
+            $("#delButton").hide();
+            $("#saveButton").hide();
           }
 
-          setText("buildName", json.player.nome);
-          setText("avg_eq_level", json.player.avg_eq_level);
+          setText("buildName", json_p1.nome);
+          setText("className", json_p1.classe);
+          $("#buildName_edit").val(json_p1.nome);
+          $("#buildName_edit").trigger('change');
+          $("#className_edit").val(json_p1.classe);
+          $("#className_edit").trigger('change');
+          $("#buildPubblica").prop( "checked", (json_p1.pubblica == 1) );
+          $("#buildPubblica").trigger('change');
+          $("#buildNotes").text(json_p1.note);
+          $("#buildNotes_edit").val(json_p1.note);
 
-          if(json.player.classe != undefined) {
-              if(json.player.main_class != undefined && json.player.main_class != "Nessuna") {
-                setText("className", json.player.classe + ' (' + json.player.main_class + ')');
-              } else {
-                setText("className", json.player.classe);
-              }
-          }
+          setImg();
 
-          setPlayerImg(json, data.custom_image_path,"classImg");
-
-          setText("razza", json.player.razza);
-          setText("hp", json.player.hp);
-          setText("mana", json.player.mana);
-          setText("energia", json.player.energia);
-          setText("danno_fisico", json.player.dannoFisico);
-          setText("potere_magico", json.player.potereMagico);          
-          setText("forza", json.player.forza);
-          setText("intelligenza", json.player.intelligenza);
-          setText("saggezza", json.player.saggezza);
-          setText("destrezza", json.player.destrezza);
-          setText("costituzione", json.player.costituzione);
-          setText("carisma", json.player.carisma);
-          setText("oggettiLimitatiMin", json.player.oggLimitati);
-          setText("oggettiLimitatiMax", json.player.oggLimitatiMax);
-
-          if (json.player.oggLimitati != undefined) {
-            $("#oggettiLimitati").show();
-          } else {
-            $("#oggettiLimitati").hide();
-          }
-
-          // ATTACCHI
-          setText("crit_chance", json.player.critico_chance,"%");
-          setText("crit_molt", json.player.critico_moltiplicatore,"%");
-          setText("num_attacks", json.player.num_attacchi);
-
-          if (json.attacks != undefined && json.attacks.length > 0) {
-              var primaria = false;
-              var secondaria = false;
-              var tipologia;
-              var media_princ = 0;
-              var media_sec = 0;
-              json.attacks.forEach(
-                    element => {
-                      if ((element.tipologia != undefined && element.tipologia == "Secondaria") || (element.tipologia == undefined && element.perc != undefined)) {
-                        tipologia = "Secondaria";
-                        media_sec += parseFloat(element.media);
-                      } else {
-                        tipologia = "Primaria";
-                        media_princ += parseFloat(element.media);
-                      }
-
-                      if ((tipologia == "Secondaria" && !secondaria) || (tipologia == "Primaria" && !primaria)) {
-                          var li = document.createElement("li");
-                          var div = document.createElement("div");
-                          var span1 = document.createElement("span");
-                          var span2 = document.createElement("span");
-                          span2.id = "media_arma_"+tipologia;
-
-                          if (tipologia == "Secondaria") {
-                            span1.innerText = "Arma Secondaria";
-                            secondaria = true;
-                          } else {
-                            span1.innerText = "Arma Primaria";
-                            primaria = true;
-                          }
-
-                          //span2.innerText = element.media;
-
-                          li.classList.add("list-group-item", "list", "dynamic-generated");
-                          div.classList.add("info");
-                          span1.classList.add("stat");
-                          span2.classList.add("number_value");
-
-                          li.appendChild(div);
-                          div.appendChild(span1);
-                          div.appendChild(span2);
-
-                          document.getElementById("listaAttacchi").appendChild(li);
-                        }
-                      }
-              )
-
-              if (media_princ > 0) $("#media_arma_Primaria").text(media_princ);
-              if (media_sec > 0) $("#media_arma_Secondaria").text(media_sec);
-          }
-
-          // Alla fine aggiunto un separatore
-          var li = document.createElement("li");
-          li.classList.add("list-group-item", "list", "separatore", "dynamic-generated");
-          document.getElementById("listaAttacchi").appendChild(li);
-
-          // STATISTICHE
-          if (json.statistiche != undefined && json.statistiche.length > 0) {
-              json.statistiche.forEach(
-                    element => {
-                      if (!element.nome.startsWith("Resistenza")) {
-                        var li = document.createElement("li");
-                        var div = document.createElement("div");
-                        var span1 = document.createElement("span");
-                        var span2 = document.createElement("span");
-
-                        li.classList.add("list-group-item", "list", "dynamic-generated");
-                        div.classList.add("info");
-                        span1.classList.add("stat");
-                        span2.classList.add("number_value");
-
-                        span1.innerText = element.nome;
-                        span2.innerText = element.valore;
-
-                        li.appendChild(div);
-                        div.appendChild(span1);
-                        div.appendChild(span2);
-
-                        document.getElementById("listaStats").appendChild(li);
-                      }
-                    }
-              )
-              // Alla fine aggiunto un separatore
-              var li = document.createElement("li");
-              li.classList.add("list-group-item", "list", "separatore", "dynamic-generated");
-              document.getElementById("listaStats").appendChild(li);
-          }
-
-          // BONUS
-          if (json.bonus != undefined && json.bonus.length > 0) {
-              json.bonus.forEach(
-                    element => {
-                        var li_name = document.createElement("li");
-                        var div_name = document.createElement("div");
-                        var span_name = document.createElement("span");
-
-                        li_name.classList.add("list-group-item", "list", "dynamic-generated");
-                        div_name.classList.add("info");
-                        span_name.classList.add("set_name");
-
-                        span_name.innerText = element.nome;
-
-                        li_name.appendChild(div_name);
-                        div_name.appendChild(span_name);
-
-                        document.getElementById("listaBonus").appendChild(li_name);
-
-                        //2 Pezzi
-                        if (element.p2 != undefined && element.p2.length > 0) {
-                          var li_2p = document.createElement("li");
-                          var div_2p = document.createElement("div");
-                          var span1_2p = document.createElement("span");
-                          var span2_2p = document.createElement("span");
-
-                          li_2p.classList.add("list-group-item", "list", "dynamic-generated");
-                          div_2p.classList.add("info");
-                          span1_2p.classList.add("set_pieces");
-                          span2_2p.classList.add("number_value");
-
-                          span1_2p.innerText = "(2 pezzi)";
-                          span2_2p.innerText = element.p2;
-
-                          li_2p.appendChild(div_2p);
-                          div_2p.appendChild(span1_2p);
-                          div_2p.appendChild(span2_2p);
-                          
-                          document.getElementById("listaBonus").appendChild(li_2p);
-                        }
-
-                        //4 Pezzi
-                        if (element.p4 != undefined && element.p4.length > 0) {
-                          var li_4p = document.createElement("li");
-                          var div_4p = document.createElement("div");
-                          var span1_4p = document.createElement("span");
-                          var span2_4p = document.createElement("span");
-
-                          li_4p.classList.add("list-group-item", "list", "dynamic-generated");
-                          div_4p.classList.add("info");
-                          span1_4p.classList.add("set_pieces");
-                          span2_4p.classList.add("number_value");
-
-                          span1_4p.innerText = "(4 pezzi)";
-                          span2_4p.innerText = element.p4;
-
-                          li_4p.appendChild(div_4p);
-                          div_4p.appendChild(span1_4p);
-                          div_4p.appendChild(span2_4p);
-                          
-                          document.getElementById("listaBonus").appendChild(li_4p);
-                        }                        
-
-                        // Alla fine aggiunto un separatore
-                        var li = document.createElement("li");
-                        li.classList.add("list-group-item", "list", "separatore", "dynamic-generated");
-                        document.getElementById("listaBonus").appendChild(li);
-                    }
-              )
-          }
-
-          // RESISTENZE
-          setText("ass_fisico", json.player.assorbimento_fisico,"%");
-          setText("ass_magico", json.player.assorbimento_magico,"%");
-          setText("res_impatto", getResistenza(json.resistenze, "Impatto"));
-          setText("res_perforazione", getResistenza(json.resistenze, "Perforazione"));
-          setText("res_taglio", getResistenza(json.resistenze, "Taglio"));
-          setText("res_trauma", getResistenza(json.resistenze, "Trauma"));
-          setText("res_fuoco", getResistenza(json.resistenze, "Fuoco"));
-          setText("res_freddo", getResistenza(json.resistenze, "Freddo"));
-          setText("res_elettricita", getResistenza(json.resistenze, "Elettricita"));
-          setText("res_acido", getResistenza(json.resistenze, "Acido"));
-          setText("res_energia", getResistenza(json.resistenze, "Energia"));
-          setText("res_natura", getResistenza(json.resistenze, "Natura"));
-          setText("res_psichico", getResistenza(json.resistenze, "Psichico"));
-          setText("res_lumen", getResistenza(json.resistenze, "Lumen"));
-          setText("res_umbra", getResistenza(json.resistenze, "Umbra"));
-          setText("res_caos", getResistenza(json.resistenze, "Caos"));
-
-          // EQUIPAGGIAMENTO
-          if (Object.keys(json.equipment).length > 0) {
-            $("#come_luce").html(getEq(json.equipment["come luce"]));
-            $("#mano_destra").html(getEq(json.equipment["mano destra"]));
-            $("#mano_sinistra").html(getEq(json.equipment["mano sinistra"]));
-            $("#al_collo_1").html(getEq(json.equipment["al collo 1"]));
-            $("#al_collo_2").html(getEq(json.equipment["al collo 2"]));
-            $("#sul_corpo").html(getEq(json.equipment["sul corpo"]));
-            $("#in_testa").html(getEq(json.equipment["in testa"]));
-            $("#sulle_gambe").html(getEq(json.equipment["sulle gambe"]));
-            $("#ai_piedi").html(getEq(json.equipment["ai piedi"]));
-            $("#sulle_mani").html(getEq(json.equipment["sulle mani"]));
-            $("#sulle_braccia").html(getEq(json.equipment["sulle braccia"]));
-            $("#come_scudo").html(getEq(json.equipment["come scudo"]));
-            $("#attorno_al_corpo").html(getEq(json.equipment["attorno al corpo"]));
-            $("#alla_vita").html(getEq(json.equipment["alla vita"]));
-            $("#polso_destro").html(getEq(json.equipment["polso destro"]));
-            $("#polso_sinistro").html(getEq(json.equipment["polso sinistro"]));
-            $("#impugnato").html(getEq(json.equipment["impugnato"]));
-            $("#afferrato").html(getEq(json.equipment["afferrato"]));
-            $("#sulla_schiena").html(getEq(json.equipment["sulla schiena"]));
-            $("#orecchio_destro").html(getEq(json.equipment["orecchio destro"]));
-            $("#orecchio_sinistro").html(getEq(json.equipment["orecchio sinistro"]));
-            $("#sul_viso").html(getEq(json.equipment["sul viso"]));
-            $("#incoccato").html(getEq(json.equipment["incoccato"]));
-            $("#come_aura").html(getEq(json.equipment["come aura"]));
-          }
-
-          // Creo il grafico Stat
-          if (chart_stat) chart_stat.destroy();
-          chart_stat = CreaChartStat('chart_stat', json, undefined, false);
+          json.forEach(el => {
+            $("#"+el.slot+"_sel_item").val(el.proprieta.nome);
+            $("#"+el.slot+"_sel_item").trigger('change');
+            $("#"+el.slot+"_percorso_livello").val(el.proprieta.livello_percorso);
+            $("#"+el.slot+"_percorso_livello").trigger('change');
+          })
 
           $('#gridContainer').hide();
-          $("#player").show();
+          $("#build").show();
         }
 
         function ToggleEdit(el) {
-          //if ("<?php if ($isLoggedIn) { echo $user['user_name']; } ?>" == json_p1.account) {
-            $("#"+($(el.currentTarget).attr("slot")) + "_edit").toggle();
-          //}
+          $(".edit_item").each(function (idx) {
+            if ($(this).attr("id") != $("#"+($(el.currentTarget).attr("slot")) + "_edit").attr("id")) {
+              $(this).hide();
+            }
+          });
+
+          $("#"+($(el.currentTarget).attr("slot")) + "_edit").toggle();
+        }
+
+        function setImg() {
+          $("#classImg").attr("src", 'img/' + $("#className_edit").val().toLowerCase() + '.png');
+        }
+
+        function getDannoArma (dadi, tipo_danno, perc_fisico, perc_magico) {
+          if (dadi != undefined && dadi.length > 0) {
+            var dice = dadi.toString().split("D");
+            var media = ((parseFloat(isNull(dice[0],'0')) * parseFloat(isNull(dice[1],'0')) + parseFloat(isNull(dice[0],'0')))/2);
+            return (dadi + ' (media ' + media + ') di tipologia ' + tipo_danno + ", %" + perc_fisico + ' DF, %' + perc_magico + ' PM');
+          } else {
+            return "";
+          }
+        }   
+
+        function setObject (el) {
+          var oggetto = $("#"+el).val();
+          if (oggetto != undefined && oggetto.length > 0) {
+              var slot = $("#"+el).attr("slot");
+              var proprieta = oggetti_db.find((element) => element.nome == oggetto);
+              
+              $("#"+slot+"_percorso_livello").empty();
+              for (idx = proprieta.livello_percorso; idx <= proprieta.livello_percorso_max; idx++) {
+                var opt = document.createElement ("option");
+                $(opt).addClass("dynamic-generated");
+                $(opt).val(idx);
+                $(opt).text(idx);
+                $(opt).attr("limitato", getLimitatoValue(idx, proprieta.livello_percorso_max));
+                $("#"+slot+"_percorso_livello").append(opt);
+              }
+
+              oggetti_build = oggetti_build.filter(function( obj ) {
+                return obj.slot !== slot;
+              });
+              oggetti_build.push({slot: slot, proprieta: proprieta});
+
+              updateObject(slot);
+
+              $("#"+slot+"_percorso_nome").text(proprieta.percorso);
+              $("#"+slot+"_ac").val(proprieta.ac);
+              $("#"+slot+"_danni").val(getDannoArma(proprieta.dadi, proprieta.tipo_danno, proprieta.perc_fisico, proprieta.perc_magico));
+              $("#"+slot+"_pow_1_tipo").val(proprieta.potere_1_tipo);
+              $("#"+slot+"_pow_1_valore").val(proprieta.potere_1_valore);
+              $("#"+slot+"_pow_1_nome").val(proprieta.potere_1_nome);
+              $("#"+slot+"_pow_2_tipo").val(proprieta.potere_2_tipo);
+              $("#"+slot+"_pow_2_valore").val(proprieta.potere_2_valore);
+              $("#"+slot+"_pow_2_nome").val(proprieta.potere_2_nome);
+              $("#"+slot+"_pow_3_tipo").val(proprieta.potere_3_tipo);
+              $("#"+slot+"_pow_3_valore").val(proprieta.potere_3_valore);
+              $("#"+slot+"_pow_3_nome").val(proprieta.potere_3_nome);
+              $("#"+slot+"_pow_4_tipo").val(proprieta.potere_4_tipo);
+              $("#"+slot+"_pow_4_valore").val(proprieta.potere_4_valore);
+              $("#"+slot+"_pow_4_nome").val(proprieta.potere_4_nome);
+              $("#"+slot+"_pow_5_tipo").val(proprieta.potere_5_tipo);
+              $("#"+slot+"_pow_5_valore").val(proprieta.potere_5_valore);
+              $("#"+slot+"_pow_5_nome").val(proprieta.potere_5_nome);
+              $("#"+slot+"_pow_6_tipo").val(proprieta.potere_6_tipo);
+              $("#"+slot+"_pow_6_valore").val(proprieta.potere_6_valore);
+              $("#"+slot+"_pow_6_nome").val(proprieta.potere_6_nome);
+              $('#'+slot+'_edit_details').show();
+          }
+        }
+
+        function updateObject(slot) {
+            var oggetto = oggetti_build.find((element) => element.slot == slot);
+            var proprieta = oggetto.proprieta;
+            var bonus = [];
+
+            // Aggiorno i bonus
+            oggetti_build.forEach(elem => {
+                var b = bonus.find (bon => bon.nome == elem.proprieta.bonus);
+                if (b == undefined) {
+                  bonus.push ({nome : elem.proprieta.bonus,
+                              items : 1,
+                              bonus_2p_nome : elem.proprieta.bonus_2p_nome,
+                              bonus_2p_valore : elem.proprieta.bonus_2p_valore,
+                              bonus_4p_nome : elem.proprieta.bonus_4p_nome,
+                              bonus_4p_valore : elem.proprieta.bonus_4p_valore
+                              })
+                } else {
+                  b.items = b.items + 1;
+                }
+            })
+
+            $("#listaBonus").empty();
+
+            bonus.forEach(elem => {
+                if (elem.items >= 4) {
+                  AddBonus(elem.nome, '+' + elem.bonus_2p_valore + ' ' + elem.bonus_2p_nome, '+' + elem.bonus_4p_valore + ' ' + elem.bonus_4p_nome);
+                } else if (elem.items >= 2) {
+                  AddBonus(elem.nome, '+' + elem.bonus_2p_valore + ' ' + elem.bonus_2p_nome, '');
+                }
+            })            
+            
+            // Livello percorso
+            var liv = $("#"+slot+"_percorso_livello").val();
+
+            oggetto.proprieta.livello_percorso = liv;
+
+            // Nome oggetto
+            $("#"+slot).html("<span style='color:rgb(191,191,191)'>[</span>" + getRarita(proprieta.rarita) + "<span style='color:rgb(191,191,191)'>|</span>" + getLimitato(liv,proprieta.livello_percorso_max) + "<span style='color:rgb(191,191,191)'>]</span> " + proprieta.nome);
+
+            var limitato = 0;
+
+            // Aggiorno il conteggio degli oggetti limitati
+            $(".percorso_livello").each(function( index ) {
+              if ($(this).val() != undefined && $(this).val().length > 0) {
+                var opt = $(this).find(":selected");
+                limitato = limitato + Number($(opt).attr("limitato"));
+              }
+            })
+            
+            $("#oggettiLimitatiMin").text(limitato);
+            if (limitato > 36) {
+              $("#oggettiLimitatiMin").addClass("limiteSuperato");
+            } else {
+              $("#oggettiLimitatiMin").removeClass("limiteSuperato");
+            }
+        }
+
+        function getRarita(rarita){
+            var r = rarita.substring(0,1);
+            var l;
+            var c;
+
+            switch (r) {
+              case "A":
+                l = "A";
+                c = "cyan";
+                break;
+              case "L":
+                l = "L";
+                c = "orange";
+                break;
+              case "E":
+                l = "E";
+                c = "purple";
+                break;
+              case "U":
+                l = "U";
+                c = "yellow";
+                break;
+              case "S":
+                l = "S";
+                c = "yellow";
+                break;
+              case "C":
+                l = "T";
+                c = "gray";
+                break;
+              default:
+            }
+            return ("<span style='color: " + c + ";'>"+l+"</span>");
+        }
+
+        function getLimitato(liv, liv_max){
+            var limitato = liv;
+            if (liv == liv_max) {
+              return ("<span style='color: rgb(255,0,255);'>"+limitato+"</span>");
+            } else if ((Number(liv)+1) == liv_max || (Number(liv)+2) == liv_max) {
+              return ("<span style='color: rgb(255,255,0);'>"+limitato+"</span>");
+            } else if ((Number(liv)+3) == liv_max || (Number(liv)+4) == liv_max) {
+              return ("<span style='color: rgb(0,255,0);'>"+limitato+"</span>");
+            } else {
+              return ("<span style='color: rgb(228,228,228);'>"+limitato+"</span>");
+            }
+        }
+
+        function getLimitatoValue(liv, liv_max){
+            if (liv == liv_max) {
+              return 3;
+            } else if ((Number(liv)+1) == liv_max || (Number(liv)+2) == liv_max) {
+              return 2;
+            } else if ((Number(liv)+3) == liv_max || (Number(liv)+4) == liv_max) {
+              return 1;
+            } else {
+              return 0;
+            }
+        }        
+
+        function AddPoteriTipo (nome) {
+          $(".sel_potere_tipo").each(function( index ) {
+              var opt = document.createElement ("option");
+              $(opt).val(nome);
+              $(opt).text(nome);
+              $(this).append(opt);
+          })
+        }
+
+        function AddPoteriNome (nome) {
+          $(".sel_potere_nome").each(function( index ) {
+              var opt = document.createElement ("option");
+              $(opt).val(nome);
+              $(opt).text(nome);
+              $(this).append(opt);
+          })
+        } 
+
+        function AddBonus (nome, p2, p4) {
+            var li_name = document.createElement("li");
+            var div_name = document.createElement("div");
+            var span_name = document.createElement("span");
+
+            li_name.classList.add("list-group-item", "list", "dynamic-generated");
+            div_name.classList.add("info");
+            span_name.classList.add("set_name");
+
+            span_name.innerText = nome;
+
+            li_name.appendChild(div_name);
+            div_name.appendChild(span_name);
+
+            document.getElementById("listaBonus").appendChild(li_name);
+
+            //2 Pezzi
+            if (p2 != undefined && p2.length > 0) {
+              var li_2p = document.createElement("li");
+              var div_2p = document.createElement("div");
+              var span1_2p = document.createElement("span");
+              var span2_2p = document.createElement("span");
+
+              li_2p.classList.add("list-group-item", "list", "dynamic-generated");
+              div_2p.classList.add("info");
+              span1_2p.classList.add("set_pieces");
+              span2_2p.classList.add("number_value");
+
+              span1_2p.innerText = "(2 pezzi)";
+              span2_2p.innerText = p2;
+
+              li_2p.appendChild(div_2p);
+              div_2p.appendChild(span1_2p);
+              div_2p.appendChild(span2_2p);
+              
+              document.getElementById("listaBonus").appendChild(li_2p);
+            }
+
+            //4 Pezzi
+            if (p4 != undefined && p4.length > 0) {
+              var li_4p = document.createElement("li");
+              var div_4p = document.createElement("div");
+              var span1_4p = document.createElement("span");
+              var span2_4p = document.createElement("span");
+
+              li_4p.classList.add("list-group-item", "list", "dynamic-generated");
+              div_4p.classList.add("info");
+              span1_4p.classList.add("set_pieces");
+              span2_4p.classList.add("number_value");
+
+              span1_4p.innerText = "(4 pezzi)";
+              span2_4p.innerText = p4;
+
+              li_4p.appendChild(div_4p);
+              div_4p.appendChild(span1_4p);
+              div_4p.appendChild(span2_4p);
+              
+              document.getElementById("listaBonus").appendChild(li_4p);
+            }                        
+
+            // Alla fine aggiunto un separatore
+            var li = document.createElement("li");
+            li.classList.add("list-group-item", "list", "separatore", "dynamic-generated");
+            document.getElementById("listaBonus").appendChild(li);        
+        }
+
+        function SaveBuild () {
+          var account = "<?php if ($isLoggedIn) { echo $user['user_name']; } ?>";
+          var nome = $("#buildName_edit").val();
+          var classe = $("#className_edit").val();
+          var note = $("#buildNotes_edit").val();
+          var json = JSON.stringify(oggetti_build).replaceAll('"','§');
+          var pubblica = $("#buildPubblica").is(":checked") ? 1 : 0;
+
+          if (nome.length == 0) {
+            show_error ("Dai un nome alla build");
+            return;
+          }
+
+          if (classe.length == 0) {
+            show_error ("Scegli una classe");
+            return;
+          }
+
+          ExecSaveBuild(account, nome, classe, note, json, pubblica);
+        }
+
+        function ExecSaveBuild(account, nome, classe, note, json, pubblica) {
+            fetch('php/save_build.php', {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json'
+                  },
+                  body: '{' +
+                            '"account" : "'  +  account  + '",' + 
+                            '"nome" : "'     +  nome     + '",' + 
+                            '"classe" : "'   +  classe   + '",' + 
+                            '"note" : "'     +  note     + '",' + 
+                            '"json" : "'     +  json     + '",' + 
+                            '"pubblica" : "' +  pubblica + '"' +
+                        '}' 
+            })
+            .then(response => { FetchBuilds(); show_info ("Salvataggio eseguito con successo") } )
+            .catch(error => console.log("Errore in caricamento: " + error));
+        }
+
+        function DeleteBuild () {
+          var account = "<?php if ($isLoggedIn) { echo $user['user_name']; } ?>";
+          var nome = $("#buildName_edit").val();
+          var ExecDeleteBuild = function () {
+            fetch('php/delete_build.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                  body: '{' +
+                            '"account" : "'  +  account  + '",' + 
+                            '"nome" : "'     +  nome     + '"' + 
+                        '}'                 
+            })
+            .then(data => {
+                            $("#build").hide();
+                            $('#gridContainer').show();
+                            show_info("Cancellazione eseguita con successo")
+                          })
+            .catch(error => show_error("Errore in cancellazione build: " + error));
+          };
+
+          show_confirmation_modal("Sei sicuro?", ExecDeleteBuild);
+        }
+
+        function SetPubblicaLabel () {
+          if ($("#buildPubblica").is(":checked")) {
+              $("#buildPubblicaLabel").text("Pubblica");
+          } else {
+              $("#buildPubblicaLabel").text("Privata");
+          }
         }
 
 </script>

@@ -4,10 +4,15 @@
     margin-left: 10px;
 }
 
-.sel_potere_tipo,
-.sel_potere_nome {
+.sel_potere_tipo {
     height: 20px;
     width: 155px;
+    margin-left: 10px;
+}
+
+.sel_potere_nome {
+    height: 20px;
+    width: 255px;
     margin-left: 10px;
 }
 
@@ -17,9 +22,22 @@
     margin-left: 10px;
 }
 
+.danno_label {
+    height: 20px;
+    margin-left: 10px;
+    width: 50px;
+}
+
+.danno_valore {
+    height: 20px;
+    margin-left: 10px;
+    width: 100%;
+}
+
 .potere_valore {
     height: 20px;
     margin-left: 10px;
+    width: 70px;
 }
 
 .eqrow_edit {
@@ -42,4 +60,14 @@
 
 .edit_item {
     background-color: #343434;
+}
+
+.buildNotes {
+    white-space: pre-wrap;
+    outline: none;
+    width: 100%;
+}
+
+.limiteSuperato {
+    color: crimson;
 }

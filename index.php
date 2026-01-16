@@ -71,16 +71,6 @@
            Oggetti
           </a>
           <a class="link" 
-            href="javascript:LoadPage('builder.php')"
-            draggable="false"
-            style="padding:5px; margin: 0px;"
-            onmouseover="$('#builderImg').attr('src','img\\builder_dark.svg')"
-            onmouseout ="$('#builderImg').attr('src','img\\builder.svg')"
-            >
-            <img id="builderImg" src="img\\builder.svg" width="32px" height="32px" style="margin: 0px" />
-            Builder
-            </a>
-          <a class="link" 
             href="javascript:LoadPage('admin.php')"
             draggable="false"
             style="padding:5px; margin: 0px;"
@@ -92,6 +82,16 @@
             </a>
         <?php } ?>
         <?php if ($isLoggedIn && $user['user_type'] != "2") {?>
+          <a class="link" 
+            href="javascript:LoadPage('builder.php')"
+            draggable="false"
+            style="padding:5px; margin: 0px;"
+            onmouseover="$('#builderImg').attr('src','img\\builder_dark.svg')"
+            onmouseout ="$('#builderImg').attr('src','img\\builder.svg')"
+            >
+            <img id="builderImg" src="img\\builder.svg" width="32px" height="32px" style="margin: 0px" />
+            Builder
+          </a>
           <a class="link" 
             href="javascript:LoadPage('pwd.php')"
             draggable="false"

@@ -6,7 +6,7 @@
     // Salvo sul DB
     if($data){   
         $dbnu = new PDO('sqlite:'.$dbu);
-        $stmt=$dbnu->prepare("SELECT account, nome, note, classe, avg_eq_level, data_caricamento, CASE WHEN pubblica = 0 THEN 'Privata' ELSE 'Pubblica' END AS visibilita FROM builds WHERE (pubblica = 1 OR upper(account) = upper(:account))");
+        $stmt=$dbnu->prepare("SELECT account, nome, note, classe, data_caricamento, pubblica FROM builds WHERE (pubblica = 1 OR upper(account) = upper(:account))");
         $stmt->bindValue(":account",$data['account'], PDO::PARAM_STR);
 
         $stmt->execute();

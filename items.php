@@ -385,6 +385,7 @@
                 var dtTable = $("#datatableItems").DataTable();
                 dtTable.columns.adjust();
             });
+            
             $("#fItemSlot").select2({
               placeholder: "Seleziona gli slot...",
               language: "it"
