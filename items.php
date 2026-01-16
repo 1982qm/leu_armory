@@ -476,22 +476,21 @@
                                     undefined,
                                     true
           );
-          
-          $(".dt-search").parent().css("position","absolute");
-          $(".dt-search").parent().css("top","-72px");
-          $(".dt-search").parent().css("right","10px");
-          $(".dt-search").parent().css("font-size","14px");
-          $(".dt-search input").css("border-color","#464D54");
-
-          table.on('childRow.dt', function (e, show, row) {
-            $("ul.dtr-details > li").each (function() {
-                if ($(this).find(".dtr-data").text().length == 0) {
-                   $(this).addClass("hideDetail");
-                }
-            })
-          })
-
           setTimeout(() => {
+            $(".dt-search").parent().css("position","absolute");
+            $(".dt-search").parent().css("top","-72px");
+            $(".dt-search").parent().css("right","10px");
+            $(".dt-search").parent().css("font-size","14px");
+            $(".dt-search input").css("border-color","#464D54");
+
+            table.on('childRow.dt', function (e, show, row) {
+              $("ul.dtr-details > li").each (function() {
+                  if ($(this).find(".dtr-data").text().length == 0) {
+                    $(this).addClass("hideDetail");
+                  }
+              })
+            })
+
             document.getElementById("loadingDiv").style.display = "none";
             document.getElementById("content").style.display = "block";
           }, 300);

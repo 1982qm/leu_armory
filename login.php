@@ -212,17 +212,6 @@
 		document.getElementById('br2').style.display = 'none';
 		document.getElementById('username').focus();
 	}
-
-	<?php
-	if(!(isset($_GET['logout']) AND $_GET['logout']=='y')) {
-	?>
-		window.addEventListener("load", function () {
-			$("#username").val("Guest");
-			$("#password").val("guest");
-			$("#submitButton").click();
-		})
-	<?php } ?>
-
 </script>
 
 </body>

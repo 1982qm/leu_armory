@@ -323,17 +323,16 @@
                                     },
                                     ShowPlayer
           );
-          table .column('2')
-                .order('desc')
-                .draw();
-          
-          $(".dt-search").parent().css("position","absolute");
-          $(".dt-search").parent().css("top","-72px");
-          $(".dt-search").parent().css("right","10px");
-          $(".dt-search").parent().css("font-size","14px");
-          $(".dt-search input").css("border-color","#464D54");
 
           setTimeout(() => {
+            table .column('2')
+                  .order('desc')
+                  .draw();
+            $(".dt-search").parent().css("position","absolute");
+            $(".dt-search").parent().css("top","-72px");
+            $(".dt-search").parent().css("right","10px");
+            $(".dt-search").parent().css("font-size","14px");
+            $(".dt-search input").css("border-color","#464D54");
             window.addEventListener('orientationchange', function (){
                 var dtTable = $("#datatablePlayers").DataTable();
                 dtTable.columns.adjust();

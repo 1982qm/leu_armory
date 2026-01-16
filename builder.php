@@ -580,25 +580,23 @@
                                     ShowBuild,
                                     true
           );
-          table .column('4')
-                .order('desc')
-                .draw();
-          
-          $(".dt-search").parent().css("position","absolute");
-          $(".dt-search").parent().css("top","-72px");
-          $(".dt-search").parent().css("right","10px");
-          $(".dt-search").parent().css("font-size","14px");
-          $(".dt-search input").css("border-color","#464D54");
 
           setTimeout(() => {
+            table .column('4')
+                  .order('desc')
+                  .draw();
+            $(".dt-search").parent().css("position","absolute");
+            $(".dt-search").parent().css("top","-72px");
+            $(".dt-search").parent().css("right","10px");
+            $(".dt-search").parent().css("font-size","14px");
+            $(".dt-search input").css("border-color","#464D54");
             window.addEventListener('orientationchange', function (){
                 var dtTable = $("#datatableBuilds").DataTable();
                 dtTable.columns.adjust();
             });
+            // Libero il semaforo
+            sema.release();            
           }, 300);          
-
-          // Libero il semaforo
-          sema.release();
         }
 
         function ShowBuild (tr) {
