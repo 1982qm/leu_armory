@@ -427,7 +427,7 @@
           "/armory/img/background.jpg"
         )
 
-        window.addEventListener("load", function () {
+        $(document).ready(function() {
             Chart.defaults.font.family = "'DejaVu Sans Mono', monospace";
             Chart.defaults.color = "#fff";
             if(input_p1) input_p1 = input_p1.toString().replace(/"/g,"");

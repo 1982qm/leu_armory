@@ -375,7 +375,7 @@
           "/armory/img/background.jpg"
         )
 
-        window.addEventListener("load", function () {
+        $(document).ready(function() {
             CreateDataTable($("#datatableItems"),
                               <?php if ($isLoggedIn && $user['user_type'] == "1") {?>
                                 'Aggiungi', AddItem, 'Modifica', EditItem, 'Elimina', DeleteItem

@@ -266,7 +266,7 @@
           "/armory/img/background.jpg"
         )
 
-        window.addEventListener("load", function () {
+        $(document).ready(function() {
             CreateDataTable($("#datatableBuilds"), 'Nuova build', NewBuild);
             $("#className_edit").select2({
               placeholder: "Seleziona la classe...",

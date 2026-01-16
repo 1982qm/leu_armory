@@ -123,8 +123,6 @@ function LoadDataTable(myDt, array, makeRow, clickFun, selectable) {
             }
         });
     };
-    // Rendering del dataTable
-    dtTable.columns.adjust().draw(false);
 
     return dtTable;
 }
