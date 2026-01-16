@@ -290,6 +290,7 @@
                        `      <span>Livello:</span> ` +
                        `      <select id="#slot#_percorso_livello" class="percorso_livello" onchange="updateObject('#slot#')"> ` +
                        `      </select> ` +
+                       `      <img style="cursor: pointer; height: 20px; position: absolute; right: 10px" src='img/remove_item.svg' onclick="RemoveItem('#slot#')"></img> ` +
                        `    </div> `
             ;
 
@@ -600,9 +601,11 @@
         }
 
         function ShowBuild (tr) {
-          nome=$(tr).find("td").eq(0).text();
-          account=$(tr).find("td").eq(3).text();
-          FetchBuildDetails(nome, account);
+          if (tr) {
+              nome=$(tr).find("td").eq(0).text();
+              account=$(tr).find("td").eq(3).text();
+              FetchBuildDetails(nome, account);
+          }
         }
 
         function FetchBuildDetails (nome, account) {
@@ -735,7 +738,7 @@
               oggetti_build = oggetti_build.filter(function( obj ) {
                 return obj.slot !== slot;
               });
-              oggetti_build.push({slot: slot, proprieta: proprieta});
+              oggetti_build.push({slot: slot, proprieta: structuredClone(proprieta)});
 
               updateObject(slot);
 
@@ -767,6 +770,40 @@
         function updateObject(slot) {
             var oggetto = oggetti_build.find((element) => element.slot == slot);
             var proprieta = oggetto.proprieta;
+
+            updateBonus();
+                   
+            // Livello percorso
+            var liv = $("#"+slot+"_percorso_livello").val();
+
+            oggetto.proprieta.livello_percorso = liv;
+
+            // Nome oggetto
+            $("#"+slot).html("<span style='color:rgb(191,191,191)'>[</span>" + getRarita(proprieta.rarita) + "<span style='color:rgb(191,191,191)'>|</span>" + getLimitato(liv,proprieta.livello_percorso_max) + "<span style='color:rgb(191,191,191)'>]</span> " + proprieta.nome);
+
+            updateLimiteOggetti()
+        }
+
+        function updateLimiteOggetti () {            
+            var limitato = 0;
+
+            // Aggiorno il conteggio degli oggetti limitati
+            $(".percorso_livello").each(function( index ) {
+              if ($(this).val() != undefined && $(this).val().length > 0) {
+                var opt = $(this).find(":selected");
+                limitato = limitato + Number($(opt).attr("limitato"));
+              }
+            })
+            
+            $("#oggettiLimitatiMin").text(limitato);
+            if (limitato > 36) {
+              $("#oggettiLimitatiMin").addClass("limiteSuperato");
+            } else {
+              $("#oggettiLimitatiMin").removeClass("limiteSuperato");
+            }
+        }
+
+        function updateBonus () {
             var bonus = [];
 
             // Aggiorno i bonus
@@ -793,32 +830,7 @@
                 } else if (elem.items >= 2) {
                   AddBonus(elem.nome, '+' + elem.bonus_2p_valore + ' ' + elem.bonus_2p_nome, '');
                 }
-            })            
-            
-            // Livello percorso
-            var liv = $("#"+slot+"_percorso_livello").val();
-
-            oggetto.proprieta.livello_percorso = liv;
-
-            // Nome oggetto
-            $("#"+slot).html("<span style='color:rgb(191,191,191)'>[</span>" + getRarita(proprieta.rarita) + "<span style='color:rgb(191,191,191)'>|</span>" + getLimitato(liv,proprieta.livello_percorso_max) + "<span style='color:rgb(191,191,191)'>]</span> " + proprieta.nome);
-
-            var limitato = 0;
-
-            // Aggiorno il conteggio degli oggetti limitati
-            $(".percorso_livello").each(function( index ) {
-              if ($(this).val() != undefined && $(this).val().length > 0) {
-                var opt = $(this).find(":selected");
-                limitato = limitato + Number($(opt).attr("limitato"));
-              }
-            })
-            
-            $("#oggettiLimitatiMin").text(limitato);
-            if (limitato > 36) {
-              $("#oggettiLimitatiMin").addClass("limiteSuperato");
-            } else {
-              $("#oggettiLimitatiMin").removeClass("limiteSuperato");
-            }
+            })   
         }
 
         function getRarita(rarita){
@@ -1036,6 +1048,42 @@
           } else {
               $("#buildPubblicaLabel").text("Privata");
           }
+        }
+
+        function RemoveItem (slot) {
+          $("#"+slot+"_sel_item").val("");
+          $("#"+slot+"_sel_item").trigger("change");
+          $('#'+slot+'_edit_details').hide();
+          $("#"+slot+"_percorso_livello").empty();
+          $("#"+slot+"_percorso_nome").text("");
+          $("#"+slot+"_ac").val("");
+          $("#"+slot+"_danni").val("");
+          $("#"+slot+"_pow_1_tipo").val("");
+          $("#"+slot+"_pow_1_valore").val("");
+          $("#"+slot+"_pow_1_nome").val("");
+          $("#"+slot+"_pow_2_tipo").val("");
+          $("#"+slot+"_pow_2_valore").val("");
+          $("#"+slot+"_pow_2_nome").val("");
+          $("#"+slot+"_pow_3_tipo").val("");
+          $("#"+slot+"_pow_3_valore").val("");
+          $("#"+slot+"_pow_3_nome").val("");
+          $("#"+slot+"_pow_4_tipo").val("");
+          $("#"+slot+"_pow_4_valore").val("");
+          $("#"+slot+"_pow_4_nome").val("");
+          $("#"+slot+"_pow_5_tipo").val("");
+          $("#"+slot+"_pow_5_valore").val("");
+          $("#"+slot+"_pow_5_nome").val("");
+          $("#"+slot+"_pow_6_tipo").val("");
+          $("#"+slot+"_pow_6_valore").val("");
+          $("#"+slot+"_pow_6_nome").val("");
+          $('#'+slot+'_edit_details').hide();          
+          
+          oggetti_build = oggetti_build.filter(function( obj ) {
+            return obj.slot !== slot;
+          });          
+          $("#"+slot).html("");
+          updateBonus();
+          updateLimiteOggetti ();
         }
 
 </script>

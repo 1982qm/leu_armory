@@ -112,13 +112,15 @@ function LoadDataTable(myDt, array, makeRow, clickFun, selectable) {
         $(myDt).find('tbody').on('click', 'tr', function () {
             // Seleziono il record sul quale è stato eseguito il dbclick
             var tr = dtTable.row(this).node();
-            if (selectable != undefined && selectable == true) {
-                // Deseleziono eventuali righe già selezionate
-                $(".selected").removeClass("selected");
-                tr.classList.add('selected');
+            if (tr != undefined) {
+                if (selectable != undefined && selectable == true) {
+                    // Deseleziono eventuali righe già selezionate
+                    $(".selected").removeClass("selected");
+                    tr.classList.add('selected');
+                }
+                // Mostro la form di editing del record
+                clickFun(tr);
             }
-            // Mostro la form di editing del record
-            clickFun(tr);
         });
     };
     // Rendering del dataTable
