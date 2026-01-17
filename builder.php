@@ -808,17 +808,19 @@
 
             // Aggiorno i bonus
             oggetti_build.forEach(elem => {
-                var b = bonus.find (bon => bon.nome == elem.proprieta.bonus);
-                if (b == undefined) {
-                  bonus.push ({nome : elem.proprieta.bonus,
-                              items : 1,
-                              bonus_2p_nome : elem.proprieta.bonus_2p_nome,
-                              bonus_2p_valore : elem.proprieta.bonus_2p_valore,
-                              bonus_4p_nome : elem.proprieta.bonus_4p_nome,
-                              bonus_4p_valore : elem.proprieta.bonus_4p_valore
-                              })
-                } else {
-                  b.items = b.items + 1;
+                if (elem.proprieta.bonus != undefined) {
+                    var b = bonus.find (bon => bon.nome == elem.proprieta.bonus);
+                    if (b == undefined) {
+                      bonus.push ({nome : elem.proprieta.bonus,
+                                  items : 1,
+                                  bonus_2p_nome : elem.proprieta.bonus_2p_nome,
+                                  bonus_2p_valore : elem.proprieta.bonus_2p_valore,
+                                  bonus_4p_nome : elem.proprieta.bonus_4p_nome,
+                                  bonus_4p_valore : elem.proprieta.bonus_4p_valore
+                                  })
+                    } else {
+                      b.items = b.items + 1;
+                    }
                 }
             })
 
