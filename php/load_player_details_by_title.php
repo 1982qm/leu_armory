@@ -7,7 +7,7 @@
     if($data){
         $dbnu = new PDO('sqlite:'.$dbu);
 
-        $stmt=$dbnu->prepare("SELECT * FROM v_players where upper(titolo) = upper(:nome) LIMIT 1");
+        $stmt=$dbnu->prepare("SELECT * FROM v_players where upper(ifnull(nullif(titolo,''), nome)) = upper(:nome) LIMIT 1");
         $stmt->bindValue(":nome",$data['nome'], PDO::PARAM_STR);
 
         $stmt->execute();
