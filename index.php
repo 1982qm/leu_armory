@@ -61,6 +61,16 @@
           </a>          
         <?php if ($isLoggedIn && $user['user_type'] == "1") {?>
           <a class="link" 
+            href="javascript:LoadPage('bonus.php')"
+            draggable="false"
+            style="padding:5px; margin: 0px;"
+            onmouseover="$('#bonusImg').attr('src','img\\bonus_dark.svg')"
+            onmouseout ="$('#bonusImg').attr('src','img\\bonus.svg')"
+           >
+           <img id="bonusImg" src="img\\bonus.svg" width="32px" height="32px" style="margin: 0px"/>
+           Bonus
+          </a>        
+          <a class="link" 
             href="javascript:LoadPage('percorsi.php')"
             draggable="false"
             style="padding:5px; margin: 0px;"
@@ -149,6 +159,8 @@
           "/armory/img/items_dark.svg",
           "/armory/img/percorsi.svg",
           "/armory/img/percorsi_dark.svg",
+          "/armory/img/bonus.svg",
+          "/armory/img/bonus_dark.svg",
           "/armory/img/compare.svg",
           "/armory/img/compare_dark.svg",
           "/armory/img/admin.svg",
