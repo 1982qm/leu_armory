@@ -61,6 +61,16 @@
           </a>          
         <?php if ($isLoggedIn && $user['user_type'] == "1") {?>
           <a class="link" 
+            href="javascript:LoadPage('percorsi.php')"
+            draggable="false"
+            style="padding:5px; margin: 0px;"
+            onmouseover="$('#percorsiImg').attr('src','img\\percorsi_dark.svg')"
+            onmouseout ="$('#percorsiImg').attr('src','img\\percorsi.svg')"
+           >
+           <img id="percorsiImg" src="img\\percorsi.svg" width="32px" height="32px" style="margin: 0px"/>
+           Percorsi
+          </a>        
+          <a class="link" 
             href="javascript:LoadPage('items.php')"
             draggable="false"
             style="padding:5px; margin: 0px;"
@@ -137,6 +147,8 @@
           "/armory/img/logout_dark.svg",
           "/armory/img/items.svg",
           "/armory/img/items_dark.svg",
+          "/armory/img/percorsi.svg",
+          "/armory/img/percorsi_dark.svg",
           "/armory/img/compare.svg",
           "/armory/img/compare_dark.svg",
           "/armory/img/admin.svg",

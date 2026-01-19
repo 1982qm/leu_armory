@@ -11,8 +11,10 @@
                              "      , b.potere_2p_valore as bonus_2p_valore " .
                              "      , b.potere_4p_nome  as bonus_4p_nome " .
                              "      , b.potere_4p_valore as bonus_4p_valore " .
+                             "      , p.limiti " .
                              "  FROM items i" .
                              "  LEFT JOIN bonus b on i.bonus = b.nome" .
+                             "  LEFT JOIN percorsi p on i.percorso = p.nome" .
                              " WHERE (length(:nome) = 0 OR instr(upper(i.nome),upper(:nome)) > 0)" .
                              "   AND (length(:percorso) = 0 OR instr(upper(:percorso)||',',upper(i.percorso)||',') > 0)" .
                              "   AND (length(:slot) = 0 OR instr(upper(:slot)||',',upper(i.slot)||',') > 0)" .

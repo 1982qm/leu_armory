@@ -729,7 +729,7 @@
                 $(opt).addClass("dynamic-generated");
                 $(opt).val(idx);
                 $(opt).text(idx);
-                $(opt).attr("limitato", getLimitatoValue(idx, proprieta.livello_percorso_max));
+                $(opt).attr("limitato", getLimitatoValue(idx, proprieta));
                 $("#"+slot+"_percorso_livello").append(opt);
               }
 
@@ -777,7 +777,7 @@
             oggetto.proprieta.livello_percorso = liv;
 
             // Nome oggetto
-            $("#"+slot).html("<span style='color:rgb(191,191,191)'>[</span>" + getRarita(proprieta.rarita) + "<span style='color:rgb(191,191,191)'>|</span>" + getLimitato(liv,proprieta.livello_percorso_max) + "<span style='color:rgb(191,191,191)'>]</span> " + proprieta.nome);
+            $("#"+slot).html("<span style='color:rgb(191,191,191)'>[</span>" + getRarita(proprieta.rarita) + "<span style='color:rgb(191,191,191)'>|</span>" + getLimitatoColore(liv,proprieta) + "<span style='color:rgb(191,191,191)'>]</span> " + proprieta.nome);
 
             updateLimiteOggetti()
         }
@@ -868,29 +868,32 @@
             return ("<span style='color: " + c + ";'>"+l+"</span>");
         }
 
-        function getLimitato(liv, liv_max){
-            var limitato = liv;
-            if (liv == liv_max) {
-              return ("<span style='color: rgb(255,0,255);'>"+limitato+"</span>");
-            } else if ((Number(liv)+1) == liv_max || (Number(liv)+2) == liv_max) {
-              return ("<span style='color: rgb(255,255,0);'>"+limitato+"</span>");
-            } else if ((Number(liv)+3) == liv_max || (Number(liv)+4) == liv_max) {
-              return ("<span style='color: rgb(0,255,0);'>"+limitato+"</span>");
-            } else {
-              return ("<span style='color: rgb(228,228,228);'>"+limitato+"</span>");
+        function getLimitatoColore(liv, proprieta){
+            var idx = Number(proprieta.livello_percorso_max) - Number(liv);
+            var limiti = proprieta.limiti.split(",").reverse();
+            var colore;
+            switch (limiti[idx]) {
+              case "3":
+                colore = "<span style='color: rgb(255,0,255);'>"+liv+"</span>"
+                break;
+              case "2":
+                colore = "<span style='color: rgb(255,255,0);'>"+liv+"</span>"
+                break;
+              case "1":
+                colore = "<span style='color: rgb(0,255,0);'>"+liv+"</span>"
+                break;
+              default:
+                colore = "<span style='color: rgb(228,228,228);'>"+liv+"</span>"
+                break;
             }
+
+            return colore;
         }
 
-        function getLimitatoValue(liv, liv_max){
-            if (liv == liv_max) {
-              return 3;
-            } else if ((Number(liv)+1) == liv_max || (Number(liv)+2) == liv_max) {
-              return 2;
-            } else if ((Number(liv)+3) == liv_max || (Number(liv)+4) == liv_max) {
-              return 1;
-            } else {
-              return 0;
-            }
+        function getLimitatoValue(liv, proprieta){
+            var idx = Number(proprieta.livello_percorso_max) - Number(liv);
+            var limiti = proprieta.limiti.split(",").reverse();
+            return limiti[idx];
         }        
 
         function AddPoteriTipo (nome) {
