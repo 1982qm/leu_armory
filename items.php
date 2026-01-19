@@ -473,8 +473,9 @@
                                                 getBonus(element.bonus_nome, element.bonus_4p_nome, element.bonus_4p_valore)
                                                ];
                                     },
-                                    undefined,
-                                    true
+                                    undefined, //click function
+                                    true, //selectable
+                                    undefined //ordinamento
           );
           setTimeout(() => {
             $(".dt-search").parent().css("position","absolute");

@@ -321,13 +321,12 @@
                                     function (element) {
                                         return [element.titolo, element.classe, element.avg_eq_level, element.data_caricamento];
                                     },
-                                    ShowPlayer
+                                    ShowPlayer, //click function
+                                    false, //selectable
+                                    '2;desc' //ordinamento
           );
 
           setTimeout(() => {
-            table .column('2')
-                  .order('desc')
-                  .draw();
             $(".dt-search").parent().css("position","absolute");
             $(".dt-search").parent().css("top","-72px");
             $(".dt-search").parent().css("right","10px");

@@ -93,7 +93,7 @@ function CreateDataTable(myDt, addText, addFun, editText, editFun, delText, delF
 //-----------------------------------------------------------------------------
 // CARICAMENTO DATATABLE, SI ASPETTA SEMPRE DUE CAMPI: ID E NAME
 //-----------------------------------------------------------------------------
-function LoadDataTable(myDt, array, makeRow, clickFun, selectable) {
+function LoadDataTable(myDt, array, makeRow, clickFun, selectable, customOrder) {
     // Pulizia dataTable
     var dtTable = $(myDt).DataTable();
     dtTable.clear();
@@ -105,10 +105,19 @@ function LoadDataTable(myDt, array, makeRow, clickFun, selectable) {
             dtTable.row.add(row);
         }
     );
+    //Ordinamento custom
+    if (customOrder != undefined) {
+        var order = customOrder.split(";");
+        dtTable.column(order[0])
+            .order(order[1]);
+    }
+
+    dtTable.draw();
+
     if (clickFun != undefined) {
-        // Elimino eventuali eventi dbclick già registrati
+        // Elimino eventuali eventi click già registrati
         $(myDt).find('tbody').off('click', 'tr');
-        // Ad ogni riga associo un evento dbclick per editare il record
+        // Ad ogni riga associo un evento click per editare il record
         $(myDt).find('tbody').on('click', 'tr', function () {
             // Seleziono il record sul quale è stato eseguito il dbclick
             var tr = dtTable.row(this).node();

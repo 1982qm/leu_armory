@@ -578,14 +578,12 @@
                                                 element.pubblica == 1 ? "Pubblica" : "Privata"
                                                ];
                                     },
-                                    ShowBuild,
-                                    true
+                                    ShowBuild, //click function
+                                    true, //selectable
+                                    '4;desc' //ordinamento
           );
 
           setTimeout(() => {
-            table .column('4')
-                  .order('desc')
-                  .draw();
             $(".dt-search").parent().css("position","absolute");
             $(".dt-search").parent().css("top","-72px");
             $(".dt-search").parent().css("right","10px");
