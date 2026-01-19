@@ -774,7 +774,7 @@
                 idx = el.indexOf("Percorso ");
                 if (idx > -1) {
                   idx = el.indexOf("(");
-                  percorso = el.substr(9,idx-9);
+                  percorso = el.substr(9,idx-10);
                   idx += el.substr(idx+1).indexOf("(") + 1;
                   percorso_livello = el.substr(idx+1,2);
                   percorso_livello_max = el.substr(el.trim().lastIndexOf(" ")+1,2);

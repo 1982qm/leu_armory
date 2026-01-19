@@ -1,6 +1,3 @@
 install.sh
 uploads/
-database/leu_armory.db
-database/leu_builds.db
-database/login.db
-database/*.json
+database/

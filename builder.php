@@ -806,7 +806,7 @@
 
             // Aggiorno i bonus
             oggetti_build.forEach(elem => {
-                if (elem.proprieta.bonus != undefined) {
+                if (elem.proprieta.bonus != undefined && elem.proprieta.bonus.length > 0) {
                     var b = bonus.find (bon => bon.nome == elem.proprieta.bonus);
                     if (b == undefined) {
                       bonus.push ({nome : elem.proprieta.bonus,
