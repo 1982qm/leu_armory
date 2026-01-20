@@ -43,132 +43,108 @@
            href="javascript:LoadPage('players.php')"
            draggable="false"
            style="padding:5px; margin: 0px;"
-           onmouseover="$('#playerImg').attr('src','img\\players_dark.svg')"
-           onmouseout ="$('#playerImg').attr('src','img\\players.svg')"
+           onmouseover="$('#playerImg').hide();$('#playerImg_dark').show();"
+           onmouseout ="$('#playerImg').show();$('#playerImg_dark').hide();"
            >
            <img id="playerImg" src="img\\players.svg" width="32px" height="32px" style="margin: 0px"/>
+           <img id="playerImg_dark" src="img\\players_dark.svg" width="32px" height="32px" style="margin: 0px; display:none"/>
            Players
-          </a>
+        </a>
         <a class="link" 
            href="javascript:LoadPage('compare.php')"
            draggable="false"
            style="padding:5px; margin: 0px;"
-           onmouseover="$('#compareImg').attr('src','img\\compare_dark.svg')"
-           onmouseout ="$('#compareImg').attr('src','img\\compare.svg')"
+           onmouseover="$('#compareImg').hide();$('#compareImg_dark').show();"
+           onmouseout ="$('#compareImg').show();$('#compareImg_dark').hide();"
            >
            <img id="compareImg" src="img\\compare.svg" width="24px" height="24px" style="margin: 0px"/>
+           <img id="compareImg_dark" src="img\\compare_dark.svg" width="24px" height="24px" style="margin: 0px; display:none"/>
            Confronta
-          </a>          
+        </a>          
         <?php if ($isLoggedIn && $user['user_type'] == "1") {?>
           <a class="link" 
-            href="javascript:LoadPage('bonus.php')"
-            draggable="false"
-            style="padding:5px; margin: 0px;"
-            onmouseover="$('#bonusImg').attr('src','img\\bonus_dark.svg')"
-            onmouseout ="$('#bonusImg').attr('src','img\\bonus.svg')"
-           >
-           <img id="bonusImg" src="img\\bonus.svg" width="32px" height="32px" style="margin: 0px"/>
-           Bonus
+             href="javascript:LoadPage('bonus.php')"
+             draggable="false"
+             style="padding:5px; margin: 0px;"
+             onmouseover="$('#bonusImg').hide();$('#bonusImg_dark').show();"
+             onmouseout ="$('#bonusImg').show();$('#bonusImg_dark').hide();"
+             >
+             <img id="bonusImg" src="img\\bonus.svg" width="32px" height="32px" style="margin: 0px"/>
+             <img id="bonusImg_dark" src="img\\bonus_dark.svg" width="32px" height="32px" style="margin: 0px; display:none"/>
+             Bonus
           </a>        
           <a class="link" 
-            href="javascript:LoadPage('percorsi.php')"
-            draggable="false"
-            style="padding:5px; margin: 0px;"
-            onmouseover="$('#percorsiImg').attr('src','img\\percorsi_dark.svg')"
-            onmouseout ="$('#percorsiImg').attr('src','img\\percorsi.svg')"
-           >
-           <img id="percorsiImg" src="img\\percorsi.svg" width="32px" height="32px" style="margin: 0px"/>
-           Percorsi
+             href="javascript:LoadPage('percorsi.php')"
+             draggable="false"
+             style="padding:5px; margin: 0px;"
+             onmouseover="$('#percorsiImg').hide();$('#percorsiImg_dark').show();"
+             onmouseout ="$('#percorsiImg').show();$('#percorsiImg_dark').hide();"
+             >
+             <img id="percorsiImg" src="img\\percorsi.svg" width="32px" height="32px" style="margin: 0px"/>
+             <img id="percorsiImg_dark" src="img\\percorsi_dark.svg" width="32px" height="32px" style="margin: 0px; display:none"/>
+             Percorsi
           </a>        
           <a class="link" 
-            href="javascript:LoadPage('items.php')"
-            draggable="false"
-            style="padding:5px; margin: 0px;"
-            onmouseover="$('#itemsImg').attr('src','img\\items_dark.svg')"
-            onmouseout ="$('#itemsImg').attr('src','img\\items.svg')"
-           >
-           <img id="itemsImg" src="img\\items.svg" width="32px" height="32px" style="margin: 0px"/>
-           Oggetti
+             href="javascript:LoadPage('items.php')"
+             draggable="false"
+             style="padding:5px; margin: 0px;"
+             onmouseover="$('#itemsImg').hide();$('#itemsImg_dark').show();"
+             onmouseout ="$('#itemsImg').show();$('#itemsImg_dark').hide();"
+             >
+             <img id="itemsImg" src="img\\items.svg" width="32px" height="32px" style="margin: 0px"/>
+             <img id="itemsImg_dark" src="img\\items_dark.svg" width="32px" height="32px" style="margin: 0px; display:none"/>
+             Oggetti
           </a>
           <a class="link" 
-            href="javascript:LoadPage('admin.php')"
-            draggable="false"
-            style="padding:5px; margin: 0px;"
-            onmouseover="$('#adminImg').attr('src','img\\admin_dark.svg')"
-            onmouseout ="$('#adminImg').attr('src','img\\admin.svg')"
-            >
-            <img id="adminImg" src="img\\admin.svg" width="32px" height="32px" style="margin: 0px" />
-            Admin
-            </a>
+             href="javascript:LoadPage('admin.php')"
+             draggable="false"
+             style="padding:5px; margin: 0px;"
+             onmouseover="$('#adminImg').hide();$('#adminImg_dark').show();"
+             onmouseout ="$('#adminImg').show();$('#adminImg_dark').hide();"
+             >
+             <img id="adminImg" src="img\\admin.svg" width="32px" height="32px" style="margin: 0px" />
+             <img id="adminImg_dark" src="img\\admin_dark.svg" width="32px" height="32px" style="margin: 0px; display:none"/>
+             Admin
+          </a>
         <?php } ?>
         <?php if ($isLoggedIn && $user['user_type'] != "2") {?>
           <a class="link" 
-            href="javascript:LoadPage('builder.php')"
-            draggable="false"
-            style="padding:5px; margin: 0px;"
-            onmouseover="$('#builderImg').attr('src','img\\builder_dark.svg')"
-            onmouseout ="$('#builderImg').attr('src','img\\builder.svg')"
-            >
-            <img id="builderImg" src="img\\builder.svg" width="32px" height="32px" style="margin: 0px" />
-            Builder
+             href="javascript:LoadPage('builder.php')"
+             draggable="false"
+             style="padding:5px; margin: 0px;"
+             onmouseover="$('#builderImg').hide();$('#builderImg_dark').show();"
+             onmouseout ="$('#builderImg').show();$('#builderImg_dark').hide();"
+             >
+             <img id="builderImg" src="img\\builder.svg" width="32px" height="32px" style="margin: 0px" />
+             <img id="builderImg_dark" src="img\\builder_dark.svg" width="32px" height="32px" style="margin: 0px; display:none"/>
+             Builder
           </a>
           <a class="link" 
-            href="javascript:LoadPage('pwd.php')"
-            draggable="false"
-            style="padding:5px; margin: 0px;"
-            onmouseover="$('#pwdImg').attr('src','img\\pwd_dark.svg')"
-            onmouseout ="$('#pwdImg').attr('src','img\\pwd.svg')"
-            >
-            <img id="pwdImg" src="img\\pwd.svg" width="32px" height="32px" style="margin: 0px" />
-            Cambia Password
-            </a>          
+             href="javascript:LoadPage('pwd.php')"
+             draggable="false"
+             style="padding:5px; margin: 0px;"
+             onmouseover="$('#pwdImg').hide();$('#pwdImg_dark').show();"
+             onmouseout ="$('#pwdImg').show();$('#pwdImg_dark').hide();"
+             >
+             <img id="pwdImg" src="img\\pwd.svg" width="32px" height="32px" style="margin: 0px" />
+             <img id="pwdImg_dark" src="img\\pwd_dark.svg" width="32px" height="32px" style="margin: 0px; display:none"/>
+             Cambia Password
+          </a>          
         <?php } ?>
         <a class="link" 
            href="login.php?logout=y"
            draggable="false"
            style="padding:5px; margin: 0px; margin-right: 10px;"
-           onmouseover="$('#logoutImg').attr('src','img\\logout_dark.svg')"
-           onmouseout ="$('#logoutImg').attr('src','img\\logout.svg')"
+           onmouseover="$('#logoutImg').hide();$('#logoutImg_dark').show();"
+           onmouseout ="$('#logoutImg').show();$('#logoutImg_dark').hide();"
            >
            <img id="logoutImg" src="img\\logout.svg" width="24px" height="24px" style="margin: 0px"/>
+           <img id="logoutImg_dark" src="img\\logout_dark.svg" width="24px" height="24px" style="margin: 0px; display:none"/>
            Logout <?php if ($isLoggedIn) { echo $user['user_name']; } ?>
-          </a>
+        </a>
       </div>
     </div>
     <iframe name="frame" id="frame" style="border:0px; top: 0; left: 0; bottom: 0px; right: 0; width: 100%; height: calc(100dvh - 55px);" src="players.php" >
-    
-    <script>
-        //PRELOAD
-        var images = [];
-
-        function preload() {
-          for (var i = 0; i < arguments.length; i++) {
-            images[i] = new Image();
-            images[i].src = preload.arguments[i];
-          }
-        }
-
-        preload (
-          "/armory/img/players.svg",
-          "/armory/img/players_dark.svg",
-          "/armory/img/builder.svg",
-          "/armory/img/builder_dark.svg",
-          "/armory/img/logout.svg",
-          "/armory/img/logout_dark.svg",
-          "/armory/img/items.svg",
-          "/armory/img/items_dark.svg",
-          "/armory/img/percorsi.svg",
-          "/armory/img/percorsi_dark.svg",
-          "/armory/img/bonus.svg",
-          "/armory/img/bonus_dark.svg",
-          "/armory/img/compare.svg",
-          "/armory/img/compare_dark.svg",
-          "/armory/img/admin.svg",
-          "/armory/img/admin_dark.svg",
-          "/armory/img/logo.svg",
-          "/armory/img/background.jpg"
-        )
-    </script>
 
 </body>
 

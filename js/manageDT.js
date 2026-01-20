@@ -1,7 +1,7 @@
 //-----------------------------------------------------------------------------
 // CREAZIONE DATATABLE
 //-----------------------------------------------------------------------------
-function CreateDataTable(myDt, addText, addFun, editText, editFun, delText, delFun) {
+function CreateDataTable(myDt, initComplete, addText, addFun, editText, editFun, delText, delFun) {
     var selectable = (addFun != undefined || editFun != undefined || delFun != undefined);
 
     var buttons = [];
@@ -84,10 +84,10 @@ function CreateDataTable(myDt, addText, addFun, editText, editFun, delText, delF
                 });
             // Rimuovo la classe di default del dataTable
             $(".customButton").parent().removeClass("dt-buttons");
+            // Vado avanti con l'elaborazione
+            if (initComplete != undefined) initComplete(this);
         }
     });
-
-    return table;
 }
 
 //-----------------------------------------------------------------------------

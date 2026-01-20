@@ -376,35 +376,37 @@
         )
 
         $(document).ready(function() {
-            CreateDataTable($("#datatableItems"),
+            var initComplete = function (dt) {
+                window.addEventListener('orientationchange', function (){
+                    var dtTable = $("#datatableItems").DataTable();
+                    dtTable.columns.adjust();
+                });
+                
+                $("#fItemSlot").select2({
+                  placeholder: "Seleziona gli slot...",
+                  language: "it"
+                });
+                
+                <?php if ($isLoggedIn && $user['user_type'] == "1") {?>
+                  $("#frmItemSlot").select2({
+                    placeholder: "Seleziona lo slot...",
+                    language: "it"
+                  });
+                  $("#frmItemRarita").select2({
+                    placeholder: "Seleziona la rarità...",
+                    language: "it"
+                  });
+                <?php } ?>
+                FetchItemsPercorsi();
+                //Gestione dell'enter sui filtri di tipo text
+                CatchKeypress("fItemNome",13,FetchItems);
+                CatchKeypress("fItemPotere",13,FetchItems);
+            };
+            CreateDataTable($("#datatableItems"), initComplete
                               <?php if ($isLoggedIn && $user['user_type'] == "1") {?>
-                                'Aggiungi', AddItem, 'Modifica', EditItem, 'Elimina', DeleteItem
+                                , 'Aggiungi', AddItem, 'Modifica', EditItem, 'Elimina', DeleteItem
                               <?php } ?>
                             );
-            window.addEventListener('orientationchange', function (){
-                var dtTable = $("#datatableItems").DataTable();
-                dtTable.columns.adjust();
-            });
-            
-            $("#fItemSlot").select2({
-              placeholder: "Seleziona gli slot...",
-              language: "it"
-            });
-            
-            <?php if ($isLoggedIn && $user['user_type'] == "1") {?>
-              $("#frmItemSlot").select2({
-                placeholder: "Seleziona lo slot...",
-                language: "it"
-              });
-              $("#frmItemRarita").select2({
-                placeholder: "Seleziona la rarità...",
-                language: "it"
-              });
-            <?php } ?>
-            FetchItemsPercorsi();
-            //Gestione dell'enter sui filtri di tipo text
-            CatchKeypress("fItemNome",13,FetchItems);
-            CatchKeypress("fItemPotere",13,FetchItems);
         })
 
         function FetchItemsPercorsi () {

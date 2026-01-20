@@ -267,14 +267,16 @@
         )
 
         $(document).ready(function() {
-            CreateDataTable($("#datatableBuilds"), 'Nuova build', NewBuild);
-            $("#className_edit").select2({
-              placeholder: "Seleziona la classe...",
-              language: "it"
-            });
-            FetchItems();
-            FetchBuilds();
-            ShowContent();
+            var initComplete = function (dt) {
+              $("#className_edit").select2({
+                placeholder: "Seleziona la classe...",
+                language: "it"
+              });
+              FetchItems();
+              FetchBuilds();
+              ShowContent();
+            };
+            CreateDataTable($("#datatableBuilds"), initComplete, 'Nuova build', NewBuild);
         })
 
         function CreateElements (el) {
@@ -424,6 +426,8 @@
             $(".eq").text("");
             $("#oggettiLimitatiMin").text("0");
             $("#classImg").attr("src","");
+            $("#className_edit").val("");
+            $("#className_edit").trigger("change");
 
             $(".edit_link").each(function( index ) {
               CreateElements (this);
@@ -621,6 +625,7 @@
 
         function LoadBuildDetails (data) {
           $('.dynamic-generated').remove();
+          $(".eq").text("");
 
           oggetti_build = [];
 
@@ -704,7 +709,12 @@
         }
 
         function setImg() {
-          $("#classImg").attr("src", 'img/' + $("#className_edit").val().toLowerCase() + '.png');
+          var classe = $("#className_edit").val();
+          if (classe != "") {
+            $("#classImg").attr("src", 'img/' + classe.toLowerCase() + '.png');
+          } else {
+            $("#classImg").attr("src", '');
+          }
         }
 
         function getDannoArma (dadi, tipo_danno, perc_fisico, perc_magico) {
@@ -1037,6 +1047,7 @@
             .then(data => {
                             $("#build").hide();
                             $('#gridContainer').show();
+                            FetchBuilds();
                             show_info("Cancellazione eseguita con successo")
                           })
             .catch(error => show_error("Errore in cancellazione build: " + error));

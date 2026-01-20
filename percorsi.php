@@ -182,17 +182,20 @@
         )
 
         $(document).ready(function() {
-            CreateDataTable($("#datatablePercorsi"),
+            var initComplete = function (dt) {
+                window.addEventListener('orientationchange', function (){
+                    var dtTable = $("#datatablePercorsi").DataTable();
+                    dtTable.columns.adjust();
+                });
+
+                FetchPercorsi();
+            };
+            CreateDataTable($("#datatablePercorsi"), initComplete
                               <?php if ($isLoggedIn && $user['user_type'] == "1") {?>
-                                'Aggiungi', AddPercorso, 'Modifica', EditPercorso, 'Elimina', DeletePercorso
+                                , 'Aggiungi', AddPercorso, 'Modifica', EditPercorso, 'Elimina', DeletePercorso
                               <?php } ?>
                             );
-            window.addEventListener('orientationchange', function (){
-                var dtTable = $("#datatablePercorsi").DataTable();
-                dtTable.columns.adjust();
-            });
 
-            FetchPercorsi();
         })
 
         function FetchPercorsi () {

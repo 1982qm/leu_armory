@@ -299,8 +299,14 @@
             Chart.defaults.color = "#fff";
             if(input_name) input_name = input_name.toString().replace(/"/g,"");
             InitImgBtn();
-            CreateDataTable($("#datatablePlayers"));
-            FetchPlayers();
+            var initComplete = function (dt) {
+                window.addEventListener('orientationchange', function (){
+                    var dtTable = $("#datatablePlayers").DataTable();
+                    dtTable.columns.adjust();
+                });
+                FetchPlayers();
+            };
+            CreateDataTable($("#datatablePlayers"), initComplete);
         })
 
         function FetchPlayers () {

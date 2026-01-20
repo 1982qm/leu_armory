@@ -194,17 +194,18 @@
         )
 
         $(document).ready(function() {
-            CreateDataTable($("#datatableBonus"),
+            var initComplete = function (dt) {
+                window.addEventListener('orientationchange', function (){
+                    var dtTable = $("#datatableBonus").DataTable();
+                    dtTable.columns.adjust();
+                });
+                FetchBonus();
+            };
+            CreateDataTable($("#datatableBonus"), initComplete
                               <?php if ($isLoggedIn && $user['user_type'] == "1") {?>
-                                'Aggiungi', AddBonus, 'Modifica', EditBonus, 'Elimina', DeleteBonus
+                                , 'Aggiungi', AddBonus, 'Modifica', EditBonus, 'Elimina', DeleteBonus
                               <?php } ?>
                             );
-            window.addEventListener('orientationchange', function (){
-                var dtTable = $("#datatableBonus").DataTable();
-                dtTable.columns.adjust();
-            });
-
-            FetchBonus();
         })
 
         function FetchBonus () {
