@@ -2,8 +2,7 @@
     $dbu=realpath(__DIR__).'/../database/leu_items.db'; //database location
 
     $dbnu = new PDO('sqlite:'.$dbu);
-    $stmt=$dbnu->prepare("SELECT * FROM bonus"
-                            );
+    $stmt=$dbnu->prepare("SELECT * FROM bonus");
 
     $stmt->execute();
 

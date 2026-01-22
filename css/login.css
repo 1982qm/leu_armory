@@ -41,9 +41,16 @@ body {
 .register {
     cursor: pointer;
     color: white;
+    background-color: #880a0d;
     font-size: 14px;
-    text-decoration: underline;
     font-family: 'DejaVu Sans Mono', monospace;
+    opacity: 70%;
+    padding: 5px 41px;
+    border: 1px solid white;
+}
+
+.register:hover {
+    opacity: 100%;
 }
 
 #login {
