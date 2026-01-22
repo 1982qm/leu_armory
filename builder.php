@@ -171,30 +171,30 @@
                   <div class="card-body">
                     <h5 class="card-title" style="text-shadow: 1px 1px 2px black;">Equipaggiamento<span id="oggettiLimitati">Oggetti limitati <span id="oggettiLimitatiMin">0</span>/<span id="oggettiLimitatiMax">36</span></span></h5>
                     <ul class="list-group list-group-flush">
-                      <li class="list-group-item list edit_link" slot="come luce" slot_db="Luce"><div class="eqrow"><span class="slot">come luce</span><span id="come_luce" class="eq"></span></div></li>
-                      <li class="list-group-item list edit_link" slot="mano_destra" slot_db="Dita"><div class="eqrow"><span class="slot">mano destra</span><span id="mano_destra" class="eq"></span></div></li>
-                      <li class="list-group-item list edit_link" slot="mano_sinistra" slot_db="Dita"><div class="eqrow"><span class="slot">mano sinistra</span><span id="mano_sinistra" class="eq"></span></div></li>
-                      <li class="list-group-item list edit_link" slot="al_collo_1" slot_db="Collo"><div class="eqrow"><span class="slot">al collo</span><span id="al_collo_1" class="eq"></span></div></li>
-                      <li class="list-group-item list edit_link" slot="al_collo_2" slot_db="Collo"><div class="eqrow"><span class="slot">al collo</span><span id="al_collo_2" class="eq"></span></div></li>
-                      <li class="list-group-item list edit_link" slot="sul_corpo" slot_db="Corpo"><div class="eqrow"><span class="slot">sul corpo</span><span id="sul_corpo" class="eq"></span></div></li>
-                      <li class="list-group-item list edit_link" slot="in_testa" slot_db="Testa"><div class="eqrow"><span class="slot">in testa</span><span id="in_testa" class="eq"></span></div></li>
-                      <li class="list-group-item list edit_link" slot="sulle_gambe" slot_db="Gambe"><div class="eqrow"><span class="slot">sulle gambe</span><span id="sulle_gambe" class="eq"></span></div></li>
-                      <li class="list-group-item list edit_link" slot="ai_piedi" slot_db="Piedi"><div class="eqrow"><span class="slot">ai piedi</span><span id="ai_piedi" class="eq"></span></div></li>
-                      <li class="list-group-item list edit_link" slot="sulle_mani" slot_db="Mani"><div class="eqrow"><span class="slot">sule mani</span><span id="sulle_mani" class="eq"></span></div></li>
-                      <li class="list-group-item list edit_link" slot="sulle_braccia" slot_db="Braccia"><div class="eqrow"><span class="slot">sulle braccia</span><span id="sulle_braccia" class="eq"></span></div></li>
-                      <li class="list-group-item list edit_link" slot="come_scudo" slot_db="Scudo"><div class="eqrow"><span class="slot">come scudo</span><span id="come_scudo" class="eq"></span></div></li>
-                      <li class="list-group-item list edit_link" slot="attorno_al_corpo" slot_db="Attorno"><div class="eqrow"><span class="slot">attorno al corpo</span><span id="attorno_al_corpo" class="eq"></span></div></li>
-                      <li class="list-group-item list edit_link" slot="alla_vita" slot_db="Vita"><div class="eqrow"><span class="slot">alla vita</span><span id="alla_vita" class="eq"></span></div></li>
-                      <li class="list-group-item list edit_link" slot="polso_destro" slot_db="Polso"><div class="eqrow"><span class="slot">polso destro</span><span id="polso_destro" class="eq"></span></div></li>
-                      <li class="list-group-item list edit_link" slot="polso_sinistro" slot_db="Polso"><div class="eqrow"><span class="slot">polso sinistro</span><span id="polso_sinistro" class="eq"></span></div></li>
-                      <li class="list-group-item list edit_link" slot="impugnato" slot_db="Impugnato"><div class="eqrow"><span class="slot">impugnato</span><span id="impugnato" class="eq"></span></div></li>
-                      <li class="list-group-item list edit_link" slot="afferrato" slot_db="Afferrato"><div class="eqrow"><span class="slot">afferrato</span><span id="afferrato" class="eq"></span></div></li>
-                      <li class="list-group-item list edit_link" slot="sulla_schiena" slot_db="Schiena"><div class="eqrow"><span class="slot">sulla schiena</span><span id="sulla_schiena" class="eq"></span></div></li>
-                      <li class="list-group-item list edit_link" slot="orecchio_destro" slot_db="Orecchie"><div class="eqrow"><span class="slot">orecchio destro</span><span id="orecchio_destro" class="eq"></span></div></li>
-                      <li class="list-group-item list edit_link" slot="orecchio_sinistro" slot_db="Orecchie"><div class="eqrow"><span class="slot">orecchio sinistro</span><span id="orecchio_sinistro" class="eq"></span></div></li>
-                      <li class="list-group-item list edit_link" slot="sul_viso" slot_db="Viso"><div class="eqrow"><span class="slot">sul viso</span><span id="sul_viso" class="eq"></span></div></li>
-                      <li class="list-group-item list edit_link" slot="incoccato" slot_db="Incoccato"><div class="eqrow"><span class="slot">incoccato</span><span id="incoccato" class="eq"></span></div></li>
-                      <li class="list-group-item list edit_link" slot="come_aura" slot_db="Aura"><div class="eqrow"><span class="slot">come aura</span><span id="come_aura" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="come luce" slot_db="Luce"><div class="eqrow"><input type="checkbox" id="come_luce_check" class="slot_check" onchange="updateChecked('come_luce')"></input><span class="slot">come luce</span><span id="come_luce" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="mano_destra" slot_db="Dita"><div class="eqrow"><input type="checkbox" id="mano_destra_check" class="slot_check" onchange="updateChecked('mano_destra')"></input><span class="slot">mano destra</span><span id="mano_destra" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="mano_sinistra" slot_db="Dita"><div class="eqrow"><input type="checkbox" id="mano_sinistra_check" class="slot_check" onchange="updateChecked('mano_sinistra')"></input><span class="slot">mano sinistra</span><span id="mano_sinistra" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="al_collo_1" slot_db="Collo"><div class="eqrow"><input type="checkbox" id="al_collo_1_check" class="slot_check" onchange="updateChecked('al_collo_1')"></input><span class="slot">al collo</span><span id="al_collo_1" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="al_collo_2" slot_db="Collo"><div class="eqrow"><input type="checkbox" id="al_collo_2_check" class="slot_check" onchange="updateChecked('al_collo_2_')"></input><span class="slot">al collo</span><span id="al_collo_2" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="sul_corpo" slot_db="Corpo"><div class="eqrow"><input type="checkbox" id="sul_corpo_check" class="slot_check" onchange="updateChecked('sul_corpo_')"></input><span class="slot">sul corpo</span><span id="sul_corpo" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="in_testa" slot_db="Testa"><div class="eqrow"><input type="checkbox" id="in_testa_check" class="slot_check" onchange="updateChecked('in_testa')"></input><span class="slot">in testa</span><span id="in_testa" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="sulle_gambe" slot_db="Gambe"><div class="eqrow"><input type="checkbox" id="sulle_gambe_check" class="slot_check" onchange="updateChecked('sulle_gambe')"></input><span class="slot">sulle gambe</span><span id="sulle_gambe" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="ai_piedi" slot_db="Piedi"><div class="eqrow"><input type="checkbox" id="ai_piedi_check" class="slot_check" onchange="updateChecked('ai_piedi')"></input><span class="slot">ai piedi</span><span id="ai_piedi" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="sulle_mani" slot_db="Mani"><div class="eqrow"><input type="checkbox" id="sulle_mani_check" class="slot_check" onchange="updateChecked('sulle_manik')"></input><span class="slot">sule mani</span><span id="sulle_mani" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="sulle_braccia" slot_db="Braccia"><div class="eqrow"><input type="checkbox" id="sulle_braccia_check" class="slot_check" onchange="updateChecked('sulle_braccia')"></input><span class="slot">sulle braccia</span><span id="sulle_braccia" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="come_scudo" slot_db="Scudo"><div class="eqrow"><input type="checkbox" id="come_scudo_check" class="slot_check" onchange="updateChecked('come_scudo')"></input><span class="slot">come scudo</span><span id="come_scudo" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="attorno_al_corpo" slot_db="Attorno"><div class="eqrow"><input type="checkbox" id="attorno_al_corpo_check" class="slot_check" onchange="updateChecked('attorno_al_corpo')"></input><span class="slot">attorno al corpo</span><span id="attorno_al_corpo" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="alla_vita" slot_db="Vita"><div class="eqrow"><input type="checkbox" id="alla_vita_check" class="slot_check" onchange="updateChecked('alla_vita')"></input><span class="slot">alla vita</span><span id="alla_vita" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="polso_destro" slot_db="Polso"><div class="eqrow"><input type="checkbox" id="polso_destro_check" class="slot_check" onchange="updateChecked('polso_destro')"></input><span class="slot">polso destro</span><span id="polso_destro" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="polso_sinistro" slot_db="Polso"><div class="eqrow"><input type="checkbox" id="polso_sinistro_check" class="slot_check" onchange="updateChecked('polso_sinistro')"></input><span class="slot">polso sinistro</span><span id="polso_sinistro" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="impugnato" slot_db="Impugnato"><div class="eqrow"><input type="checkbox" id="impugnato_check" class="slot_check" onchange="updateChecked('impugnato')"></input><span class="slot">impugnato</span><span id="impugnato" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="afferrato" slot_db="Afferrato"><div class="eqrow"><input type="checkbox" id="afferrato_check" class="slot_check" onchange="updateChecked('afferrato')"></input><span class="slot">afferrato</span><span id="afferrato" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="sulla_schiena" slot_db="Schiena"><div class="eqrow"><input type="checkbox" id="sulla_schiena_check" class="slot_check" onchange="updateChecked('sulla_schiena')"></input><span class="slot">sulla schiena</span><span id="sulla_schiena" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="orecchio_destro" slot_db="Orecchie"><div class="eqrow"><input type="checkbox" id="orecchio_destro_check" class="slot_check" onchange="updateChecked('orecchio_destro')"></input><span class="slot">orecchio destro</span><span id="orecchio_destro" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="orecchio_sinistro" slot_db="Orecchie"><div class="eqrow"><input type="checkbox" id="orecchio_sinistro_check" class="slot_check" onchange="updateChecked('orecchio_sinistro')"></input><span class="slot">orecchio sinistro</span><span id="orecchio_sinistro" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="sul_viso" slot_db="Viso"><div class="eqrow"><input type="checkbox" id="sul_viso_check" class="slot_check" onchange="updateChecked('sul_viso')"></input><span class="slot">sul viso</span><span id="sul_viso" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="incoccato" slot_db="Incoccato"><div class="eqrow"><input type="checkbox" id="incoccato_check" class="slot_check" onchange="updateChecked('incoccato')"></input><span class="slot">incoccato</span><span id="incoccato" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="come_aura" slot_db="Aura"><div class="eqrow"><input type="checkbox" id="come_aura_check" class="slot_check" onchange="updateChecked('come_aura')"></input><span class="slot">come aura</span><span id="come_aura" class="eq"></span></div></li>
                       <li class="list-group-item list separatore"></li>
                     </ul>
                   </div>
@@ -428,6 +428,7 @@
             $("#classImg").attr("src","");
             $("#className_edit").val("");
             $("#className_edit").trigger("change");
+            $('.slot_check').prop('checked', false);
 
             $(".edit_link").each(function( index ) {
               CreateElements (this);
@@ -465,7 +466,7 @@
           .catch(error => console.log("Errore in caricamento: " + error));
         }
 
-        function LoadItems (data) {
+        function LoadItems () {
           var data = oggetti_db;
 
           data.forEach(
@@ -626,6 +627,7 @@
         function LoadBuildDetails (data) {
           $('.dynamic-generated').remove();
           $(".eq").text("");
+          $('.slot_check').prop('checked', false);
 
           oggetti_build = [];
 
@@ -661,6 +663,7 @@
             $(".edit_link").each(function( index ) {
               $(this).click(ToggleEdit);
             })
+            $('.slot_check').show();
           } else {
             $(".edit_link").css("cursor", "default");
             $("#buildName").show();
@@ -672,6 +675,7 @@
             $("#buildNotes_edit").hide();
             $("#delButton").hide();
             $("#saveButton").hide();
+            $('.slot_check').hide();
           }
 
           setText("buildName", json_p1.nome);
@@ -688,6 +692,9 @@
           setImg();
 
           json.forEach(el => {
+            if (el.proprieta.checked != undefined) {
+                $("#"+el.slot+"_check").prop('checked', el.proprieta.checked);
+            }
             $("#"+el.slot+"_sel_item").val(el.proprieta.nome);
             $("#"+el.slot+"_sel_item").trigger('change');
             $("#"+el.slot+"_percorso_livello").val(el.proprieta.livello_percorso);
@@ -746,7 +753,13 @@
               oggetti_build = oggetti_build.filter(function( obj ) {
                 return obj.slot !== slot;
               });
-              oggetti_build.push({slot: slot, proprieta: structuredClone(proprieta)});
+
+              var item_prop = structuredClone(proprieta);
+              if (!Object.prototype.hasOwnProperty.call(item_prop, 'checked')) {
+                item_prop.checked = false;
+              }
+
+              oggetti_build.push({slot: slot, proprieta: item_prop});
 
               updateObject(slot);
 
@@ -789,7 +802,8 @@
             // Nome oggetto
             $("#"+slot).html("<span style='color:rgb(191,191,191)'>[</span>" + getRarita(proprieta.rarita) + "<span style='color:rgb(191,191,191)'>|</span>" + getLimitatoColore(liv,proprieta) + "<span style='color:rgb(191,191,191)'>]</span> " + proprieta.nome);
 
-            updateLimiteOggetti()
+            updateLimiteOggetti();
+            updateChecked(slot);
         }
 
         function updateLimiteOggetti () {            
@@ -1064,6 +1078,15 @@
           }
         }
 
+        function updateChecked(slot) {
+          var checked = $('#'+slot+'_check').is(":checked");
+          var oggetto = oggetti_build.find((element) => element.slot == slot);
+          if (oggetto != undefined) {
+            var proprieta = oggetto.proprieta;
+            oggetto.proprieta.checked = checked;
+          }
+        }
+
         function RemoveItem (slot) {
           $("#"+slot+"_sel_item").val("");
           $("#"+slot+"_sel_item").trigger("change");
@@ -1090,7 +1113,8 @@
           $("#"+slot+"_pow_6_tipo").val("");
           $("#"+slot+"_pow_6_valore").val("");
           $("#"+slot+"_pow_6_nome").val("");
-          $('#'+slot+'_edit_details').hide();          
+          $('#'+slot+'_edit_details').hide();
+          $('#'+slot+'_check').prop('checked', false);
           
           oggetti_build = oggetti_build.filter(function( obj ) {
             return obj.slot !== slot;
