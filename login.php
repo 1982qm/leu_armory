@@ -173,7 +173,7 @@
 					echo(' style="display: none;" ');
 				} 
 				?>
-			>Registrati</label>
+			>REGISTRATI</label>
 			<br id="br2" 
 				<?php 
 				if(isset($_POST['registerButton'])) {

@@ -41,11 +41,11 @@ body {
 .register {
     cursor: pointer;
     color: white;
-    background-color: #880a0d;
-    font-size: 14px;
+    background-color: rgb(70, 70, 70);
+    font-size: 16px;
     font-family: 'DejaVu Sans Mono', monospace;
     opacity: 70%;
-    padding: 5px 41px;
+    padding: 3px 35px;
     border: 1px solid white;
 }
 

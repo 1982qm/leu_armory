@@ -1005,12 +1005,18 @@
         }
 
         function SaveBuild () {
-          var account = "<?php if ($isLoggedIn) { echo $user['user_name']; } ?>";
+          var account;
           var nome = $("#buildName_edit").val();
           var classe = $("#className_edit").val();
           var note = $("#buildNotes_edit").val();
           var json = JSON.stringify(oggetti_build).replaceAll('"','§');
           var pubblica = $("#buildPubblica").is(":checked") ? 1 : 0;
+
+          if (json_p1 != undefined && json_p1.account != undefined) {
+              account = json_p1.account;
+          } else {
+              account = "<?php if ($isLoggedIn) { echo $user['user_name']; } ?>";
+          }
 
           if (nome.length == 0) {
             show_error ("Dai un nome alla build");
