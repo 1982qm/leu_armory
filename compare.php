@@ -1048,7 +1048,7 @@
           // RESISTENZE - P1
           //setText("ass_fisico_1", isNull(json_p1.player.assorbimento_fisico,"0"),"%");
           //setText("ass_magico_1", isNull(json_p1.player.assorbimento_magico,"0"),"%");
-          setText("ass_corpo_a_corpo_1", isNull(json_p1.player.assorbimento_danno_corpo_a_corpo,"0"),"%");
+          setText("ass_corpo_a_corpo_1", isNull(json_p1.player.assorbimento,"0"),"%");
           setText("res_impatto_1", getResistenza(json_p1.resistenze, "Impatto"));
           setText("res_perforazione_1", getResistenza(json_p1.resistenze, "Perforazione"));
           setText("res_taglio_1", getResistenza(json_p1.resistenze, "Taglio"));
@@ -1066,7 +1066,7 @@
           // RESISTENZE - P2
           //setText("ass_fisico_2", isNull(json_p2.player.assorbimento_fisico,"0"),"%");
           //setText("ass_magico_2", isNull(json_p2.player.assorbimento_magico,"0"),"%");
-          setText("ass_corpo_a_corpo_2", isNull(json_p2.player.assorbimento_danno_corpo_a_corpo,"0"),"%");
+          setText("ass_corpo_a_corpo_2", isNull(json_p2.player.assorbimento,"0"),"%");
           setText("res_impatto_2", getResistenza(json_p2.resistenze, "Impatto"));
           setText("res_perforazione_2", getResistenza(json_p2.resistenze, "Perforazione"));
           setText("res_taglio_2", getResistenza(json_p2.resistenze, "Taglio"));

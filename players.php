@@ -671,7 +671,7 @@
           // RESISTENZE
           //setText("ass_fisico", isNull(json.player.assorbimento_fisico,"0"),"%");
           //setText("ass_magico", isNull(json.player.assorbimento_magico,"0"),"%");
-          setText("ass_corpo_a_corpo", isNull(json.player.assorbimento_danno_corpo_a_corpo,"0"),"%");
+          setText("ass_corpo_a_corpo", isNull(json.player.assorbimento,"0"),"%");
           setText("res_impatto", getResistenza(json.resistenze, "Impatto"));
           setText("res_perforazione", getResistenza(json.resistenze, "Perforazione"));
           setText("res_taglio", getResistenza(json.resistenze, "Taglio"));
