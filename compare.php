@@ -143,8 +143,11 @@
                     <!-- RESISTENZE -->
                     <h5 class="card-title" style="white-space: pre"> </h5>
                     <ul class="list-group list-group-flush" style="text-align: right">
+                      <!--
                       <li class="list-group-item list"><div class="compare_info"><span id="ass_fisico_1" class="number_value_1"></span></div></li>
                       <li class="list-group-item list"><div class="compare_info"><span id="ass_magico_1" class="number_value_1"></span></div></li>
+                      -->
+                      <li class="list-group-item list"><div class="compare_info"><span id="ass_corpo_a_corpo_1" class="number_value_1"></span></div></li>
                       <li class="list-group-item list separatore"></li>
                       <li class="list-group-item list"><div class="compare_info"><span id="res_impatto_1" class="number_value_1"></span></div></li>
                       <li class="list-group-item list"><div class="compare_info"><span id="res_perforazione_1" class="number_value_1"></span></div></li>
@@ -234,8 +237,11 @@
                     <!-- RESISTENZE -->
                     <h5 class="card-title" style="text-shadow: 1px 1px 2px black; text-align: center;">Resistenze</h5>
                     <ul class="list-group list-group-flush" style="text-align: center;">
+                      <!--
                       <li class="list-group-item list"><span class="compare_label">Assorbimento Fisico</span></li>
                       <li class="list-group-item list"><span class="compare_label">Assorbimento Magico</span></li>
+                      -->
+                      <li class="list-group-item list"><span class="compare_label">Assorbimento Corpo a Corpo</span></li>
                       <li class="list-group-item list separatore"></li>
                       <li class="list-group-item list"><span class="compare_label">Impatto</span></li>
                       <li class="list-group-item list"><span class="compare_label">Perforazione</span></li>
@@ -325,8 +331,11 @@
                     <!-- RESISTENZE -->
                     <h5 class="card-title" style="white-space: pre"> </h5>
                     <ul class="list-group list-group-flush" style="text-align: right">
+                      <!--
                       <li class="list-group-item list"><div class="compare_info"><span id="ass_fisico_2" class="number_value_2"></span></div></li>
                       <li class="list-group-item list"><div class="compare_info"><span id="ass_magico_2" class="number_value_2"></span></div></li>
+                      -->
+                      <li class="list-group-item list"><div class="compare_info"><span id="ass_corpo_a_corpo_2" class="number_value_2"></span></div></li>
                       <li class="list-group-item list separatore"></li>
                       <li class="list-group-item list"><div class="compare_info"><span id="res_impatto_2" class="number_value_2"></span></div></li>
                       <li class="list-group-item list"><div class="compare_info"><span id="res_perforazione_2" class="number_value_2"></span></div></li>
@@ -1037,8 +1046,9 @@
 
         function updateRes() {
           // RESISTENZE - P1
-          setText("ass_fisico_1", isNull(json_p1.player.assorbimento_fisico,"0"),"%");
-          setText("ass_magico_1", isNull(json_p1.player.assorbimento_magico,"0"),"%");
+          //setText("ass_fisico_1", isNull(json_p1.player.assorbimento_fisico,"0"),"%");
+          //setText("ass_magico_1", isNull(json_p1.player.assorbimento_magico,"0"),"%");
+          setText("ass_corpo_a_corpo_1", isNull(json_p1.player.assorbimento_danno_corpo_a_corpo,"0"),"%");
           setText("res_impatto_1", getResistenza(json_p1.resistenze, "Impatto"));
           setText("res_perforazione_1", getResistenza(json_p1.resistenze, "Perforazione"));
           setText("res_taglio_1", getResistenza(json_p1.resistenze, "Taglio"));
@@ -1054,8 +1064,9 @@
           setText("res_umbra_1", getResistenza(json_p1.resistenze, "Umbra"));
           setText("res_caos_1", getResistenza(json_p1.resistenze, "Caos"));
           // RESISTENZE - P2
-          setText("ass_fisico_2", isNull(json_p2.player.assorbimento_fisico,"0"),"%");
-          setText("ass_magico_2", isNull(json_p2.player.assorbimento_magico,"0"),"%");
+          //setText("ass_fisico_2", isNull(json_p2.player.assorbimento_fisico,"0"),"%");
+          //setText("ass_magico_2", isNull(json_p2.player.assorbimento_magico,"0"),"%");
+          setText("ass_corpo_a_corpo_2", isNull(json_p2.player.assorbimento_danno_corpo_a_corpo,"0"),"%");
           setText("res_impatto_2", getResistenza(json_p2.resistenze, "Impatto"));
           setText("res_perforazione_2", getResistenza(json_p2.resistenze, "Perforazione"));
           setText("res_taglio_2", getResistenza(json_p2.resistenze, "Taglio"));
@@ -1071,8 +1082,9 @@
           setText("res_umbra_2", getResistenza(json_p2.resistenze, "Umbra"));
           setText("res_caos_2", getResistenza(json_p2.resistenze, "Caos"));  
           // Le resistenze le devo splittare per togliere la percentuale
-          if (parseFloat(isNull($("#ass_fisico_1").text(),'0'))                     > parseFloat(isNull($("#ass_fisico_2").text(),'0'))                     ) $("#ass_fisico_1").addClass("highValue");
-          if (parseFloat(isNull($("#ass_magico_1").text(),'0'))                     > parseFloat(isNull($("#ass_magico_2").text(),'0'))                     ) $("#ass_magico_1").addClass("highValue");
+          //if (parseFloat(isNull($("#ass_fisico_1").text(),'0'))                     > parseFloat(isNull($("#ass_fisico_2").text(),'0'))                     ) $("#ass_fisico_1").addClass("highValue");
+          //if (parseFloat(isNull($("#ass_magico_1").text(),'0'))                     > parseFloat(isNull($("#ass_magico_2").text(),'0'))                     ) $("#ass_magico_1").addClass("highValue");
+          if (parseFloat(isNull($("#ass_corpo_a_corpo_1").text(),'0'))              > parseFloat(isNull($("#ass_corpo_a_corpo_2").text(),'0'))              ) $("#ass_corpo_a_corpo_1").addClass("highValue");
           if (parseFloat(isNull($("#res_impatto_1").text().split(" ")[0],'0'))      > parseFloat(isNull($("#res_impatto_2").text().split(" ")[0],'0'))      ) $("#res_impatto_1").addClass("highValue");
           if (parseFloat(isNull($("#res_perforazione_1").text().split(" ")[0],'0')) > parseFloat(isNull($("#res_perforazione_2").text().split(" ")[0],'0')) ) $("#res_perforazione_1").addClass("highValue");
           if (parseFloat(isNull($("#res_taglio_1").text().split(" ")[0],'0'))       > parseFloat(isNull($("#res_taglio_2").text().split(" ")[0],'0'))       ) $("#res_taglio_1").addClass("highValue");
@@ -1088,8 +1100,9 @@
           if (parseFloat(isNull($("#res_umbra_1").text().split(" ")[0],'0'))        > parseFloat(isNull($("#res_umbra_2").text().split(" ")[0],'0'))        ) $("#res_umbra_1").addClass("highValue");
           if (parseFloat(isNull($("#res_caos_1").text().split(" ")[0],'0'))         > parseFloat(isNull($("#res_caos_2").text().split(" ")[0],'0'))         ) $("#res_caos_1").addClass("highValue");
           // Le resistenze le devo splittare per togliere la percentuale
-          if (parseFloat(isNull($("#ass_fisico_2").text(),'0'))                     > parseFloat(isNull($("#ass_fisico_1").text(),'0'))                     ) $("#ass_fisico_2").addClass("highValue");
-          if (parseFloat(isNull($("#ass_magico_2").text(),'0'))                     > parseFloat(isNull($("#ass_magico_1").text(),'0'))                     ) $("#ass_magico_2").addClass("highValue");
+          //if (parseFloat(isNull($("#ass_fisico_2").text(),'0'))                     > parseFloat(isNull($("#ass_fisico_1").text(),'0'))                     ) $("#ass_fisico_2").addClass("highValue");
+          //if (parseFloat(isNull($("#ass_magico_2").text(),'0'))                     > parseFloat(isNull($("#ass_magico_1").text(),'0'))                     ) $("#ass_magico_2").addClass("highValue");
+          if (parseFloat(isNull($("#ass_corpo_a_corpo_2").text(),'0'))              > parseFloat(isNull($("#ass_corpo_a_corpo_1").text(),'0'))              ) $("#ass_corpo_a_corpo_2").addClass("highValue");
           if (parseFloat(isNull($("#res_impatto_2").text().split(" ")[0],'0'))      > parseFloat(isNull($("#res_impatto_1").text().split(" ")[0],'0'))      ) $("#res_impatto_2").addClass("highValue");
           if (parseFloat(isNull($("#res_perforazione_2").text().split(" ")[0],'0')) > parseFloat(isNull($("#res_perforazione_1").text().split(" ")[0],'0')) ) $("#res_perforazione_2").addClass("highValue");
           if (parseFloat(isNull($("#res_taglio_2").text().split(" ")[0],'0'))       > parseFloat(isNull($("#res_taglio_1").text().split(" ")[0],'0'))       ) $("#res_taglio_2").addClass("highValue");

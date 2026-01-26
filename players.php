@@ -198,8 +198,11 @@
                     <!-- RESISTENZE -->
                     <h5 class="card-title" style="text-shadow: 1px 1px 2px black;">Resistenze</h5>
                     <ul class="list-group list-group-flush">
+                      <!--
                       <li class="list-group-item list"><div class="info"><span class="resi">Assorbimento Fisico</span><span id="ass_fisico" class="number_value"></span></div></li>
                       <li class="list-group-item list"><div class="info"><span class="resi">Assorbimento Magico</span><span id="ass_magico" class="number_value"></span></div></li>
+                      -->
+                      <li class="list-group-item list"><div class="info"><span class="resi">Assorbimento Corpo a Corpo</span><span id="ass_corpo_a_corpo" class="number_value"></span></div></li>
                       <li class="list-group-item list separatore"></li>
                       <li class="list-group-item list"><div class="info"><span class="resi">Impatto</span><span id="res_impatto" class="number_value"></span></div></li>
                       <li class="list-group-item list"><div class="info"><span class="resi">Perforazione</span><span id="res_perforazione" class="number_value"></span></div></li>
@@ -666,8 +669,9 @@
           }
 
           // RESISTENZE
-          setText("ass_fisico", isNull(json.player.assorbimento_fisico,"0"),"%");
-          setText("ass_magico", isNull(json.player.assorbimento_magico,"0"),"%");
+          //setText("ass_fisico", isNull(json.player.assorbimento_fisico,"0"),"%");
+          //setText("ass_magico", isNull(json.player.assorbimento_magico,"0"),"%");
+          setText("ass_corpo_a_corpo", isNull(json.player.assorbimento_danno_corpo_a_corpo,"0"),"%");
           setText("res_impatto", getResistenza(json.resistenze, "Impatto"));
           setText("res_perforazione", getResistenza(json.resistenze, "Perforazione"));
           setText("res_taglio", getResistenza(json.resistenze, "Taglio"));
