@@ -666,8 +666,8 @@
           }
 
           // RESISTENZE
-          setText("ass_fisico", json.player.assorbimento_fisico,"%");
-          setText("ass_magico", json.player.assorbimento_magico,"%");
+          setText("ass_fisico", isNull(json.player.assorbimento_fisico,"0"),"%");
+          setText("ass_magico", isNull(json.player.assorbimento_magico,"0"),"%");
           setText("res_impatto", getResistenza(json.resistenze, "Impatto"));
           setText("res_perforazione", getResistenza(json.resistenze, "Perforazione"));
           setText("res_taglio", getResistenza(json.resistenze, "Taglio"));
