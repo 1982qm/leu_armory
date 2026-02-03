@@ -23,7 +23,7 @@
         {
             "powerID": 6,
             "powerName": "Strade Misteriose",
-            "powerDescription": "Il Tempo di Attesa richiesto per cambiare posizione nella stanza e` ridotto del [mVal]50%[sys]."
+            "powerDescription": "Il Tempo di Attesa richiesto per cambiare posizione nella stanza e` ridotto del [mVal]50%[mTit]."
         },
         {
             "powerID": 7,

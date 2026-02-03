@@ -13,7 +13,7 @@ function CreaChartStat(chart_id, json_p1, json_p2, legend) {
                     getValore(json_p1.statistiche, "Precisione"),
                     getValore(json_p1.statistiche, "Colpo Critico"),
                     getValore(json_p1.statistiche, "Letalita`"),
-                    getValore(json_p1.statistiche, "Astuzia"),
+                    getValore(json_p1.statistiche, "Maestria"),
                     getValore(json_p1.statistiche, "Penetrazione"),
                     getValore(json_p1.statistiche, "Armatura"),
                     getValore(json_p1.statistiche, "Vitalita`")
@@ -37,7 +37,7 @@ function CreaChartStat(chart_id, json_p1, json_p2, legend) {
                     getValore(json_p2.statistiche, "Precisione"),
                     getValore(json_p2.statistiche, "Colpo Critico"),
                     getValore(json_p2.statistiche, "Letalita`"),
-                    getValore(json_p2.statistiche, "Astuzia"),
+                    getValore(json_p2.statistiche, "Maestria"),
                     getValore(json_p2.statistiche, "Penetrazione"),
                     getValore(json_p2.statistiche, "Armatura"),
                     getValore(json_p2.statistiche, "Vitalita`")
@@ -58,7 +58,7 @@ function CreaChartStat(chart_id, json_p1, json_p2, legend) {
             'Precisione',
             'Colpo Critico',
             'Letalità',
-            'Astuzia',
+            'Maestria',
             'Penetrazione',
             'Armatura',
             'Vitalità'

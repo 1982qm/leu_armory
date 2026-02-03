@@ -175,12 +175,12 @@
                       <li class="list-group-item list edit_link" slot="mano_destra" slot_db="Dita"><div class="eqrow"><input type="checkbox" id="mano_destra_check" class="slot_check" onchange="updateChecked('mano_destra')"></input><span class="slot">mano destra</span><span id="mano_destra" class="eq"></span></div></li>
                       <li class="list-group-item list edit_link" slot="mano_sinistra" slot_db="Dita"><div class="eqrow"><input type="checkbox" id="mano_sinistra_check" class="slot_check" onchange="updateChecked('mano_sinistra')"></input><span class="slot">mano sinistra</span><span id="mano_sinistra" class="eq"></span></div></li>
                       <li class="list-group-item list edit_link" slot="al_collo_1" slot_db="Collo"><div class="eqrow"><input type="checkbox" id="al_collo_1_check" class="slot_check" onchange="updateChecked('al_collo_1')"></input><span class="slot">al collo</span><span id="al_collo_1" class="eq"></span></div></li>
-                      <li class="list-group-item list edit_link" slot="al_collo_2" slot_db="Collo"><div class="eqrow"><input type="checkbox" id="al_collo_2_check" class="slot_check" onchange="updateChecked('al_collo_2_')"></input><span class="slot">al collo</span><span id="al_collo_2" class="eq"></span></div></li>
-                      <li class="list-group-item list edit_link" slot="sul_corpo" slot_db="Corpo"><div class="eqrow"><input type="checkbox" id="sul_corpo_check" class="slot_check" onchange="updateChecked('sul_corpo_')"></input><span class="slot">sul corpo</span><span id="sul_corpo" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="al_collo_2" slot_db="Collo"><div class="eqrow"><input type="checkbox" id="al_collo_2_check" class="slot_check" onchange="updateChecked('al_collo_2')"></input><span class="slot">al collo</span><span id="al_collo_2" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="sul_corpo" slot_db="Corpo"><div class="eqrow"><input type="checkbox" id="sul_corpo_check" class="slot_check" onchange="updateChecked('sul_corpo')"></input><span class="slot">sul corpo</span><span id="sul_corpo" class="eq"></span></div></li>
                       <li class="list-group-item list edit_link" slot="in_testa" slot_db="Testa"><div class="eqrow"><input type="checkbox" id="in_testa_check" class="slot_check" onchange="updateChecked('in_testa')"></input><span class="slot">in testa</span><span id="in_testa" class="eq"></span></div></li>
                       <li class="list-group-item list edit_link" slot="sulle_gambe" slot_db="Gambe"><div class="eqrow"><input type="checkbox" id="sulle_gambe_check" class="slot_check" onchange="updateChecked('sulle_gambe')"></input><span class="slot">sulle gambe</span><span id="sulle_gambe" class="eq"></span></div></li>
                       <li class="list-group-item list edit_link" slot="ai_piedi" slot_db="Piedi"><div class="eqrow"><input type="checkbox" id="ai_piedi_check" class="slot_check" onchange="updateChecked('ai_piedi')"></input><span class="slot">ai piedi</span><span id="ai_piedi" class="eq"></span></div></li>
-                      <li class="list-group-item list edit_link" slot="sulle_mani" slot_db="Mani"><div class="eqrow"><input type="checkbox" id="sulle_mani_check" class="slot_check" onchange="updateChecked('sulle_manik')"></input><span class="slot">sule mani</span><span id="sulle_mani" class="eq"></span></div></li>
+                      <li class="list-group-item list edit_link" slot="sulle_mani" slot_db="Mani"><div class="eqrow"><input type="checkbox" id="sulle_mani_check" class="slot_check" onchange="updateChecked('sulle_mani')"></input><span class="slot">sule mani</span><span id="sulle_mani" class="eq"></span></div></li>
                       <li class="list-group-item list edit_link" slot="sulle_braccia" slot_db="Braccia"><div class="eqrow"><input type="checkbox" id="sulle_braccia_check" class="slot_check" onchange="updateChecked('sulle_braccia')"></input><span class="slot">sulle braccia</span><span id="sulle_braccia" class="eq"></span></div></li>
                       <li class="list-group-item list edit_link" slot="come_scudo" slot_db="Scudo"><div class="eqrow"><input type="checkbox" id="come_scudo_check" class="slot_check" onchange="updateChecked('come_scudo')"></input><span class="slot">come scudo</span><span id="come_scudo" class="eq"></span></div></li>
                       <li class="list-group-item list edit_link" slot="attorno_al_corpo" slot_db="Attorno"><div class="eqrow"><input type="checkbox" id="attorno_al_corpo_check" class="slot_check" onchange="updateChecked('attorno_al_corpo')"></input><span class="slot">attorno al corpo</span><span id="attorno_al_corpo" class="eq"></span></div></li>
@@ -499,61 +499,61 @@
             });
           });
 
-          AddPoteriTipo ("Brutale");
-          AddPoteriTipo ("Cardinale");
-          AddPoteriTipo ("Incantato");
-          AddPoteriTipo ("Innato");
-          AddPoteriTipo ("Mistico");
-          AddPoteriTipo ("Progressivo");
-          AddPoteriTipo ("Resiliente");
-          AddPoteriTipo ("Volatile");
-                    
-          AddPoteriNome ("Astuzia");
-          AddPoteriNome ("Bloccare con lo scudo");
-          AddPoteriNome ("Causa ferite leggere");
-          AddPoteriNome ("Colpo Critico");
-          AddPoteriNome ("Danno Elettrico");
-          AddPoteriNome ("Danno Energia");
-          AddPoteriNome ("Danno Fisico");
-          AddPoteriNome ("Danno Fisico/Potere Magico");
-          AddPoteriNome ("Danno Freddo");
-          AddPoteriNome ("Danno Fuoco");
-          AddPoteriNome ("Danno Impatto");
-          AddPoteriNome ("Danno Lumen");
-          AddPoteriNome ("Danno Natura");
-          AddPoteriNome ("Danno Perforazione");
-          AddPoteriNome ("Danno Psichico");
-          AddPoteriNome ("Danno Taglio");
-          AddPoteriNome ("Danno Trauma");
-          AddPoteriNome ("Danno Umbra");
-          AddPoteriNome ("Eff. Abilita` (Elettrico)");
-          AddPoteriNome ("Eff. Abilita` (Energia)");
-          AddPoteriNome ("Eff. Abilita` (Freddo)");
-          AddPoteriNome ("Eff. Abilita` (Fuoco)");
-          AddPoteriNome ("Eff. Abilita` (Impatto)");
-          AddPoteriNome ("Eff. Abilita` (Lumen)");
-          AddPoteriNome ("Eff. Abilita` (Natura)");
-          AddPoteriNome ("Eff. Abilita` (Perforazione)");
-          AddPoteriNome ("Eff. Abilita` (Psichico)");
-          AddPoteriNome ("Eff. Abilita` (Taglio)");
-          AddPoteriNome ("Eff. Abilita` (Trauma)");
-          AddPoteriNome ("Eff. Abilita` (Umbra)");
-          AddPoteriNome ("Eff. Corpo a Corpo (Fisico)");
-          AddPoteriNome ("Eff. Corpo a Corpo (Magico)");
-          AddPoteriNome ("Letalita`");
-          AddPoteriNome ("Penetrazione");
-          AddPoteriNome ("Potere Magico");
-          AddPoteriNome ("Precisione");
-          AddPoteriNome ("Punti Ferita");
-          AddPoteriNome ("Recupero Punti Ferita");
-          AddPoteriNome ("Res. al Fuoco");
-          AddPoteriNome ("Res. all'Impatto");
-          AddPoteriNome ("Resistenza a Tutto");
-          AddPoteriNome ("Resistenza al Divino");
-          AddPoteriNome ("Resistenza al Fisico");
-          AddPoteriNome ("Resistenza al Magico");
-          AddPoteriNome ("Resistenza alla Perforazione");
-          AddPoteriNome ("Vitalita`");          
+          //AddPoteriTipo ("Brutale");
+          //AddPoteriTipo ("Cardinale");
+          //AddPoteriTipo ("Incantato");
+          //AddPoteriTipo ("Innato");
+          //AddPoteriTipo ("Mistico");
+          //AddPoteriTipo ("Progressivo");
+          //AddPoteriTipo ("Resiliente");
+          //AddPoteriTipo ("Volatile");
+          //          
+          //AddPoteriNome ("Maestria");
+          //AddPoteriNome ("Bloccare con lo scudo");
+          //AddPoteriNome ("Causa ferite leggere");
+          //AddPoteriNome ("Colpo Critico");
+          //AddPoteriNome ("Danno Elettrico");
+          //AddPoteriNome ("Danno Energia");
+          //AddPoteriNome ("Danno Fisico");
+          //AddPoteriNome ("Danno Fisico/Potere Magico");
+          //AddPoteriNome ("Danno Freddo");
+          //AddPoteriNome ("Danno Fuoco");
+          //AddPoteriNome ("Danno Impatto");
+          //AddPoteriNome ("Danno Lumen");
+          //AddPoteriNome ("Danno Natura");
+          //AddPoteriNome ("Danno Perforazione");
+          //AddPoteriNome ("Danno Psichico");
+          //AddPoteriNome ("Danno Taglio");
+          //AddPoteriNome ("Danno Trauma");
+          //AddPoteriNome ("Danno Umbra");
+          //AddPoteriNome ("Eff. Abilita` (Elettrico)");
+          //AddPoteriNome ("Eff. Abilita` (Energia)");
+          //AddPoteriNome ("Eff. Abilita` (Freddo)");
+          //AddPoteriNome ("Eff. Abilita` (Fuoco)");
+          //AddPoteriNome ("Eff. Abilita` (Impatto)");
+          //AddPoteriNome ("Eff. Abilita` (Lumen)");
+          //AddPoteriNome ("Eff. Abilita` (Natura)");
+          //AddPoteriNome ("Eff. Abilita` (Perforazione)");
+          //AddPoteriNome ("Eff. Abilita` (Psichico)");
+          //AddPoteriNome ("Eff. Abilita` (Taglio)");
+          //AddPoteriNome ("Eff. Abilita` (Trauma)");
+          //AddPoteriNome ("Eff. Abilita` (Umbra)");
+          //AddPoteriNome ("Eff. Corpo a Corpo (Fisico)");
+          //AddPoteriNome ("Eff. Corpo a Corpo (Magico)");
+          //AddPoteriNome ("Letalita`");
+          //AddPoteriNome ("Penetrazione");
+          //AddPoteriNome ("Potere Magico");
+          //AddPoteriNome ("Precisione");
+          //AddPoteriNome ("Punti Ferita");
+          //AddPoteriNome ("Recupero Punti Ferita");
+          //AddPoteriNome ("Res. al Fuoco");
+          //AddPoteriNome ("Res. all'Impatto");
+          //AddPoteriNome ("Resistenza a Tutto");
+          //AddPoteriNome ("Resistenza al Divino");
+          //AddPoteriNome ("Resistenza al Fisico");
+          //AddPoteriNome ("Resistenza al Magico");
+          //AddPoteriNome ("Resistenza alla Perforazione");
+          //AddPoteriNome ("Vitalita`");          
         }        
 
         async function FetchBuilds () {
