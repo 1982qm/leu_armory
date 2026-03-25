@@ -3,9 +3,21 @@
 
 <?php require("user_config.php"); 
       $isLoggedIn = isLoggedIn();
+      $gilda="";
       if($isLoggedIn) {
         $user=$isLoggedIn;
         updateExpire($user['id']);
+        // setto la gilda
+        $dbuGuild=realpath(__DIR__).'/database/leu_guilds.db'; //database location
+        $dbnuGuild = new PDO('sqlite:'.$dbuGuild);
+        //$dbnu->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $stmtGuild = $dbnuGuild->prepare('SELECT gilda FROM Users WHERE upper(username) = upper(:username) LIMIT 1');
+        $stmtGuild->bindParam(":username",$user['user_name'], PDO::PARAM_STR);
+        $stmtGuild->execute();
+        $rowGuild = $stmtGuild->fetch(PDO::FETCH_ASSOC);
+        if(!empty($rowGuild)) {
+          $gilda=$rowGuild['gilda'];
+        }
       } else {
         header('location:login.php');
       }
@@ -63,6 +75,17 @@
         </a>          
         <?php if ($isLoggedIn && $user['user_type'] == "1") {?>
           <a class="link" 
+             href="javascript:LoadPage('admin.php')"
+             draggable="false"
+             style="padding:5px; margin: 0px;"
+             onmouseover="$('#adminImg').hide();$('#adminImg_dark').show();"
+             onmouseout ="$('#adminImg').show();$('#adminImg_dark').hide();"
+             >
+             <img id="adminImg" src="img\\admin.svg" width="32px" height="32px" style="margin: 0px" />
+             <img id="adminImg_dark" src="img\\admin_dark.svg" width="32px" height="32px" style="margin: 0px; display:none"/>
+             Admin
+          </a>
+          <a class="link" 
              href="javascript:LoadPage('bonus.php')"
              draggable="false"
              style="padding:5px; margin: 0px;"
@@ -83,7 +106,9 @@
              <img id="percorsiImg" src="img\\percorsi.svg" width="32px" height="32px" style="margin: 0px"/>
              <img id="percorsiImg_dark" src="img\\percorsi_dark.svg" width="32px" height="32px" style="margin: 0px; display:none"/>
              Percorsi
-          </a>        
+          </a>       
+        <?php } ?>
+        <?php if ($isLoggedIn && ($user['user_type'] == "1" || $gilda == "Lama e Pietra")) {?>
           <a class="link" 
              href="javascript:LoadPage('items.php')"
              draggable="false"
@@ -94,17 +119,6 @@
              <img id="itemsImg" src="img\\items.svg" width="32px" height="32px" style="margin: 0px"/>
              <img id="itemsImg_dark" src="img\\items_dark.svg" width="32px" height="32px" style="margin: 0px; display:none"/>
              Oggetti
-          </a>
-          <a class="link" 
-             href="javascript:LoadPage('admin.php')"
-             draggable="false"
-             style="padding:5px; margin: 0px;"
-             onmouseover="$('#adminImg').hide();$('#adminImg_dark').show();"
-             onmouseout ="$('#adminImg').show();$('#adminImg_dark').hide();"
-             >
-             <img id="adminImg" src="img\\admin.svg" width="32px" height="32px" style="margin: 0px" />
-             <img id="adminImg_dark" src="img\\admin_dark.svg" width="32px" height="32px" style="margin: 0px; display:none"/>
-             Admin
           </a>
         <?php } ?>
         <?php if ($isLoggedIn && $user['user_type'] != "2") {?>

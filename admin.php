@@ -13,7 +13,9 @@
   <script src="lib/jquery-3.5.1.min.js"></script>
   <script src="lib/select2.min.js"></script>
   <script src="lib/select2.it.min.js"></script>
+  <script src="lib/datatables.min.js"></script>
   <script src="js/messages.js"></script>
+  <script src="js/manageDT.js?1.0"></script>
 </head>
 
 <?php require("user_config.php");
@@ -86,27 +88,54 @@
             '"pwd": "' + $("#newPwd").val() + '"' +
         '}',
     })
-    .then(data => { show_info("Cambio password eseguito"); $("#UserName").val(""); $("#newPwd").val(""); })
-    .catch(error => show_error("Errore in wipe players: " + error));
+    .then(data => {
+      show_info("Cambio password eseguito");
+      $("#UserName").val("");
+      $("#UserName").trigger("change");
+      $("#newPwd").val("");
+    })
+    .catch(error => show_error("Errore in cambio password: " + error));
   }
 
-  function LoadAccounts (data) {
+  function SetGuild () {
+    fetch('php/set_guild.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: '{' +
+            '"username": "' + $("#UserNameGuild").val() + '", ' +
+            '"gilda": "' + $("#Guild").val() + '"' +
+        '}',
+    })
+    .then(data => { 
+      show_info("Gilda settata correttamente");
+      $("#UserNameGuild").val("");
+      $("#UserNameGuild").trigger("change");
+      $("#Guild").val("");
+      $("#Guild").trigger("change");
+      FetchGuilds();
+    })
+    .catch(error => show_error("Errore modifica gilda: " + error));
+  }  
+
+  function LoadAccounts (data, ddl) {
     var def1 = document.createElement("option");
-    document.getElementById("UserName").appendChild(def1);
+    document.getElementById(ddl).appendChild(def1);
 
     data.forEach( 
         element => {
             var option = document.createElement("option");
             option.innerText = element.user_name;
 
-            document.getElementById("UserName").appendChild(option);
+            document.getElementById(ddl).appendChild(option);
         }
       )
 
-      $("#UserName").select2({
+      $("#"+ddl).select2({
         placeholder: "Seleziona Utente...",
         language: "it"
-      });      
+      });
   }
 
   function FetchAccounts () {
@@ -117,8 +146,38 @@
         }
     })
     .then(response => response.json())
-    .then(data => LoadAccounts(data))
+    .then(data => {
+      LoadAccounts(data, "UserName");
+      LoadAccounts(data, "UserNameGuild");
+    })
     .catch(error => console.log("Errore in caricamento: " + error));
+  }
+
+
+  function FetchGuilds () {
+    fetch('php/load_guilds.php', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(response => response.json())
+    .then(data => LoadGuilds(data))
+    .catch(error => console.log("Errore in caricamento: " + error));
+  }
+
+  function LoadGuilds (data) {
+    var table = LoadDataTable($("#datatableGuilds"),
+                              data,
+                              function (element) {
+                                  return [element.username,
+                                          element.gilda
+                                          ];
+                              },
+                              undefined, //click function
+                              false, //selectable
+                              undefined //ordinamento
+    );
   }
 
 </script>
@@ -141,6 +200,50 @@
                   <input type="text" id="newPwd" placeholder="New Password" style="margin-right: 20px;"></input>
                   <button onclick="javascript:SetPwd()" style="margin-right: 20px;" class="btn btn-sm btn-primary">Cambia Password</button>
           </div>
+          <div class="card-body" style="display:flex">
+                  <div style="width: 300px; margin-right: 20px;"><select id="UserNameGuild"></select></div>
+                  <div style="width: 300px; margin-right: 20px;">
+                    <select id="Guild">
+                      <option value=''></option>
+                      <option value='Luce!'>Luce!</option>
+                      <option value='Spettri'>Spettri</option>
+                      <option value='Lama e Pietra'>Lama e Pietra</option>
+                      <option value='Jedi'>Jedi</option>
+                      <option value='Vendicatori'>Vendicatori</option>
+                      <option value='I Filosofi'>I Filosofi</option>
+                      <option value='ARKANGELI'>ARKANGELI</option>
+                      <option value='Vampiri'>Vampiri</option>
+                      <option value='Mercenari'>Mercenari</option>
+                      <option value='Cavalieri del Tuono'>Cavalieri del Tuono</option>
+                      <option value='Esploratori'>Esploratori</option>
+                      <option value='[S]alii'>[S]alii</option>
+                      <option value='Anacronisti'>Anacronisti</option>
+                      <option value='Bibliotecari'>Bibliotecari</option>
+                      <option value='Grigi'>Grigi</option>                      
+                    </select>
+                  </div>
+                  <button onclick="javascript:SetGuild()" style="margin-right: 20px;" class="btn btn-sm btn-primary">Setta la Gilda</button>
+          </div>
+
+          <div id="gridContainer" class="collapse show" style="font-size: 14px;">
+              <div class="card-body">
+                  <table id="datatableGuilds" class="table table-striped hover compact">
+                      <thead>
+                          <tr>
+                              <th>UserName</th>
+                              <th>Gilda</th>
+                          </tr>
+                      </thead>
+                      <tfoot>
+                          <tr>
+                              <th>UserName</th>
+                              <th>Gilda</th>
+                          </tr>
+                      </tfoot>
+                      <tbody></tbody>
+                  </table>
+              </div>
+          </div>          
       </div>
     </div>
 
@@ -173,6 +276,18 @@
   <script>
       $( document ).ready(function() {
         FetchAccounts();
+        $("#Guild").select2({
+          placeholder: "Seleziona Gilda...",
+          language: "it"
+        });
+        var initComplete = function (dt) {
+            window.addEventListener('orientationchange', function (){
+                var dtTable = $("#datatableGuilds").DataTable();
+                dtTable.columns.adjust();
+            });
+            FetchGuilds();
+        };
+        CreateDataTable($("#datatableGuilds"), initComplete);
       });
   </script>  
 </body>

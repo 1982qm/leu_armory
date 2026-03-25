@@ -65,7 +65,7 @@ function getEqPowers(json, side) {
                 } else if (element.power == "Incantesimo su Arma") {
                     out = out + "<li class='list-group-item eqPowerItem'><span>" + element.power + ":\t</span><span style='color: #00FE1E;'>" + findWeaponSpell(element.value) + "</span></li>";
                 } else {
-                    out = out + "<li class='list-group-item eqPowerItem'><span>" + element.power + ":\t</span><span style='color: #00FE1E;'>+" + element.value + (element.power.startsWith("Eff.") ? "%" : "") + "</span></li>";
+                    out = out + "<li class='list-group-item eqPowerItem'><span>" + element.power + ":\t</span><span style='color: #00FE1E;'>+" + element.value + checkPercPower(element.power) + "</span></li>";
                 }
             }
         );
@@ -74,6 +74,15 @@ function getEqPowers(json, side) {
     }
 
     return out;
+}
+
+function checkPercPower(text) {
+    if (text.startsWith("Eff.") ||
+        text.startsWith("Potenza")) {
+        return "%";
+    } else {
+        return "";
+    }
 }
 
 function showEqInfo(el, side) {

@@ -3,9 +3,21 @@
 
 <?php require("user_config.php"); 
       $isLoggedIn = isLoggedIn();
+      $gilda="";
       if($isLoggedIn) {
         $user=$isLoggedIn;
         updateExpire($user['id']);
+        // setto la gilda
+        $dbuGuild=realpath(__DIR__).'/database/leu_guilds.db'; //database location
+        $dbnuGuild = new PDO('sqlite:'.$dbuGuild);
+        //$dbnu->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $stmtGuild = $dbnuGuild->prepare('SELECT gilda FROM Users WHERE upper(username) = upper(:username) LIMIT 1');
+        $stmtGuild->bindParam(":username",$user['user_name'], PDO::PARAM_STR);
+        $stmtGuild->execute();
+        $rowGuild = $stmtGuild->fetch(PDO::FETCH_ASSOC);
+        if(!empty($rowGuild)) {
+          $gilda=$rowGuild['gilda'];
+        }
       } else {
         //header('location:../login.php?logout=y');
         echo "<script>
@@ -298,7 +310,7 @@
 
             var html_ac = ` <div class="eqrow_edit"> ` +
                        `      <span class="potere_numero">AC</span> ` +
-                       `      <input id="#slot#_ac" placeholder="AC" class="potere_valore" readonly></input> ` +
+                       `      <input id="#slot#_ac" placeholder="AC" class="potere_valore" onchange="updateObject('#slot#')"></input> ` +
                        `    </div> `
             ;
 
@@ -314,8 +326,8 @@
                        `      <select id="#slot#_pow_1_tipo" class="sel_potere_tipo"> ` +
                        `        <option value=""></option> ` +
                        `      </select> ` +
-                       `      <input id="#slot#_pow_1_valore" placeholder="Valore" class="potere_valore" readonly></input> ` +
-                       `      <select id="#slot#_pow_1_nome" class="sel_potere_nome"> ` +
+                       `      <input id="#slot#_pow_1_valore" placeholder="Valore" class="potere_valore" onchange="updateObject('#slot#')"></input> ` +
+                       `      <select id="#slot#_pow_1_nome" class="sel_potere_nome" onchange="updateObject('#slot#')"> ` +
                        `        <option value=""></option> ` +
                        `      </select> ` +
                        `    </div> ` +
@@ -324,8 +336,8 @@
                        `      <select id="#slot#_pow_2_tipo" class="sel_potere_tipo"> ` +
                        `        <option value=""></option> ` +
                        `      </select> ` +
-                       `      <input id="#slot#_pow_2_valore" placeholder="Valore" class="potere_valore" readonly></input> ` +
-                       `      <select id="#slot#_pow_2_nome" class="sel_potere_nome"> ` +
+                       `      <input id="#slot#_pow_2_valore" placeholder="Valore" class="potere_valore"  onchange="updateObject('#slot#')"></input> ` +
+                       `      <select id="#slot#_pow_2_nome" class="sel_potere_nome" onchange="updateObject('#slot#')"> ` +
                        `        <option value=""></option> ` +
                        `      </select> ` +
                        `    </div> ` +
@@ -334,8 +346,8 @@
                        `      <select id="#slot#_pow_3_tipo" class="sel_potere_tipo"> ` +
                        `        <option value=""></option> ` +
                        `      </select> ` +
-                       `      <input id="#slot#_pow_3_valore" placeholder="Valore" class="potere_valore" readonly></input> ` +
-                       `      <select id="#slot#_pow_3_nome" class="sel_potere_nome"> ` +
+                       `      <input id="#slot#_pow_3_valore" placeholder="Valore" class="potere_valore"  onchange="updateObject('#slot#')"></input> ` +
+                       `      <select id="#slot#_pow_3_nome" class="sel_potere_nome" onchange="updateObject('#slot#')"> ` +
                        `        <option value=""></option> ` +
                        `      </select> ` +
                        `    </div> ` +
@@ -344,8 +356,8 @@
                        `      <select id="#slot#_pow_4_tipo" class="sel_potere_tipo"> ` +
                        `        <option value=""></option> ` +
                        `      </select> ` +
-                       `      <input id="#slot#_pow_4_valore" placeholder="Valore" class="potere_valore" readonly></input> ` +
-                       `      <select id="#slot#_pow_4_nome" class="sel_potere_nome"> ` +
+                       `      <input id="#slot#_pow_4_valore" placeholder="Valore" class="potere_valore"  onchange="updateObject('#slot#')"></input> ` +
+                       `      <select id="#slot#_pow_4_nome" class="sel_potere_nome" onchange="updateObject('#slot#')"> ` +
                        `        <option value=""></option> ` +
                        `      </select> ` +
                        `    </div> ` +
@@ -354,8 +366,8 @@
                        `      <select id="#slot#_pow_5_tipo" class="sel_potere_tipo"> ` +
                        `        <option value=""></option> ` +
                        `      </select> ` +
-                       `      <input id="#slot#_pow_5_valore" placeholder="Valore" class="potere_valore" readonly></input> ` +
-                       `      <select id="#slot#_pow_5_nome" class="sel_potere_nome"> ` +
+                       `      <input id="#slot#_pow_5_valore" placeholder="Valore" class="potere_valore"  onchange="updateObject('#slot#')"></input> ` +
+                       `      <select id="#slot#_pow_5_nome" class="sel_potere_nome" onchange="updateObject('#slot#')"> ` +
                        `        <option value=""></option> ` +
                        `      </select> ` +
                        `    </div> ` +
@@ -364,8 +376,8 @@
                        `      <select id="#slot#_pow_6_tipo" class="sel_potere_tipo"> ` +
                        `        <option value=""></option> ` +
                        `      </select> ` +
-                       `      <input id="#slot#_pow_6_valore" placeholder="Valore" class="potere_valore" readonly></input> ` +
-                       `      <select id="#slot#_pow_6_nome" class="sel_potere_nome"> ` +
+                       `      <input id="#slot#_pow_6_valore" placeholder="Valore" class="potere_valore"  onchange="updateObject('#slot#')"></input> ` +
+                       `      <select id="#slot#_pow_6_nome" class="sel_potere_nome" onchange="updateObject('#slot#')"> ` +
                        `        <option value=""></option> ` +
                        `      </select> ` +
                        `    </div> `
@@ -383,13 +395,15 @@
             html_prop = html_prop.replaceAll("#slot#", slot).replaceAll("#slot_db#", slot_db);
             html_end = html_end.replaceAll("#slot#", slot).replaceAll("#slot_db#", slot_db);
 
-            $(el).after(html_start+html_end);     
-
-            //if (slot == "afferrato" || slot == "impugnato") {
-            //  $(el).after(html_start+html_dice+html_prop+html_end);
-            //} else {
-            //  $(el).after(html_start+html_ac+html_prop+html_end);              
-            //}
+            <?php if ($isLoggedIn && ($user['user_type'] == "1" || $gilda == "Lama e Pietra")) {?>
+                if (slot == "afferrato" || slot == "impugnato") {
+                  $(el).after(html_start+html_dice+html_prop+html_end);
+                } else {
+                  $(el).after(html_start+html_ac+html_prop+html_end);              
+                }
+            <?php } else { ?>
+                $(el).after(html_start+html_end);
+            <?php } ?>
         }
 
         async function ShowContent() {
@@ -408,6 +422,7 @@
             $('.dynamic-generated').remove();
             
             oggetti_build = [];
+            json_p1 = null;
 
             $(".edit_link").css("cursor", "pointer");
             $("#buildName").hide();
@@ -499,61 +514,67 @@
             });
           });
 
-          //AddPoteriTipo ("Brutale");
-          //AddPoteriTipo ("Cardinale");
-          //AddPoteriTipo ("Incantato");
-          //AddPoteriTipo ("Innato");
-          //AddPoteriTipo ("Mistico");
-          //AddPoteriTipo ("Progressivo");
-          //AddPoteriTipo ("Resiliente");
-          //AddPoteriTipo ("Volatile");
-          //          
-          //AddPoteriNome ("Maestria");
-          //AddPoteriNome ("Bloccare con lo scudo");
-          //AddPoteriNome ("Causa ferite leggere");
-          //AddPoteriNome ("Colpo Critico");
-          //AddPoteriNome ("Danno Elettrico");
-          //AddPoteriNome ("Danno Energia");
-          //AddPoteriNome ("Danno Fisico");
-          //AddPoteriNome ("Danno Fisico/Potere Magico");
-          //AddPoteriNome ("Danno Freddo");
-          //AddPoteriNome ("Danno Fuoco");
-          //AddPoteriNome ("Danno Impatto");
-          //AddPoteriNome ("Danno Lumen");
-          //AddPoteriNome ("Danno Natura");
-          //AddPoteriNome ("Danno Perforazione");
-          //AddPoteriNome ("Danno Psichico");
-          //AddPoteriNome ("Danno Taglio");
-          //AddPoteriNome ("Danno Trauma");
-          //AddPoteriNome ("Danno Umbra");
-          //AddPoteriNome ("Eff. Abilita` (Elettrico)");
-          //AddPoteriNome ("Eff. Abilita` (Energia)");
-          //AddPoteriNome ("Eff. Abilita` (Freddo)");
-          //AddPoteriNome ("Eff. Abilita` (Fuoco)");
-          //AddPoteriNome ("Eff. Abilita` (Impatto)");
-          //AddPoteriNome ("Eff. Abilita` (Lumen)");
-          //AddPoteriNome ("Eff. Abilita` (Natura)");
-          //AddPoteriNome ("Eff. Abilita` (Perforazione)");
-          //AddPoteriNome ("Eff. Abilita` (Psichico)");
-          //AddPoteriNome ("Eff. Abilita` (Taglio)");
-          //AddPoteriNome ("Eff. Abilita` (Trauma)");
-          //AddPoteriNome ("Eff. Abilita` (Umbra)");
-          //AddPoteriNome ("Eff. Corpo a Corpo (Fisico)");
-          //AddPoteriNome ("Eff. Corpo a Corpo (Magico)");
-          //AddPoteriNome ("Letalita`");
-          //AddPoteriNome ("Penetrazione");
-          //AddPoteriNome ("Potere Magico");
-          //AddPoteriNome ("Precisione");
-          //AddPoteriNome ("Punti Ferita");
-          //AddPoteriNome ("Recupero Punti Ferita");
-          //AddPoteriNome ("Res. al Fuoco");
-          //AddPoteriNome ("Res. all'Impatto");
-          //AddPoteriNome ("Resistenza a Tutto");
-          //AddPoteriNome ("Resistenza al Divino");
-          //AddPoteriNome ("Resistenza al Fisico");
-          //AddPoteriNome ("Resistenza al Magico");
-          //AddPoteriNome ("Resistenza alla Perforazione");
-          //AddPoteriNome ("Vitalita`");          
+          AddPoteriTipo ("Brutale");
+          AddPoteriTipo ("Cardinale");
+          AddPoteriTipo ("Incantato");
+          AddPoteriTipo ("Innato");
+          AddPoteriTipo ("Mistico");
+          AddPoteriTipo ("Progressivo");
+          AddPoteriTipo ("Resiliente");
+          AddPoteriTipo ("Volatile");
+          AddPoteriTipo ("Spettrale");
+          AddPoteriTipo ("Divino");
+          AddPoteriTipo ("Superiore");
+                    
+          AddPoteriNome ("Maestria");
+          AddPoteriNome ("Bloccare con lo scudo");
+          AddPoteriNome ("Causa ferite leggere");
+          AddPoteriNome ("Causa ferite serie");
+          AddPoteriNome ("Causa ferite gravi");
+          AddPoteriNome ("Colpo Critico");
+          AddPoteriNome ("Danno Elettrico");
+          AddPoteriNome ("Danno Energia");
+          AddPoteriNome ("Danno Fisico");
+          AddPoteriNome ("Danno Fisico/Potere Magico");
+          AddPoteriNome ("Danno Freddo");
+          AddPoteriNome ("Danno Fuoco");
+          AddPoteriNome ("Danno Impatto");
+          AddPoteriNome ("Danno Lumen");
+          AddPoteriNome ("Danno Natura");
+          AddPoteriNome ("Danno Perforazione");
+          AddPoteriNome ("Danno Psichico");
+          AddPoteriNome ("Danno Taglio");
+          AddPoteriNome ("Danno Trauma");
+          AddPoteriNome ("Danno Umbra");
+          AddPoteriNome ("Dolore");
+          AddPoteriNome ("Potenza Abilita` (Elettrico)");
+          AddPoteriNome ("Potenza Abilita` (Energia)");
+          AddPoteriNome ("Potenza Abilita` (Freddo)");
+          AddPoteriNome ("Potenza Abilita` (Fuoco)");
+          AddPoteriNome ("Potenza Abilita` (Impatto)");
+          AddPoteriNome ("Potenza Abilita` (Lumen)");
+          AddPoteriNome ("Potenza Abilita` (Natura)");
+          AddPoteriNome ("Potenza Abilita` (Perforazione)");
+          AddPoteriNome ("Potenza Abilita` (Psichico)");
+          AddPoteriNome ("Potenza Abilita` (Taglio)");
+          AddPoteriNome ("Potenza Abilita` (Trauma)");
+          AddPoteriNome ("Potenza Abilita` (Umbra)");
+          AddPoteriNome ("Eff. Corpo a Corpo (Fisico)");
+          AddPoteriNome ("Eff. Corpo a Corpo (Magico)");
+          AddPoteriNome ("Letalita`");
+          AddPoteriNome ("Penetrazione");
+          AddPoteriNome ("Potere Magico");
+          AddPoteriNome ("Precisione");
+          AddPoteriNome ("Punti Ferita");
+          AddPoteriNome ("Recupero Punti Ferita");
+          AddPoteriNome ("Res. al Fuoco");
+          AddPoteriNome ("Res. all'Impatto");
+          AddPoteriNome ("Resistenza a Tutto");
+          AddPoteriNome ("Resistenza al Divino");
+          AddPoteriNome ("Resistenza al Fisico");
+          AddPoteriNome ("Resistenza al Magico");
+          AddPoteriNome ("Resistenza alla Perforazione");
+          AddPoteriNome ("Vitalita`");        
         }        
 
         async function FetchBuilds () {
@@ -761,8 +782,6 @@
 
               oggetti_build.push({slot: slot, proprieta: item_prop});
 
-              updateObject(slot);
-
               $("#"+slot+"_percorso_nome").text(proprieta.percorso);
               $("#"+slot+"_ac").val(proprieta.ac);
               $("#"+slot+"_danni").val(getDannoArma(proprieta.dadi, proprieta.tipo_danno, proprieta.perc_fisico, proprieta.perc_magico));
@@ -784,6 +803,9 @@
               $("#"+slot+"_pow_6_tipo").val(proprieta.potere_6_tipo);
               $("#"+slot+"_pow_6_valore").val(proprieta.potere_6_valore);
               $("#"+slot+"_pow_6_nome").val(proprieta.potere_6_nome);
+              
+              updateObject(slot);
+
               $('#'+slot+'_edit_details').show();
           }
         }
@@ -796,15 +818,93 @@
                    
             // Livello percorso
             var liv = $("#"+slot+"_percorso_livello").val();
-
             oggetto.proprieta.livello_percorso = liv;
 
+            oggetto.proprieta.ac = $("#"+slot+"_ac").val();
+
+            oggetto.proprieta.potere_1_tipo = $("#"+slot+"_pow_1_tipo").val();
+            oggetto.proprieta.potere_1_nome = $("#"+slot+"_pow_1_nome").val();
+            oggetto.proprieta.potere_1_valore = $("#"+slot+"_pow_1_valore").val();
+
+            oggetto.proprieta.potere_2_tipo = $("#"+slot+"_pow_2_tipo").val();
+            oggetto.proprieta.potere_2_nome = $("#"+slot+"_pow_2_nome").val();
+            oggetto.proprieta.potere_2_valore = $("#"+slot+"_pow_2_valore").val();
+
+            oggetto.proprieta.potere_3_tipo = $("#"+slot+"_pow_3_tipo").val();
+            oggetto.proprieta.potere_3_nome = $("#"+slot+"_pow_3_nome").val();
+            oggetto.proprieta.potere_3_valore = $("#"+slot+"_pow_3_valore").val();
+
+            oggetto.proprieta.potere_4_tipo = $("#"+slot+"_pow_4_tipo").val();
+            oggetto.proprieta.potere_4_nome = $("#"+slot+"_pow_4_nome").val();
+            oggetto.proprieta.potere_4_valore = $("#"+slot+"_pow_4_valore").val();
+
+            oggetto.proprieta.potere_5_tipo = $("#"+slot+"_pow_5_tipo").val();
+            oggetto.proprieta.potere_5_nome = $("#"+slot+"_pow_5_nome").val();
+            oggetto.proprieta.potere_5_valore = $("#"+slot+"_pow_5_valore").val();
+
+            oggetto.proprieta.potere_6_tipo = $("#"+slot+"_pow_6_tipo").val();
+            oggetto.proprieta.potere_6_nome = $("#"+slot+"_pow_6_nome").val();
+            oggetto.proprieta.potere_6_valore = $("#"+slot+"_pow_6_valore").val();
+
             // Nome oggetto
-            $("#"+slot).html("<span style='color:rgb(191,191,191)'>[</span>" + getRarita(proprieta.rarita) + "<span style='color:rgb(191,191,191)'>|</span>" + getLimitatoColore(liv,proprieta) + "<span style='color:rgb(191,191,191)'>]</span> " + proprieta.nome);
+            $("#"+slot).html(
+              "<span style='color:rgb(191,191,191)'>[</span>" 
+                + getRarita(proprieta.rarita) 
+                + "<span style='color:rgb(191,191,191)'>|</span>" 
+                + getLimitatoColore(liv,proprieta) 
+                + "<span style='color:rgb(191,191,191)'>]</span> "
+                <?php if ($isLoggedIn && ($user['user_type'] == "1" || $gilda == "Lama e Pietra")) { ?>
+                  + "<span onmouseover='showEqInfo(this,``)' onmouseout='hideEqInfo(this,``)'>"
+                <?php } ?>
+                + proprieta.nome
+                <?php if ($isLoggedIn && ($user['user_type'] == "1" || $gilda == "Lama e Pietra")) { ?>
+                  + "</span> "
+                <?php } ?>
+                <?php if ($isLoggedIn && ($user['user_type'] == "1" || $gilda == "Lama e Pietra")) { ?>
+                  + getBuildEqPowers(proprieta)
+                <?php } ?>
+
+            );
 
             updateLimiteOggetti();
             updateChecked(slot);
         }
+
+        function getBuildEqPowers(proprieta) {
+            var out = "";
+
+            if (proprieta != undefined) {
+                out = "<div class='card eqPower' style='width: 18rem;'>" +
+                    "  <div class='card-header'>Proprietà</div>" +
+                    "    <ul class='list-group list-group-flush'>";
+
+                if (proprieta.ac != undefined) out = out + "<li class='list-group-item eqPowerItem'><span>Ac:\t</span><span style='color: #00FE1E;'>" + proprieta.ac + "</span></li>";
+                if (proprieta.dadi != undefined) out = out + "<li class='list-group-item eqPowerItem'><span>Dadi:\t</span><span style='color: cyan;'>" + proprieta.dadi + "</span></li>";
+
+                var GetPotere = function (nome, valore) {
+                    if ( nome == "Causa ferite leggere" ||
+                          nome == "Causa ferite serie" ||
+                          nome == "Causa ferite gravi" ||
+                          nome == "Dolore"
+                    ) {
+                      return ("<li class='list-group-item eqPowerItem'><span>Incantesimo su arma:\t</span><span style='color: #00FE1E;'>" + nome + "</span></li>");
+                    } else {
+                      return ("<li class='list-group-item eqPowerItem'><span>" + nome + ":\t</span><span style='color: #00FE1E;'>+" + isNull(valore,'') + checkPercPower(nome) + "</span></li>");
+                    }
+                };
+
+                if (proprieta.potere_1_nome != undefined && proprieta.potere_1_nome != "") out = out + GetPotere(proprieta.potere_1_nome, proprieta.potere_1_valore);
+                if (proprieta.potere_2_nome != undefined && proprieta.potere_2_nome != "") out = out + GetPotere(proprieta.potere_2_nome, proprieta.potere_2_valore);
+                if (proprieta.potere_3_nome != undefined && proprieta.potere_3_nome != "") out = out + GetPotere(proprieta.potere_3_nome, proprieta.potere_3_valore);
+                if (proprieta.potere_4_nome != undefined && proprieta.potere_4_nome != "") out = out + GetPotere(proprieta.potere_4_nome, proprieta.potere_4_valore);
+                if (proprieta.potere_5_nome != undefined && proprieta.potere_5_nome != "") out = out + GetPotere(proprieta.potere_5_nome, proprieta.potere_5_valore);
+                if (proprieta.potere_6_nome != undefined && proprieta.potere_6_nome != "") out = out + GetPotere(proprieta.potere_6_nome, proprieta.potere_6_valore);
+
+                out = out + "</ul></div>";
+            }
+
+            return out;
+        }        
 
         function updateLimiteOggetti () {            
             var limitato = 0;
